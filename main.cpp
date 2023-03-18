@@ -310,7 +310,7 @@ public:
                 else {
                     // Get answer from player
                     if(question.askQuestion()) {
-                        player.increaseScore(question.getLevel()); // de aduna sau se scad un numar de puncte egal cu gradul
+                        player.increaseScore(question.getLevel()); // se aduna sau se scad un numar de puncte egal cu gradul
                                                                          // de dificultate al problemei
                         if(question.getLevel() >= 3){
                             time.addTime(question.getLevel());
