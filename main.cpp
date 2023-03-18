@@ -1,69 +1,80 @@
 #include <iostream>
 #include <string>
-//#include <vector>
-#include <utility>
-//#include <random>
-#include <algorithm>
+#include <vector>
+
+
 
 class Player{
     std::string name;
     int id;
     static int lastId;
-    int bestScore;
+    int score;
 
 public:
     Player(){
         name = "";
         id = lastId + 1;
-        bestScore = 0;
+        score = 0;
     }
-    Player(const std::string& name_, const int id_, const int lastId_, const int bestScore_){
+    explicit Player(const std::string& name_){
+        name = name_;
+        id = lastId + 1;
+        score = 0;
+    }
+    Player(const std::string& name_, const int id_, const int score_){
         name = name_;
         id = id_;
-        lastId = lastId_;
-        bestScore = bestScore_;
+        lastId++;
+        score = score_;
     }
     Player(Player& other){
         name = other.name;
         id = other.id;
-        lastId = other.lastId;
-        bestScore = other.bestScore;
+        lastId++;
+        score = other.score;
     }
-    Player(Player&& other){
-        name = std::move(other.name);
-        id = std::move(other.id);
-        lastId = std::move(other.lastId);
-        bestScore = std::move(other.bestScore);
+    Player(const Player& other){
+        name = other.name;
+        id = other.id;
+        lastId++;
+        score = other.score;
     }
     Player& operator=(const Player& other) {
         name = other.name;
         id = other.id;
-        lastId = other.lastId;
-        bestScore = other.bestScore;
+        lastId++;
+        score = other.score;
         return *this;
     }
 
     friend std::ostream& operator<<(std::ostream& os, const Player& player){
-        os << player.name << " " << player.id << " " << player.lastId << " " << player.bestScore;
+        os << player.name << " " << player.id << " " << " " << player.score;
         return os;
     }
 
     ///getters
-    std::string getName() const {return name;}
-    int getId() const {return id;}
-    int getLastId() const {return lastId;}
-    int getBestScore() const {return bestScore;}
+    [[nodiscard]] std::string getName() const {return name;}
 
-    void newBestScore(int newScore){
-        if(bestScore < newScore)
-            bestScore = newScore;
+    [[maybe_unused]] [[nodiscard]] int getId() const {return id;}
+    //[[nodiscard]] static int getLastId() {return lastId;}
+    [[nodiscard]] int getScore() const {return score;}
+
+
+    void increaseScore(int points) {
+        score += points;
     }
-    ~Player() {}
+
+    void decreaseScore(int points) {
+        score -= points;
+    }
+
+
+    ~Player() = default;
 };
 
 int Player::lastId = 0;
 
-class Level{
+/*class [[maybe_unused]] Level{
     std::string name;
     int pointsPerQuestion;
 
@@ -72,7 +83,7 @@ public:
         name = "";
         pointsPerQuestion = 0;
     }
-    Level(const std::string name_, const int pointsPerQuestion_){
+    Level(const std::string& name_, const int pointsPerQuestion_){
         name = name_;
         pointsPerQuestion = pointsPerQuestion_;
     }
@@ -80,15 +91,11 @@ public:
         name = other.name;
         pointsPerQuestion = other.pointsPerQuestion;
     }
-    Level(Level&& other){
-        name = std::move(other.name);
-        pointsPerQuestion = std::move(other.pointsPerQuestion);
-    }
-    Level& operator=(const Level& other){
+    Level(Level&& other) noexcept{
         name = other.name;
         pointsPerQuestion = other.pointsPerQuestion;
-        return *this;
     }
+    Level& operator=(const Level& other)= default;
 
     friend std::ostream& operator<<(std::ostream& os, const Level& lvl){
         os << lvl.name << " " << lvl.pointsPerQuestion;
@@ -96,13 +103,13 @@ public:
     }
 
     ///getters
-    std::string getName() const {return name;}
-    int getPointsPerQuestion() const {return pointsPerQuestion;}
+    [[nodiscard]] std::string getName() const {return name;}
+    [[nodiscard]] int getPointsPerQuestion() const {return pointsPerQuestion;}
 
 
 
-    ~Level(){}
-};
+    ~Level()= default;
+};*/
 
 class Timer{
     int start;
@@ -124,17 +131,12 @@ public:
         stop = other.stop;
         secondsLeft = other.secondsLeft;
     }
-    Timer(Timer&& other){
-        start = std::move(other.start);
-        stop = std::move(other.stop);
-        secondsLeft = std::move(other.secondsLeft);
-    }
-    Timer& operator=(const Timer& other){
+    Timer(Timer&& other) noexcept{
         start = other.start;
         stop = other.stop;
         secondsLeft = other.secondsLeft;
-        return *this;
     }
+    Timer& operator=(const Timer& other)= default;
 
     friend std::ostream& operator<<(std::ostream& os, const Timer& timer){
         os << timer.start << " " << timer.stop << " " << timer.secondsLeft;
@@ -142,11 +144,11 @@ public:
     }
 
     ///getters
-    int getStart() const {return start;}
-    int getStop() const {return stop;}
-    int getSecondsLeft() const {return secondsLeft;}
+    ///[[nodiscard]] int getStart() const {return start;}
+    ///[[nodiscard]] int getStop() const {return stop;}
+    [[nodiscard]] int getSecondsLeft() const {return secondsLeft;}
 
-    void finish(){
+    void finish() const{
         if(secondsLeft == 0)
             std::cout << "Time is over";
     }
@@ -155,89 +157,254 @@ public:
         stop += moreTime;
     }
 
-    ~Timer() {}
+    ~Timer() = default;
 };
-class Question{
-    std::string text;
-    std::string answer1;
-    std::string answer2;
-    std::string answer3;
-    std::string answer4;
-    int correctAnswer;
-    int questionScore;
+
+
+class Question {
+private:
+    std::string questionText;
+    std::vector<std::string> answerOptions;
+    int correctAnswerIndex;
+    int level{};
+
 public:
-    Question(){
-        text = "";
-        answer1 = "";
-        answer2 = "";
-        answer3 = "";
-        answer4 = "";
-        correctAnswer = 1;
-        questionScore = 0;
-    }
-    Question(const std::string text_, const std::string answer1_, const std::string answer2_, const std::string answer3_,
-             const std::string answer4_, const int correctAnswer_, const int questionScore_){
-        text = text_;
-        answer1 = answer1_;
-        answer2 = answer2_;
-        answer3 = answer3_;
-        answer4 = answer4_;
-        correctAnswer = correctAnswer_;
-        questionScore = questionScore_;
-    }
-    Question(Question& other){
-        text = other.text;
-        answer1 = other.answer1;
-        answer2 = other.answer2;
-        answer3 = other.answer3;
-        answer4 = other.answer4;
-        correctAnswer = other.correctAnswer;
-        questionScore = other.questionScore;
-    }
-    Question(Question&& other){
-        text = std::move(other.text);
-        answer1 = std::move(other.answer1);
-        answer2 = std::move(other.answer2);
-        answer3 = std::move(other.answer3);
-        answer4 = std::move(other.answer4);
-        correctAnswer = std::move(other.correctAnswer);
-        questionScore = std::move(other.questionScore);
-    }
-    Question& operator=(const Question& other){
-        text = other.text;
-        answer1 = other.answer1;
-        answer2 = other.answer2;
-        answer3 = other.answer3;
-        answer4 = other.answer4;
-        correctAnswer = other.correctAnswer;
-        questionScore = other.questionScore;
-        return *this;
+    Question() {
+        questionText = "";
+        answerOptions = {};
+        correctAnswerIndex = -1;
+        level = 0;
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const Question& question){
-        os << question.text << " " <<  question.answer1 << " " << question.answer2 << " " << question.answer3;
-        os << question.answer4 << " " << question.correctAnswer << " " << question.questionScore;
+    Question(const std::string& question, const std::vector<std::string>& options,const int correct, const int level_) {
+        questionText = question;
+        answerOptions = options;
+        correctAnswerIndex = correct;
+        level = level_;
+    }
+
+    explicit Question(const std::string& question) {
+        questionText = question;
+        answerOptions = {};
+        correctAnswerIndex = -1;
+    }
+
+    Question(const Question& other) {
+        questionText = other.questionText;
+        answerOptions = other.answerOptions;
+        correctAnswerIndex = other.correctAnswerIndex;
+        level = other.level;
+    }
+
+    Question(const Question&& other)  noexcept {
+        questionText = other.questionText;
+        answerOptions = other.answerOptions;
+        correctAnswerIndex = other.correctAnswerIndex;
+        level = other.level;
+    }
+
+    Question& operator=(const Question& other) = default;
+
+    friend std::ostream& operator<<(std::ostream& os, const Question& question) {
+        os << "Question: " << question.questionText << std::endl;
+        os << "Answer options:" << std::endl;
+        for (int i = 0; i < question.answerOptions.size(); i++) {
+            os << i+1 << ". " << question.answerOptions[i] << std::endl;
+        }
+        os << "Correct answer: " << question.answerOptions[question.correctAnswerIndex] << std::endl;
         return os;
     }
 
-    ///getters
-    std::string getText() const { return text; }
-    std::string getAnswer1() const { return answer1; }
-    std::string getAnswer2() const { return answer2; }
-    std::string getAnswer3() const { return answer3; }
-    std::string getAnswer4() const { return answer4; }
-    int getCorrectAnswer() const { return correctAnswer; }
-    int getQuestionScore() const { return questionScore; }
+    //[[nodiscard]] int getCorrectAnswerIndex() const {return correctAnswerIndex;}
+    //[[nodiscard]] std::vector<std::string> getAnswerText() const {return answerOptions;}
+    //[[nodiscard]] std::string getQuestionText() const {return questionText;}
+    [[nodiscard]] int getLevel() const {return level;}
 
+    void printQuestion() const {
+        std::cout << questionText << std::endl;
 
+        for (int i = 0; i < answerOptions.size(); i++) {
+            std::cout << i+1 << ". " << answerOptions[i] << std::endl;
+        }
+    }
+    [[nodiscard]] bool checkAnswer(int userAnswer) const {
+        return (userAnswer == correctAnswerIndex);
+    }
 
-    ~Question(){}
+    [[nodiscard]] bool askQuestion() const {
+        // Print the question and answer options
+        printQuestion();
+
+        // Ask the user for their answer
+        int userAnswer;
+        std::cout << "Enter your answer: ";
+        std::cin >> userAnswer;
+
+        // Check if the answer is correct
+        if (checkAnswer(userAnswer - 1)) {
+            std::cout << "Correct!" << std::endl;
+
+            return true;
+        } else {
+            std::cout << "Incorrect." << std::endl;
+            return false;
+        }
+    }
 };
 
+class Game {
+private:
+    Timer time;
+    std::vector<Question> questions;
+    std::vector<Player> players;
+
+public:
+    Game() = default;
+
+    Game(const std::vector<Question>& questions_, const std::vector<Player>& players_) {
+        questions = questions_;
+        players = players_;
+    }
+
+    Game(const Game& other) {
+        questions = other.questions;
+        players = other.players;
+    }
+
+    Game(const Game&& other)  noexcept {
+        questions = other.questions;
+        players = other.players;
+    }
+
+    Game& operator=(const Game& other) = default;
+
+    friend std::ostream& operator<<(std::ostream& os, const Game& game) {
+        os << "Questions: " << std::endl;
+        for (const auto& question : game.questions) {
+            os << question << std::endl;
+        }
+        os << "Players: " << std::endl;
+        for (const auto& player : game.players) {
+            os << player << std::endl;
+        }
+        return os;
+    }
+
+    void addQuestion(const Question& question) {
+        questions.push_back(question);
+    }
+
+    void addPlayer(const Player& player) {
+        players.push_back(player);
+    }
+
+    void play() {
+        // Play the game
+        for (auto& player : players) {
+            std::cout << "Player " << player.getName() << ", it's your turn!" << std::endl;
+
+            // Display each question
+            for (const auto& question : questions) {
+                if(time.getSecondsLeft() == 0)
+                    time.finish();
+                else {
+                    // Get answer from player
+                    if(question.askQuestion()) {
+                        player.increaseScore(question.getLevel()); // de aduna sau se scad un numar de puncte egal cu gradul
+                                                                         // de dificultate al problemei
+                        if(question.getLevel() >= 3){
+                            time.addTime(question.getLevel());
+                        }
+                    }
+                    else
+                        player.decreaseScore(question.getLevel());
+
+                }
+            }
+
+            std::cout << "Player " << player.getName() << ", your final score is " << player.getScore() << std::endl;
+        }
+    }
+};
+
+
+/**
 int main(){
     Player player1;
-    Timer gameTimer;
-    Question qst;
-    Level lvl;
+    Timer gameTimer(0,1,1);
+    std::cout << gameTimer.getSecondsLeft();
+    Question qst;Question q1("What is the capital of France?", {"Paris", "London", "Rome", "Madrid"}, 0);
+    q1.printQuestion();
+
+    std::cout << std::endl;
+
+    Question q2("Who is the author of 'To Kill a Mockingbird'?");
+    q2.printQuestion();
+    std::string text = q1.getQuestionText();
+    std::cout << text << std::endl;
+
+    std::vector<Question> questions;
+    questions.push_back(q1);
+    questions.push_back(q2);
+
+    Player p1;
+    Player p2("Bob");
+    Player p3("Alice", 141, 100);
+
+    Player p4 = p3;
+
+    std::vector<Player> ps;
+    ps.push_back(p1);
+    ps.push_back(p2), ps.push_back(p3);
+
+    p2.increaseScore(10);
+    p3.decreaseScore(20);
+
+    std::cout << p1.getName() << " has a score of " << p1.getScore() << std::endl;
+    std::cout << p2.getName() << " has a score of " << p2.getScore() << std::endl;
+    std::cout << p3.getName() << " has a score of " << p3.getScore() << std::endl;
+    std::cout << p4.getName() << " has a score of " << p4.getScore() << std::endl;
+
+    std::cout << Player::getLastId() << std::endl;
+
+    Level l("easy", 1);
+    std::cout << l.getName() << l.getPointsPerQuestion();
+    Timer t;
+    t.addTime(10);
+
+
+    Game firstGame;
+    Game secondGame(questions,ps);
+    firstGame.addPlayer(p1);
+    firstGame.addPlayer(p2);
+    firstGame.addQuestion(q1);
+    firstGame.play();
     return 0;
+}*/
+
+int main(){
+    Player p1("Alice");
+    Player p2("Bob");
+    Player p3("Christian");
+
+    Question q1("What is the capital of France?", {"Paris", "London", "Rome", "Madrid"}, 0, 1);
+    Question q2("What is the capital of UK?", {"Paris", "London", "Rome", "Madrid"}, 1, 1);
+    Question q3("What is the capital of Italy?", {"Paris", "London", "Rome", "Madrid"}, 2, 1);
+    Question q4("What is the capital of Spain?", {"Paris", "London", "Rome", "Madrid"}, 3, 1);
+    Question q5("What is the capital of Indonesia?", {"Rome", "Jakarta", "Tokyo", "New Delhi"}, 1, 2);
+
+    std::vector<Question> questions;
+    std::vector<Player> players;
+
+    questions.push_back(q1);
+    questions.push_back(q2);
+    questions.push_back(q3);
+
+    Game firstGame(questions, players);
+    firstGame.addPlayer(p1);
+    firstGame.addQuestion(q4);
+    firstGame.addQuestion(q5);
+
+    firstGame.play();
+
 }
