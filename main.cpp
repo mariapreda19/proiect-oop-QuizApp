@@ -413,4 +413,5 @@ int main(){
     players.push_back(p2);
     Game secondGame;
     secondGame.play();
+    return 0;
 }
