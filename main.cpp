@@ -266,12 +266,12 @@ public:
         players = players_;
     }
 
-    Game(const Game& other) {
+    Game([[maybe_unused]] const Game& other) {
         questions = other.questions;
         players = other.players;
     }
 
-    Game(const Game&& other)  noexcept {
+    Game([[maybe_unused]] const Game&& other)  noexcept {
         questions = other.questions;
         players = other.players;
     }
@@ -406,5 +406,11 @@ int main(){
     firstGame.addQuestion(q5);
 
     firstGame.play();
+    Timer t1(0,1,1);
+    t1.addTime(10);
 
+    players.clear();
+    players.push_back(p2);
+    Game secondGame;
+    secondGame.play();
 }
