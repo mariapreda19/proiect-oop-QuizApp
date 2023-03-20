@@ -44,8 +44,6 @@ public:
 
     void decreaseScore(int points) {
         score -= points;
-        if(score < 0)
-            score = 0;
     }
 
 
@@ -191,7 +189,7 @@ public:
     [[nodiscard]] bool askQuestion() const {
         printQuestion();
 
-        int userAnswer;
+        int userAnswer = -1;
         std::cout << "Enter your answer: ";
         std::cin >> userAnswer;
 
@@ -272,7 +270,7 @@ public:
                 }
             }
 
-            std::cout << "Player " << player.getName() << ", your final score is " << player.getScore() << std::endl;
+            std::cout << "Player " << player.getName() << ", your final score is " << std::max(player.getScore(),0) << std::endl;
         }
     }
 };
