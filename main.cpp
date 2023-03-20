@@ -146,19 +146,19 @@ public:
             questionText(std::move(question)), answerOptions(options), correctAnswerIndex(correct), level(level_){
     }
 
-    Question(const Question& other) {
-        questionText = other.questionText;
-        answerOptions = other.answerOptions;
-        correctAnswerIndex = other.correctAnswerIndex;
-        level = other.level;
+    Question(const Question& other) :
+        questionText{other.questionText},
+        answerOptions{other.answerOptions},
+        correctAnswerIndex{other.correctAnswerIndex},
+        level{other.level}{
     }
 
-    Question(const Question&& other)  noexcept {
-        questionText = other.questionText;
-        answerOptions = other.answerOptions;
-        correctAnswerIndex = other.correctAnswerIndex;
-        level = other.level;
-    }
+    /*Question(const Question&& other)  noexcept :
+        questionText{other.questionText},
+        answerOptions{other.answerOptions},
+        correctAnswerIndex{other.correctAnswerIndex},
+        level{other.level}{
+    }*/
 
     Question& operator=(const Question& other) = default;
 
@@ -216,15 +216,15 @@ public:
 
     explicit Game(const std::vector<Question>& questions_ = {}, const std::vector<Player>& players_ = {}) : questions(questions_), players(players_){}
 
-    Game([[maybe_unused]] const Game& other) {
-        questions = other.questions;
-        players = other.players;
+    Game([[maybe_unused]] const Game& other) :
+        questions{other.questions},
+        players{other.players}{
     }
 
-    Game([[maybe_unused]] const Game&& other)  noexcept {
+    /*Game([[maybe_unused]] const Game&& other)  noexcept {
         questions = other.questions;
         players = other.players;
-    }
+    }*/
 
     Game& operator=(const Game& other) = default;
 
