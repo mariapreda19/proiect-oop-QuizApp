@@ -342,6 +342,7 @@ int main(){
     Question q3("What is the capital of Italy?", {"Paris", "London", "Rome", "Madrid"}, 2, 1);
     Question q4("What is the capital of Spain?", {"Paris", "London", "Rome", "Madrid"}, 3, 1);
     Question q5("What is the capital of Indonesia?", {"Rome", "Jakarta", "Tokyo", "New Delhi"}, 1, 2);
+    Question q6("What is the capital of Romania?", {"Rome", "Iasi", "Bucharest", "New York"}, 1, 1);
 
     std::vector<Question> questions;
     std::vector<Player> players;
@@ -354,6 +355,7 @@ int main(){
     firstGame.addPlayer(p1);
     firstGame.addQuestion(q4);
     firstGame.addQuestion(q5);
+    firstGame.addQuestion(q6);
 
     firstGame.play();
     Timer t1(0,1,1);
