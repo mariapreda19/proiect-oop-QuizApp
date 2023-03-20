@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <utility>
 #include <vector>
 
 
@@ -11,34 +12,11 @@ class Player{
     int score;
 
 public:
-    Player(){
-        name = "";
-        id = lastId + 1;
-        score = 0;
+
+    explicit Player(std::string name_ = "", int id_ = lastId + 1, int score_ = 0) : name(std::move(name_)), id(id_), score(score_) {
+        //std::cout<<"const player";
     }
-    explicit Player(const std::string& name_){
-        name = name_;
-        id = lastId + 1;
-        score = 0;
-    }
-    Player(const std::string& name_, const int id_, const int score_){
-        name = name_;
-        id = id_;
-        lastId++;
-        score = score_;
-    }
-    Player(Player& other){
-        name = other.name;
-        id = other.id;
-        lastId++;
-        score = other.score;
-    }
-    Player(const Player& other){
-        name = other.name;
-        id = other.id;
-        lastId++;
-        score = other.score;
-    }
+
     Player& operator=(const Player& other) {
         name = other.name;
         id = other.id;
@@ -55,7 +33,7 @@ public:
     ///getters
     [[nodiscard]] std::string getName() const {return name;}
 
-    [[maybe_unused]] [[nodiscard]] int getId() const {return id;}
+    //[[maybe_unused]] [[nodiscard]] int getId() const {return id;}
     //[[nodiscard]] static int getLastId() {return lastId;}
     [[nodiscard]] int getScore() const {return score;}
 
@@ -66,6 +44,8 @@ public:
 
     void decreaseScore(int points) {
         score -= points;
+        if(score < 0)
+            score = 0;
     }
 
 
@@ -73,6 +53,7 @@ public:
 };
 
 int Player::lastId = 0;
+
 
 /*class [[maybe_unused]] Level{
     std::string name;
@@ -116,17 +97,10 @@ class Timer{
     int stop;
     int secondsLeft;
 public:
-    Timer(){
-        start = 0;
-        stop = 0;
-        secondsLeft = 300;
+
+    explicit Timer(const int start_ = 0, const int stop_ = 300, const int secondsLeft_ = 300) : start(start_) , stop(stop_), secondsLeft(secondsLeft_){
     }
-    Timer(const int start_, const int stop_, const int secondsLeft_){
-        start = start_;
-        stop = stop_;
-        secondsLeft = secondsLeft_;
-    }
-    Timer(Timer& other){
+    Timer(Timer const& other){
         start = other.start;
         stop = other.stop;
         secondsLeft = other.secondsLeft;
@@ -143,9 +117,8 @@ public:
         return os;
     }
 
-    ///getters
-    ///[[nodiscard]] int getStart() const {return start;}
-    ///[[nodiscard]] int getStop() const {return stop;}
+    //[[nodiscard]] int getStart() const {return start;}
+    //[[nodiscard]] int getStop() const {return stop;}
     [[nodiscard]] int getSecondsLeft() const {return secondsLeft;}
 
     void finish() const{
@@ -169,24 +142,8 @@ private:
     int level{};
 
 public:
-    Question() {
-        questionText = "";
-        answerOptions = {};
-        correctAnswerIndex = -1;
-        level = 0;
-    }
-
-    Question(const std::string& question, const std::vector<std::string>& options,const int correct, const int level_) {
-        questionText = question;
-        answerOptions = options;
-        correctAnswerIndex = correct;
-        level = level_;
-    }
-
-    explicit Question(const std::string& question) {
-        questionText = question;
-        answerOptions = {};
-        correctAnswerIndex = -1;
+    explicit Question(std::string  question = "", const std::vector<std::string>& options = {},const int correct = -1, const int level_ = 0) :
+            questionText(std::move(question)), answerOptions(options), correctAnswerIndex(correct), level(level_){
     }
 
     Question(const Question& other) {
@@ -208,7 +165,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Question& question) {
         os << "Question: " << question.questionText << std::endl;
         os << "Answer options:" << std::endl;
-        for (int i = 0; i < question.answerOptions.size(); i++) {
+        for (long long unsigned int i = 0; i < question.answerOptions.size(); i++) {
             os << i+1 << ". " << question.answerOptions[i] << std::endl;
         }
         os << "Correct answer: " << question.answerOptions[question.correctAnswerIndex] << std::endl;
@@ -223,7 +180,7 @@ public:
     void printQuestion() const {
         std::cout << questionText << std::endl;
 
-        for (int i = 0; i < answerOptions.size(); i++) {
+        for (long long unsigned int i = 0; i < answerOptions.size(); i++) {
             std::cout << i+1 << ". " << answerOptions[i] << std::endl;
         }
     }
@@ -232,15 +189,12 @@ public:
     }
 
     [[nodiscard]] bool askQuestion() const {
-        // Print the question and answer options
         printQuestion();
 
-        // Ask the user for their answer
         int userAnswer;
         std::cout << "Enter your answer: ";
         std::cin >> userAnswer;
 
-        // Check if the answer is correct
         if (checkAnswer(userAnswer - 1)) {
             std::cout << "Correct!" << std::endl;
 
@@ -259,12 +213,8 @@ private:
     std::vector<Player> players;
 
 public:
-    Game() = default;
 
-    Game(const std::vector<Question>& questions_, const std::vector<Player>& players_) {
-        questions = questions_;
-        players = players_;
-    }
+    explicit Game(const std::vector<Question>& questions_ = {}, const std::vector<Player>& players_ = {}) : questions(questions_), players(players_){}
 
     Game([[maybe_unused]] const Game& other) {
         questions = other.questions;
