@@ -261,9 +261,6 @@ public:
         return os;
     }
 
-    void addQuestion(const Question& question) {
-        questions.push_back(question);
-    }
 
     void addPlayer(const Player& player) {
         players.push_back(player);
