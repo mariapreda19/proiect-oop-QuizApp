@@ -4,11 +4,13 @@ London
 Rome
 Madrid
 0
+1
 What is the capital of UK?
 Paris
 London
 Rome
 Madrid
+1
 1
 What is the capital of Italy?
 Paris
@@ -16,21 +18,25 @@ London
 Rome
 Madrid
 2
+1
 What is the capital of Spain?
 Paris
 London
 Rome
 Madrid
 3
+1
 What is the capital of Indonesia?
 Rome
 Jakarta
 Tokyo
 New Delhi
 1
+2
 What is the capital of Romania?
 Rome
 Iasi
 Bucharest
 New York
+2
 1

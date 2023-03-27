@@ -133,7 +133,7 @@ private:
     std::string questionText;
     std::vector<std::string> answerOptions;
     int correctAnswerIndex;
-    int level{};
+    int level;
 
 public:
     explicit Question(std::string  question = "", const std::vector<std::string>& options = {},const int correct = -1, const int level_ = 0) :
@@ -183,7 +183,6 @@ public:
 
         if (checkAnswer(userAnswer - 1)) {
             std::cout << "Correct!" << std::endl;
-
             return true;
         } else {
             std::cout << "Incorrect." << std::endl;
@@ -204,6 +203,7 @@ private:
         std::string question;
         std::vector<std::string> answerOptions;
         int correctAnswer;
+        int level;
         while(std::getline(fin, question))
         {
             for(int i=0; i<4; i++)
@@ -212,10 +212,13 @@ private:
                 std::getline(fin, line);
                 answerOptions.push_back(line);
             }
-            fin >> correctAnswer; fin.get();
+            fin >> correctAnswer;
+            fin >> level;
+            fin.get();
 
             questions.emplace_back(question, answerOptions, correctAnswer);
             answerOptions.clear();
+
         }
         fin.close();
     }
@@ -271,8 +274,8 @@ public:
                 else {
                     // Get answer from player
                     if(question.askQuestion()) {
-                        player.increaseScore(question.getLevel()); // se aduna sau se scad un numar de puncte egal cu gradul
-                                                                         // de dificultate al problemei
+                        player.increaseScore(1);// se aduna sau se scad un numar de puncte egal cu gradul
+                        std::cout << question.getLevel();// de dificultate al problemei
                         if(question.getLevel() >= 3){
                             time.addTime(question.getLevel());
                         }
@@ -328,5 +331,6 @@ int main(){
 
     players.clear();
     players.push_back(p2);
+
     return 0;
 }
