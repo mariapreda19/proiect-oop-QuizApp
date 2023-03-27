@@ -2,6 +2,7 @@
 #include <string>
 #include <utility>
 #include <vector>
+#include <fstream>
 
 
 
@@ -15,6 +16,13 @@ public:
 
     explicit Player(std::string name_ = "", int id_ = lastId + 1, int score_ = 0) : name(std::move(name_)), id(id_), score(score_) {
         //std::cout<<"const player";
+    }
+
+    Player (const Player& other){
+        name = other.name;
+        id = other.id;
+        lastId++;
+        score = other.score;
     }
 
     Player& operator=(const Player& other) {
@@ -37,7 +45,6 @@ public:
     //[[nodiscard]] static int getLastId() {return lastId;}
     [[nodiscard]] int getScore() const {return score;}
 
-
     void increaseScore(int points) {
         score += points;
     }
@@ -45,7 +52,6 @@ public:
     void decreaseScore(int points) {
         score -= points;
     }
-
 
     ~Player() = default;
 };
@@ -151,13 +157,6 @@ public:
         level{other.level}{
     }
 
-    /*Question(const Question&& other)  noexcept :
-        questionText{other.questionText},
-        answerOptions{other.answerOptions},
-        correctAnswerIndex{other.correctAnswerIndex},
-        level{other.level}{
-    }*/
-
     Question& operator=(const Question& other) = default;
 
     friend std::ostream& operator<<(std::ostream& os, const Question& question) {
@@ -189,7 +188,7 @@ public:
     [[nodiscard]] bool askQuestion() const {
         printQuestion();
 
-        int userAnswer = -1;
+        int userAnswer;
         std::cout << "Enter your answer: ";
         std::cin >> userAnswer;
 
@@ -210,9 +209,33 @@ private:
     std::vector<Question> questions;
     std::vector<Player> players;
 
+    void loadQuestions(const std::string& filePath){
+        std::ifstream fin(filePath);
+        // TODO: check if file could not be opened
+        std::string question;
+        std::vector<std::string> answerOptions;
+        int correctAnswer;
+        while(std::getline(fin, question))
+        {
+            for(int i=0; i<4; i++)
+            {
+                std::string line;
+                std::getline(fin, line);
+                answerOptions.push_back(line);
+            }
+            fin >> correctAnswer; fin.get();
+
+            questions.emplace_back(question, answerOptions, correctAnswer);
+            answerOptions.clear();
+        }
+        fin.close();
+    }
+
 public:
 
-    explicit Game(const std::vector<Question>& questions_ = {}, const std::vector<Player>& players_ = {}) : questions(questions_), players(players_){}
+    explicit Game(const std::string& questionsFilePath, const std::vector<Player>& players_ = {}) : players(players_){
+        loadQuestions(questionsFilePath);
+    }
 
     Game([[maybe_unused]] const Game& other) :
         questions{other.questions},
@@ -247,6 +270,10 @@ public:
     }
 
     void play() {
+
+        for(const auto& i : questions)
+            std::cout << i << "\n";
+
         // Play the game
         for (auto& player : players) {
             std::cout << "Player " << player.getName() << ", it's your turn!" << std::endl;
@@ -275,85 +302,16 @@ public:
     }
 };
 
-
-/**
-int main(){
-    Player player1;
-    Timer gameTimer(0,1,1);
-    std::cout << gameTimer.getSecondsLeft();
-    Question qst;Question q1("What is the capital of France?", {"Paris", "London", "Rome", "Madrid"}, 0);
-    q1.printQuestion();
-
-    std::cout << std::endl;
-
-    Question q2("Who is the author of 'To Kill a Mockingbird'?");
-    q2.printQuestion();
-    std::string text = q1.getQuestionText();
-    std::cout << text << std::endl;
-
-    std::vector<Question> questions;
-    questions.push_back(q1);
-    questions.push_back(q2);
-
-    Player p1;
-    Player p2("Bob");
-    Player p3("Alice", 141, 100);
-
-    Player p4 = p3;
-
-    std::vector<Player> ps;
-    ps.push_back(p1);
-    ps.push_back(p2), ps.push_back(p3);
-
-    p2.increaseScore(10);
-    p3.decreaseScore(20);
-
-    std::cout << p1.getName() << " has a score of " << p1.getScore() << std::endl;
-    std::cout << p2.getName() << " has a score of " << p2.getScore() << std::endl;
-    std::cout << p3.getName() << " has a score of " << p3.getScore() << std::endl;
-    std::cout << p4.getName() << " has a score of " << p4.getScore() << std::endl;
-
-    std::cout << Player::getLastId() << std::endl;
-
-    Level l("easy", 1);
-    std::cout << l.getName() << l.getPointsPerQuestion();
-    Timer t;
-    t.addTime(10);
-
-
-    Game firstGame;
-    Game secondGame(questions,ps);
-    firstGame.addPlayer(p1);
-    firstGame.addPlayer(p2);
-    firstGame.addQuestion(q1);
-    firstGame.play();
-    return 0;
-}*/
-
 int main(){
     Player p1("Alice");
     Player p2("Bob");
     Player p3("Christian");
 
-    Question q1("What is the capital of France?", {"Paris", "London", "Rome", "Madrid"}, 0, 1);
-    Question q2("What is the capital of UK?", {"Paris", "London", "Rome", "Madrid"}, 1, 1);
-    Question q3("What is the capital of Italy?", {"Paris", "London", "Rome", "Madrid"}, 2, 1);
-    Question q4("What is the capital of Spain?", {"Paris", "London", "Rome", "Madrid"}, 3, 1);
-    Question q5("What is the capital of Indonesia?", {"Rome", "Jakarta", "Tokyo", "New Delhi"}, 1, 2);
-    Question q6("What is the capital of Romania?", {"Rome", "Iasi", "Bucharest", "New York"}, 1, 1);
-
-    std::vector<Question> questions;
     std::vector<Player> players;
 
-    questions.push_back(q1);
-    questions.push_back(q2);
-    questions.push_back(q3);
 
-    Game firstGame(questions, players);
+    Game firstGame("questions.txt", players);
     firstGame.addPlayer(p1);
-    firstGame.addQuestion(q4);
-    firstGame.addQuestion(q5);
-    firstGame.addQuestion(q6);
 
     firstGame.play();
     Timer t1(0,1,1);
@@ -361,7 +319,5 @@ int main(){
 
     players.clear();
     players.push_back(p2);
-    Game secondGame;
-    secondGame.play();
     return 0;
 }

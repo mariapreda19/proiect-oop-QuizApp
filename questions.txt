@@ -1,0 +1,36 @@
+What is the capital of France?
+Paris
+London
+Rome
+Madrid
+0
+What is the capital of UK?
+Paris
+London
+Rome
+Madrid
+1
+What is the capital of Italy?
+Paris
+London
+Rome
+Madrid
+2
+What is the capital of Spain?
+Paris
+London
+Rome
+Madrid
+3
+What is the capital of Indonesia?
+Rome
+Jakarta
+Tokyo
+New Delhi
+1
+What is the capital of Romania?
+Rome
+Iasi
+Bucharest
+New York
+1
