@@ -295,8 +295,8 @@ public:
         }
     }
 };
-/*
-static inline void testSFML()
+
+/*static inline void testSFML()
 {
     sf::RenderWindow window;
     window.create(sf::VideoMode({800, 800}), "QuizApp", sf::Style::Default);
