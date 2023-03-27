@@ -101,16 +101,9 @@ public:
 
     explicit Timer(const int start_ = 0, const int stop_ = 300, const int secondsLeft_ = 300) : start(start_) , stop(stop_), secondsLeft(secondsLeft_){
     }
-    Timer(Timer const& other){
-        start = other.start;
-        stop = other.stop;
-        secondsLeft = other.secondsLeft;
+    Timer(Timer const& other): start(other.start), stop(other.stop), secondsLeft(other.secondsLeft){
     }
-    Timer(Timer&& other) noexcept{
-        start = other.start;
-        stop = other.stop;
-        secondsLeft = other.secondsLeft;
-    }
+    Timer(Timer&& other) noexcept = default;
     Timer& operator=(const Timer& other)= default;
 
     friend std::ostream& operator<<(std::ostream& os, const Timer& timer){
@@ -148,11 +141,10 @@ public:
     }
 
     Question(const Question& other) :
-        questionText{other.questionText},
-        answerOptions{other.answerOptions},
-        correctAnswerIndex{other.correctAnswerIndex},
-        level{other.level}{
-    }
+        questionText(other.questionText),
+        answerOptions(other.answerOptions),
+        correctAnswerIndex(other.correctAnswerIndex),
+        level(other.level){}
 
     Question& operator=(const Question& other) = default;
 
@@ -235,8 +227,8 @@ public:
     }
 
     Game([[maybe_unused]] const Game& other) :
-        questions{other.questions},
-        players{other.players}{
+        questions(other.questions),
+        players(other.players){
     }
 
     /*Game([[maybe_unused]] const Game&& other)  noexcept {
