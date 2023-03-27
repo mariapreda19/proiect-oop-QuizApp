@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 
-
+//#include <SFML/Graphics.hpp>
 
 class Player{
     std::string name;
@@ -18,11 +18,8 @@ public:
         //std::cout<<"const player";
     }
 
-    Player (const Player& other){
-        name = other.name;
-        id = other.id;
+    Player (const Player& other): name(other.name), id(other.id), score(other.score){
         lastId++;
-        score = other.score;
     }
 
     Player& operator=(const Player& other) {
@@ -298,8 +295,31 @@ public:
         }
     }
 };
+/*
+static inline void testSFML()
+{
+    sf::RenderWindow window;
+    window.create(sf::VideoMode({800, 800}), "QuizApp", sf::Style::Default);
+    window.setVerticalSyncEnabled(true);
+    window.setFramerateLimit(60);
+
+    while(window.isOpen())
+    {
+        // Poll events
+        sf::Event e{};
+        while(window.pollEvent(e))
+        {
+            if(e.type == sf::Event::Closed)
+                window.close();
+        }
+        window.clear(sf::Color::Red);
+
+        window.display();
+    }
+}*/
 
 int main(){
+
     Player p1("Alice");
     Player p2("Bob");
     Player p3("Christian");
