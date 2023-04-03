@@ -87,7 +87,7 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp src/Player.cpp src/Game.cpp src/Question.cpp src/Button.cpp src/Timer.cpp)
 
 ###############################################################################
 
@@ -135,5 +135,5 @@ endif()
 # update name in .github/workflows/cmake.yml:29 when changing "bin" name here
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 install(FILES questions.txt DESTINATION bin)
-# install(DIRECTORY some_dir1 some_dir2 DESTINATION bin)
+#install(DIRECTORY some_dir1 some_dir2 DESTINATION bin)
 # install(FILES some_file1.txt some_file2.md DESTINATION bin)
