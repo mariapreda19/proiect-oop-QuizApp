@@ -13,6 +13,7 @@ std::ostream& operator<<(std::ostream& os, const Screen& screen) {
     for (long long unsigned int i = 0; i < screen.options.size(); i++) {
         os << i + 1 << ". " << screen.options[i] << std::endl;
     }
+    return os;
 }
 
 
