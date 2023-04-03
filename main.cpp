@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 
-//#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
 
 class Player{
     std::string name;
@@ -127,8 +127,24 @@ public:
     ~Timer() = default;
 };
 
+class Screen {
+    std::string text;
+    std::vector<std::string> options;
 
-class Question {
+public:
+    explicit Screen(std::string text = "", const std::vector<std::string> &options = {}) : text(std::move(text)), options(options){}
+
+    friend std::ostream& operator<<(std::ostream& os, const Screen& screen) {
+        os << "Text: " << screen.text << std::endl;
+        os << "Options:" << std::endl;
+        for (long long unsigned int i = 0; i < screen.options.size(); i++) {
+            os << i + 1 << ". " << screen.options[i] << std::endl;
+        }
+    }
+};
+
+
+class Question: public Screen{
 private:
     std::string questionText;
     std::vector<std::string> answerOptions;
@@ -291,12 +307,51 @@ public:
     }
 };
 
-/*static inline void testSFML()
+class Button{
+    sf::Vector2f position;
+    std::string buttonTexture; // path to texture
+
+public:
+    Button (sf::Vector2f position_, std::string texture_) : position(position_), buttonTexture(std::move(texture_)) {
+
+    }
+    Button(const Button& other): position(other.position), buttonTexture(other.buttonTexture){}
+    Button& operator=(const Button& other) = default;
+    ~Button() = default;
+
+    bool displayButton(sf::RenderWindow &window){
+        sf::Sprite sprite;
+        sf::Texture texture;
+        texture.loadFromFile(this -> buttonTexture);
+        sprite.setTexture(texture);
+        sprite.setPosition(this -> position);
+        window.draw(sprite);
+        sf::Vector2f tempMouse(sf::Mouse::getPosition(window));
+        if( sprite.getGlobalBounds().contains(tempMouse) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            while (sprite.getGlobalBounds().contains(tempMouse) && sf::Mouse::isButtonPressed(sf::Mouse::Left)){}
+            return true;
+        }
+        return false;
+    }
+
+};
+
+static inline void testSFML()
 {
     sf::RenderWindow window;
-    window.create(sf::VideoMode({800, 800}), "QuizApp", sf::Style::Default);
+    window.create(sf::VideoMode({1000, 800}), "QuizApp", sf::Style::Default);
     window.setVerticalSyncEnabled(true);
     window.setFramerateLimit(60);
+
+    std::vector<Button> butoane;
+
+    for(int i=0; i<6; i++)
+    {
+        Button temp({200+ float(i % 3) * 206, 400 +float(i / 3) * 138},"button.png");
+        butoane.emplace_back(temp);
+    }
+
 
     while(window.isOpen())
     {
@@ -307,13 +362,22 @@ public:
             if(e.type == sf::Event::Closed)
                 window.close();
         }
-        window.clear(sf::Color::Red);
+
+        for (int i=0 ; i < int(butoane.size()); i++){
+            if(butoane[i].displayButton(window) == 1)
+                std::cout<<i;
+        }
 
         window.display();
     }
-}*/
+}
 
 int main(){
+
+    /*
+    testSFML();
+    return 0;
+    */
 
     Player p1("Alice");
     Player p2("Bob");
