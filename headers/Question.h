@@ -7,27 +7,28 @@
 
 #include <iostream>
 #include <vector>
+#include "Button.h"
+#include "SFML/Graphics.hpp"
 
 class Screen {
     std::string text;
-    std::vector<std::string> options;
+    std::vector<Button> options;
 
 public:
     explicit Screen(std::string text = "", const std::vector<std::string> &options = {});
 
     friend std::ostream& operator<<(std::ostream& os, const Screen& screen);
+
+    int displayScreen(sf::RenderWindow &window);
 };
 
+class Question: public Screen {
 
-class Question {
-private:
-    std::string questionText;
-    std::vector<std::string> answerOptions;
-    int correctAnswerIndex;
-    int level;
+    using Screen::Screen;
+    int correctAnswerIndex, category;
 
 public:
-    explicit Question(std::string question = "", const std::vector<std::string> &options = {}, int correct = -1, int level_ = 0);
+    explicit Question(std::string question = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0);
 
     Question(const Question &other);
 
@@ -35,9 +36,9 @@ public:
 
     friend std::ostream &operator<<(std::ostream &os, const Question &question);
 
-    [[nodiscard]] int getLevel() const;
+    [[nodiscard]] int getCategory() const;
 
-    void printQuestion() const;
+//    void printQuestion() const;
 
     [[nodiscard]] bool checkAnswer(int userAnswer) const;
 

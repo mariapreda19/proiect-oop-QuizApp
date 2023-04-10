@@ -8,6 +8,9 @@
 #include "Player.h"
 #include "Question.h"
 #include "Timer.h"
+#include <vector>
+#include <fstream>
+#include "SFML/Graphics.hpp"
 
 
 class Game {

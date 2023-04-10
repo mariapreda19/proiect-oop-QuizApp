@@ -32,11 +32,116 @@ Jakarta
 Tokyo
 New Delhi
 1
-2
+1
 What is the capital of Romania?
 Rome
 Iasi
 Bucharest
 New York
 2
+1
+Which continent is the largest in terms of land area?
+Asia
+Europe
+Africa
+North America
+0
+1
+What is the capital city of Brazil?
+Rio de Janeiro
+São Paulo
+Brasília
+Salvador
+2
+1
+Which river is the longest in the world?
+Amazon River
+Nile River
+Yangtze River
+Mississippi River
+1
+1
+Which country is the smallest in the world by land area?
+Monaco
+Nauru
+San Marino
+Vatican City
+3
+1
+Which continent is also a country?
+South America
+Africa
+Australia
+Asia
+2
+1
+Which ocean is the largest in terms of surface area?
+Atlantic Ocean
+Indian Ocean
+Southern Ocean
+Pacific Ocean
+3
+1
+Which is the highest mountain in the world?
+Mount Everest
+K2
+Mount Kilimanjaro
+Mount McKinley
+0
+1
+What is the largest country in South America by land area?
+Colombia
+Argentina
+Brazil
+Peru
+2
+1
+Which European country has the most active volcanoes?
+Greece
+Iceland
+Italy
+Spain
+2
+1
+Which African country has the largest population?
+Egypt
+Nigeria
+Ethiopia
+South Africa
+1
+1
+What is the world's largest desert by area?
+Gobi Desert
+Sahara Desert
+Kalahari Desert
+Arabian Desert
+1
+1
+Which country is the largest producer of coffee in the world?
+Brazil
+Colombia
+Ethiopia
+Vietnam
+0
+1
+Which Asian country has the largest population?
+China
+India
+Indonesia
+Japan
+0
+1
+What is the largest island in the world by land area?
+Greenland
+Madagascar
+Borneo
+New Guinea
+0
+1
+Which country is both in Europe and Asia?
+Georgia
+Kazakhstan
+Russia
+Turkey
+3
 1

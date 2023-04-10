@@ -3,9 +3,6 @@
 //
 
 #include "../headers/Game.h"
-#include <vector>
-#include <fstream>
-
 
 void Game::loadQuestions(const std::string& filePath){
     std::ifstream fin(filePath);
@@ -13,22 +10,19 @@ void Game::loadQuestions(const std::string& filePath){
     std::string question;
     std::vector<std::string> answerOptions;
     int correctAnswer;
-    int level;
-    while(std::getline(fin, question))
-    {
-        for(int i=0; i<4; i++)
-        {
+    int category;
+    while(std::getline(fin, question)){
+        for(int i=0; i<4; i++){
             std::string line;
             std::getline(fin, line);
-            answerOptions.push_back(line);
+            answerOptions.emplace_back(line);
         }
         fin >> correctAnswer;
-        fin >> level;
+        fin >> category;
         fin.get();
 
-        questions.emplace_back(question, answerOptions, correctAnswer);
+        questions.emplace_back(question, answerOptions, correctAnswer, category);
         answerOptions.clear();
-
     }
     fin.close();
 }
@@ -66,32 +60,43 @@ void Game::addPlayer(const Player& player) {
     players.push_back(player);
 }
 
-void Game::play() {
+void Game::play(){
 
-    for(const auto& i : questions)
-        std::cout << i << "\n";
-
-    // Play the game
     for (auto& player : players) {
         std::cout << "Player " << player.getName() << ", it's your turn!" << std::endl;
 
-        // Display each question
-        for (const auto& question : questions) {
-            if(time.getSecondsLeft() == 0)
-                time.finish();
-            else {
-                // Get answer from player
-                if(question.askQuestion()) {
-                    player.increaseScore(1);// se aduna sau se scad un numar de puncte egal cu gradul
-                    std::cout << question.getLevel();// de dificultate al problemei
-                    if(question.getLevel() >= 3){
-                        time.addTime(question.getLevel());
+        std::vector<Button> butoane;
+        std::vector<std::string> categorii = {"Music", "Geography", "History", "Art", "Literature", "Sports"};
+
+        for (int i = 0; i < 6; i++) {
+            Button temp({200 + float(i % 3) * 206, 400 + float(int(i / 3)) * 138}, categorii[i], "button.png");
+            butoane.emplace_back(temp);
+        }
+
+        Screen screen("Categorii", butoane);
+
+
+        sf::RenderWindow window;
+        window.create(sf::VideoMode({1000, 800}), "QuizApp", sf::Style::Default);
+        window.setVerticalSyncEnabled(true);
+
+        int categorie_aleasa = screen.displayScreen(window);
+
+        if (categorie_aleasa) {
+            for (Question &question: questions)
+                if (categorie_aleasa == question.getCategory()) {
+                    if (time.getSecondsLeft() == 0)
+                        time.finish();
+                    else {
+                        int raspuns = question.displayScreen(window);
+                        if (raspuns != -1) {
+                            if (question.checkAnswer(raspuns))
+                                player.increaseScore(1);
+                            else
+                                player.decreaseScore(1);
+                        }
                     }
                 }
-                else
-                    player.decreaseScore(question.getLevel());
-
-            }
         }
 
         std::cout << "Player " << player.getName() << ", your final score is " << std::max(player.getScore(),0) << std::endl;
