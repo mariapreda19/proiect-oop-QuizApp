@@ -15,7 +15,7 @@ class Screen {
     std::vector<Button> options;
 
 public:
-    explicit Screen(std::string text = "", const std::vector<std::string> &options = {});
+    explicit Screen(std::string text = "", const std::vector<std::string> &button_options = {});
 
     friend std::ostream& operator<<(std::ostream& os, const Screen& screen);
 

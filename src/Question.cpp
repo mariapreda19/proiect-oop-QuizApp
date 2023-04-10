@@ -2,18 +2,23 @@
 // Created by maria on 4/3/2023.
 //
 
+#include <utility>
+
 #include "../headers/Question.h"
 
 
-Screen::Screen(std::string text, const std::vector<std::string> &options) : text(std::move(text)){
+Screen::Screen(std::string text, const std::vector<std::string> &button_options) : text(std::move(text)){
 
-    std::vector<Button> buttons;
-    int size_ = options.size();
+    unsigned long long int size_ = button_options.size();
 
-    for(int i=0; i < size_ ; i++){
-        Button temp({200+ float(i % (size_ / 2)) * 206, 400 + float(int(i / (size_ / 2))) * 138}, options[i] ,"button.png");
-        buttons.emplace_back(temp);
+    float space_left = float(1000 - (196 * int(size_ / 2) + 20 * (int(size_ / 2) - 1))) / 2;
+    //TODO edit this after final textures are added;
+
+    for(unsigned long long int i=0; i < size_ ; i++){
+        Button temp({space_left + float(i % (size_ / 2)) * 216, 400 + float(int(i / (size_ / 2))) * 138}, button_options[i] ,"button.png");
+        options.emplace_back(temp);
     }
+
 }
 
 std::ostream& operator<<(std::ostream& os, const Screen& screen) {
@@ -72,7 +77,7 @@ int Screen::displayScreen (sf::RenderWindow &window){
 
 
 Question::Question(std::string question, const std::vector<std::string>& options, const int correct, const int category_):
-        Screen(question, options), correctAnswerIndex = correct, category = category_ {
+        Screen(std::move(question), options), correctAnswerIndex(correct), category(category_) {
 }
 
 Question::Question(const Question& other) = default;

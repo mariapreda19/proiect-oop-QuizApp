@@ -21,7 +21,8 @@ void Game::loadQuestions(const std::string& filePath){
         fin >> category;
         fin.get();
 
-        questions.emplace_back(question, answerOptions, correctAnswer, category);
+        Question temp_(question, answerOptions, correctAnswer, category);
+        questions.emplace_back(temp_);
         answerOptions.clear();
     }
     fin.close();
@@ -65,15 +66,9 @@ void Game::play(){
     for (auto& player : players) {
         std::cout << "Player " << player.getName() << ", it's your turn!" << std::endl;
 
-        std::vector<Button> butoane;
         std::vector<std::string> categorii = {"Music", "Geography", "History", "Art", "Literature", "Sports"};
 
-        for (int i = 0; i < 6; i++) {
-            Button temp({200 + float(i % 3) * 206, 400 + float(int(i / 3)) * 138}, categorii[i], "button.png");
-            butoane.emplace_back(temp);
-        }
-
-        Screen screen("Categorii", butoane);
+        Screen screen("Categorii", categorii);
 
 
         sf::RenderWindow window;
