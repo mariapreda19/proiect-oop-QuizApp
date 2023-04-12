@@ -45,5 +45,16 @@ public:
     [[nodiscard]] bool askQuestion() const;
 };
 
+class Menu: public Screen{
+    using Screen::Screen;
+    Button single, competitive;
+
+private:
+    explicit Menu(std::string text = "", const std::vector<std::string> &button_options = {},
+                  std::string button_texture = "", std::string button_texture_clicked = "");
+    Menu(const Menu &other);
+    Menu &operator=(const Menu &other);
+};
+
 
 #endif //OOP_QUESTION_H

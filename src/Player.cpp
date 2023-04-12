@@ -4,14 +4,12 @@
 
 #include "../headers/Player.h"
 
-int Player::lastId = 0;
-
-Player::Player(std::string name_, int id_ , int score_) : name(std::move(name_)), id(id_), score(score_) {
+Player::Player(std::string name_, int lastId , int score_) : name(std::move(name_)), lastId(lastId), score(score_) {
+    this -> id = lastId + 1;
     //std::cout<<"const player";
 }
 
-Player::Player (const Player& other): name(other.name), id(other.id), score(other.score){
-    lastId++;
+Player::Player (const Player& other): name(other.name), lastId(other.lastId), id(other.id), score(other.score){
 }
 
 Player& Player:: operator=(const Player& other) {

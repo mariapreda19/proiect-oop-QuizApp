@@ -9,13 +9,13 @@
 
 class Player{
     std::string name;
+    int lastId;
     int id;
-    static int lastId;
     int score;
 
 public:
 
-    explicit Player(std::string name_ = "", int id_ = lastId + 1, int score_ = 0);
+    explicit Player(std::string name_, int lastId = 0, int score_ = 0);
 
     Player (const Player& other);
 

@@ -9,12 +9,14 @@
 int main(){
 
     Player p1("A");
+    Player p2("Maria");
     std::vector<Player> players;
 
-    Game firstGame("questions.txt", players);
-    firstGame.addPlayer(p1);
 
-    firstGame.play();
+    //Game firstGame("questions.txt", players);
+    //firstGame.addPlayer(p1);
+
+    //firstGame.play();
 
 
     return 0;
