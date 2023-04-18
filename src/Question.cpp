@@ -124,7 +124,7 @@ void Question::printQuestion() const {
         return false;
     }
 }
-
+/*
 Menu::Menu(std::string text, const std::vector<std::string> &button_options, std::string button_texture,
            std::string button_texture_clicked): Screen(std::move(text), button_options),
            single({200,700},"",std::move(button_texture)),
@@ -135,3 +135,4 @@ Menu::Menu(std::string text, const std::vector<std::string> &button_options, std
 Menu::Menu(const Menu& other) = default;
 
 Menu& Menu::operator=(const Menu& other) = default;
+*/

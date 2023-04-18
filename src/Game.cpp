@@ -3,10 +3,21 @@
 //
 
 #include "../headers/Game.h"
+#include <algorithm>
+#include <random>
+
 
 void Game::loadQuestions(const std::string& filePath){
     std::ifstream fin(filePath);
-    // TODO: check if file could not be opened
+    try {
+            std::ifstream file(filePath);
+            if (!file.is_open()) {
+                throw std::runtime_error("Failed to open file");
+            }
+            file.close();
+    } catch (const std::exception& e) {
+        std::cerr << "Error opening file: " << e.what() << std::endl;
+    }
     std::string question;
     std::vector<std::string> answerOptions;
     int correctAnswer;
@@ -62,38 +73,77 @@ void Game::addPlayer(const Player& player) {
 }
 
 void Game::play(){
+    bool quit = false;
+    while(!quit) {
+        for (auto &player: players) {
+            std::cout << "Player " << player.getName() << ", it's your turn!" << std::endl;
 
-    for (auto& player : players) {
-        std::cout << "Player " << player.getName() << ", it's your turn!" << std::endl;
+            std::vector<std::string> categorii = {"Music", "Geography", "History", "Art", "Literature", "Sports"};
 
-        std::vector<std::string> categorii = {"Music", "Geography", "History", "Art", "Literature", "Sports"};
-
-        Screen screen("Categorii", categorii);
+            Screen screen("Categorii", categorii);
 
 
-        sf::RenderWindow window;
-        window.create(sf::VideoMode({1000, 800}), "QuizApp", sf::Style::Default);
-        window.setVerticalSyncEnabled(true);
+            sf::RenderWindow window;
+            window.create(sf::VideoMode({1000, 800}), "QuizApp", sf::Style::Default);
+            window.setVerticalSyncEnabled(true);
 
-        int categorie_aleasa = screen.displayScreen(window);
+            int categorie_aleasa = screen.displayScreen(window);
 
-        if (categorie_aleasa) {
-            for (Question &question: questions)
-                if (categorie_aleasa == question.getCategory()) {
-                    if (time.getSecondsLeft() == 0)
-                        time.finish();
-                    else {
-                        int raspuns = question.displayScreen(window);
-                        if (raspuns != -1) {
-                            if (question.checkAnswer(raspuns))
-                                player.increaseScore(1);
-                            else
-                                player.decreaseScore(1);
+            if (categorie_aleasa != -1) {
+                bool quit2 = false;
+                while(!quit2) {
+                    Timer time(3);
+                    time.reset();
+
+                    int number = 0;
+
+                    std::vector<Question> category_questions;
+                    for (Question &question: questions) {
+                        if (categorie_aleasa == question.getCategory()) {
+                            category_questions.push_back(question);
+                        }
+                    }
+
+                    std::random_device rd;
+                    std::mt19937 g(rd());
+                    std::shuffle(category_questions.begin(), category_questions.end(), g);
+
+                    for (Question &question: category_questions) {
+                        if (time.isExpired() == 1 || number == 10) {
+                            std::string message = "Player " + player.getName() + ", your final score is " +
+                                                  std::to_string(std::max(player.getScore(), 0));
+                            std::vector<std::string> optiuniFinal;
+                            optiuniFinal.push_back("Play Again");
+                            optiuniFinal.push_back("Menu");
+                            optiuniFinal.push_back("Quit");
+                            Screen final(message, optiuniFinal);
+                            int alegereFinala = final.displayScreen(window);
+                            if(alegereFinala == 1) {
+                                quit2 = true;
+                                break;
+                            }
+                            if(alegereFinala == 0)
+                                break;
+                            if(alegereFinala == 2){
+                                quit = true;
+                                quit2 = true;
+                                break;
+                            }
+
+                        }
+                        else {
+                            number += 1;
+                            int raspuns = question.displayScreen(window);
+                            if (raspuns != -1) {
+                                if (question.checkAnswer(raspuns))
+                                    player.increaseScore(1);
+                                else
+                                    player.decreaseScore(0);
+                            }
                         }
                     }
                 }
+            }
         }
-
-        std::cout << "Player " << player.getName() << ", your final score is " << std::max(player.getScore(),0) << std::endl;
     }
 }

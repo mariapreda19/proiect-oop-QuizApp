@@ -8,28 +8,17 @@
 #define OOP_TIMER_H
 
 
-class Timer{
-    int start;
-    int stop;
-    int secondsLeft;
+#include <chrono>
+#include <ctime>
 
+class Timer {
 public:
-
-    explicit Timer(const int start_ = 0, const int stop_ = 300, const int secondsLeft_ = 300);
-
-    Timer(Timer const& other) noexcept;
-
-    Timer& operator=(const Timer& other);
-
-    friend std::ostream& operator<<(std::ostream& os, const Timer& timer);
-
-    [[nodiscard]] int getSecondsLeft() const;
-
-    void finish() const;
-
-    void addTime(int moreTime);
-
-    ~Timer();
+    Timer(int durationSeconds);
+    bool isExpired() const;
+    void reset();
+private:
+    std::chrono::nanoseconds duration_;
+    std::chrono::time_point<std::chrono::high_resolution_clock> start_;
 };
 
 

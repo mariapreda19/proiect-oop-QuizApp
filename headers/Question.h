@@ -44,7 +44,7 @@ public:
 
     [[nodiscard]] bool askQuestion() const;
 };
-
+/*
 class Menu: public Screen{
     using Screen::Screen;
     Button single, competitive;
@@ -55,6 +55,6 @@ private:
     Menu(const Menu &other);
     Menu &operator=(const Menu &other);
 };
-
+*/
 
 #endif //OOP_QUESTION_H

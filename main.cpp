@@ -13,10 +13,10 @@ int main(){
     std::vector<Player> players;
 
 
-    //Game firstGame("questions.txt", players);
-    //firstGame.addPlayer(p1);
+    Game firstGame("questions.txt", players);
+    firstGame.addPlayer(p1);
 
-    //firstGame.play();
+    firstGame.play();
 
 
     return 0;

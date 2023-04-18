@@ -15,7 +15,6 @@
 
 class Game {
 private:
-    Timer time;
     std::vector<Question> questions;
     std::vector<Player> players;
 

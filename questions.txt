@@ -145,3 +145,402 @@ Russia
 Turkey
 3
 1
+Who painted the Mona Lisa?
+Pablo Picasso
+Michelangelo
+Leonardo da Vinci
+Vincent van Gogh
+2
+3
+Which artist is known for painting the Starry Night?
+Vincent van Gogh
+Pablo Picasso
+Claude Monet
+Salvador Dali
+0
+3
+Which art movement is known for its colorful, abstract shapes and forms?
+Cubism
+Expressionism
+Fauvism
+Surrealism
+2
+3
+Who created the sculpture David?
+Leonardo da Vinci
+Michelangelo
+Donatello
+Raphael
+1
+3
+Which artist is known for painting the water lilies series?
+Claude Monet
+Paul Cézanne
+Vincent van Gogh
+Edvard Munch
+0
+3
+Which Renaissance artist created the ceiling of the Sistine Chapel?
+Leonardo da Vinci
+Donatello
+Michelangelo
+Raphael
+2
+3
+What is the name of the famous painting of a screaming figure?
+The Scream
+The Shout
+The Cry
+The Yell
+0
+3
+Which artist is known for creating the sculpture The Thinker?
+Michelangelo
+Auguste Rodin
+Gian Lorenzo Bernini
+Leonardo da Vinci
+1
+3
+Which art movement is known for using bright colors and bold designs to convey a sense of joy and celebration?
+Pop Art
+Fauvism
+Expressionism
+Abstract Expressionism
+1
+3
+Who is the artist behind the famous sculpture The Kiss?
+Gian Lorenzo Bernini
+Michelangelo
+Auguste Rodin
+Donatello
+2
+3
+Which artist is known for painting The Persistence of Memory?
+Salvador Dali
+Pablo Picasso
+Vincent van Gogh
+Claude Monet
+0
+3
+Who painted the famous fresco The Last Supper?
+Leonardo da Vinci
+Michelangelo
+Raphael
+Sandro Botticelli
+0
+3
+Which art movement is known for its use of bold, contrasting colors and simple, geometric shapes?
+Futurism
+Abstract Expressionism
+Cubism
+Pop Art
+2
+3
+Which artist is known for creating the sculpture The David?
+Leonardo da Vinci
+Michelangelo
+Donatello
+Gian Lorenzo Bernini
+1
+3
+Who painted the famous artwork known as The Starry Night Over the Rhône?
+Vincent van Gogh
+Claude Monet
+Pierre-Auguste Renoir
+Georges Seurat
+0
+3
+Who was the lead singer of Queen?
+Paul McCartney
+Freddie Mercury
+Mick Jagger
+John Lennon
+1
+0
+What genre of music is Beyoncé known for?
+Country
+Pop
+R&B
+Heavy Metal
+2
+0
+Who is the guitarist for the Rolling Stones?
+Eric Clapton
+Keith Richards
+Jimi Hendrix
+Jimmy Page
+1
+0
+What is the name of Taylor Swift's debut album?
+Speak Now
+1989
+Red
+Taylor Swift
+3
+0
+What is the name of the singer known as the "King of Pop"?
+Prince
+Elvis Presley
+Michael Jackson
+David Bowie
+2
+0
+Who is the lead singer of the band Coldplay?
+Bono
+Chris Martin
+Thom Yorke
+Brandon Flowers
+1
+0
+Which of the following is a famous DJ and producer known for hits like "Wake Me Up" and "Levels"?
+Avicii
+Calvin Harris
+Tiësto
+David Guetta
+0
+0
+Who is the lead singer of the band U2?
+Bono
+Chris Martin
+Thom Yorke
+Brandon Flowers
+0
+0
+Which of the following is a famous rapper and songwriter known for hits like "Lose Yourself" and "Rap God"?
+Jay-Z
+Eminem
+Kanye West
+Nas
+1
+0
+What is the name of Adele's album that won Album of the Year at the 2017 Grammy Awards?
+25
+21
+19
+30
+0
+0
+What is the name of the drummer for the band Metallica?
+Lars Ulrich
+Dave Grohl
+Joey Jordison
+Neil Peart
+2
+0
+Which singer is known for hits like "Sorry" and "Love Yourself"?
+Justin Timberlake
+Bruno Mars
+Ed Sheeran
+Justin Bieber
+3
+0
+What is the name of the lead singer of the band Nirvana?
+Kurt Cobain
+Eddie Vedder
+Chris Cornell
+Layne Staley
+0
+0
+Which of the following is a famous pop group consisting of four members, known for hits like "Wannabe" and "Spice Up Your Life"?
+Destiny's Child
+TLC
+The Spice Girls
+Fifth Harmony
+2
+0
+What is the name of the singer known as the "Queen of Pop"?
+Madonna
+Lady Gaga
+Rihanna
+Beyoncé
+0
+0
+Which ancient civilization was located in modern-day Mexico?
+Inca
+Aztec
+Mayan
+Olmec
+1
+2
+Who was the first president of the United States?
+Thomas Jefferson
+George Washington
+John Adams
+Benjamin Franklin
+1
+2
+What was the name of the period in European history that followed the Middle Ages?
+Renaissance
+Enlightenment
+Industrial Revolution
+Age of Exploration
+0
+2
+Which country was responsible for colonizing much of South America?
+Spain
+Portugal
+France
+England
+0
+2
+In what year did the United States declare independence from Great Britain?
+1776
+1783
+1800
+1812
+0
+2
+Who was the leader of the Soviet Union during World War II?
+Joseph Stalin
+Vladimir Lenin
+Leon Trotsky
+Nikita Khrushchev
+0
+2
+Which European country colonized much of Africa in the 19th century?
+France
+Spain
+Italy
+Belgium
+0
+2
+Who was the first emperor of Rome?
+Julius Caesar
+Augustus
+Nero
+Trajan
+1
+2
+Which European country was the first to colonize what is now the United States?
+Spain
+France
+England
+Portugal
+2
+2
+Who was the leader of the United States during World War II?
+Franklin D. Roosevelt
+Harry S. Truman
+Dwight D. Eisenhower
+John F. Kennedy
+0
+2
+Which city was the site of the famous witch trials in 1692?
+Salem
+Boston
+Philadelphia
+New York City
+0
+2
+Which Chinese philosopher emphasized the importance of moral and ethical behavior?
+Confucius
+Laozi
+Sun Tzu
+Mozi
+0
+2
+Who was the first African American president of the United States?
+Barack Obama
+George W. Bush
+Bill Clinton
+Ronald Reagan
+0
+2
+Who was the last monarch of France before the French Revolution?
+King Louis XVI
+King Henry IV
+King Francis I
+King Charles V
+0
+2
+Who was the first president of the United States?
+John Adams
+George Washington
+Thomas Jefferson
+Benjamin Franklin
+1
+2
+Which country was the first to circumnavigate the world?
+Spain
+Portugal
+England
+France
+0
+2
+What was the name of the first successful airplane built by the Wright brothers?
+Flyer
+Hawk
+Eagle
+Falcon
+0
+2
+Who was the first female prime minister of Great Britain?
+Theresa May
+Margaret Thatcher
+Angela Merkel
+Indira Gandhi
+1
+2
+Who was the first emperor of Rome?
+Julius Caesar
+Augustus
+Nero
+Caligula
+1
+2
+What was the name of the first man to walk on the moon?
+Neil Armstrong
+Buzz Aldrin
+Michael Collins
+John Glenn
+0
+2
+What country did Christopher Columbus sail for in 1492?
+Portugal
+Spain
+Italy
+France
+1
+2
+What was the name of the ship that Charles Darwin sailed on during his voyage to the Galapagos Islands?
+Endeavour
+Beagle
+Discovery
+Bounty
+1
+2
+Who was the first person to complete a solo nonstop flight across the Atlantic Ocean?
+Charles Lindbergh
+Amelia Earhart
+Howard Hughes
+Bessie Coleman
+0
+2
+What was the name of the first successful steam-powered ship?
+Titanic
+Queen Mary
+Mayflower
+Savannah
+3
+2
+Which war was fought between North and South Korea in the 1950s?
+World War I
+World War II
+Korean War
+Gulf War
+2
+2
+Who was the first U.S. president to resign from office?
+Richard Nixon
+Gerald Ford
+Jimmy Carter
+Ronald Reagan
+0
+2
+What was the name of the famous 1969 music festival that drew hundreds of thousands of attendees?
+Woodstock
+Monterey Pop
+Isle of Wight
+Live Aid
+0
+2
