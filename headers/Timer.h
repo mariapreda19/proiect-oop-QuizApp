@@ -11,14 +11,15 @@
 #include <chrono>
 #include <ctime>
 
+
 class Timer {
-public:
-    Timer(int durationSeconds);
-    bool isExpired() const;
-    void reset();
-private:
-    std::chrono::nanoseconds duration_;
+    std::chrono::seconds duration_;
     std::chrono::time_point<std::chrono::high_resolution_clock> start_;
+public:
+    explicit Timer(int durationSeconds);
+    [[nodiscard]] bool isExpired() const;
+    void reset();
+    [[nodiscard]] int getRemainingSeconds() const;
 };
 
 

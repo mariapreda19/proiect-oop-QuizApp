@@ -11,11 +11,13 @@
 #include <vector>
 #include <fstream>
 #include "SFML/Graphics.hpp"
+#include "Erori.h"
 
 
 class Game {
 private:
-    std::vector<Question> questions;
+    Screen *startScreen;
+    std::vector<Screen *> questions;
     std::vector<Player> players;
 
     void loadQuestions(const std::string& filePath);
@@ -24,14 +26,11 @@ public:
 
     explicit Game(const std::string& questionsFilePath, const std::vector<Player>& players_ = {});
 
-    Game([[maybe_unused]] const Game& other);
 
     /*Game([[maybe_unused]] const Game&& other)  noexcept {
         questions = other.questions;
         players = other.players;
     }*/
-
-    Game& operator=(const Game& other);
 
     friend std::ostream& operator<<(std::ostream& os, const Game& game);
 

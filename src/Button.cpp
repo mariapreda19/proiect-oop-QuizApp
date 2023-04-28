@@ -6,15 +6,15 @@
 #include "../headers/Button.h"
 
 
-Button::Button (sf::Vector2f position_, std::string text, std::string texture_) : position(position_), text(std::move(text)), texture(std::move(texture_)) {}
+Button::Button (std::string text, std::string texture_) : text(std::move(text)), texture(std::move(texture_)) {}
 
-Button::Button(const Button& other): position(other.position), text(other.text), texture(other.texture){}
+Button::Button(const Button& other) = default;
 
 Button& Button::operator=(const Button& other) = default;
 
 Button::~Button() = default;
 
-bool Button::displayButton(sf::RenderWindow &window){
+bool Button::displayButton(sf::RenderWindow &window, sf::Vector2f position){
     sf::Sprite sprite;
     sf::Texture texture_;
     sf::Text text_;
@@ -28,7 +28,7 @@ bool Button::displayButton(sf::RenderWindow &window){
 
     texture_.loadFromFile(this -> texture);
     sprite.setTexture(texture_);
-    sprite.setPosition(this -> position);
+    sprite.setPosition(position);
 
     sf::Vector2f textPosition = {position.x + (float(texture_.getSize().x) - text_.getGlobalBounds().getSize().x) / 2,
                                  position.y + (float(texture_.getSize().y) - text_.getGlobalBounds().getSize().y) / 2};
@@ -48,7 +48,7 @@ bool Button::displayButton(sf::RenderWindow &window){
 }
 
 std::ostream &operator<<(std::ostream &os, const Button &button) {
-    os << button.position.x << ' ' << button.position.y << ' ' << button.text;
+    os << ' ' << button.text;
     return os;
 }
 

@@ -9,6 +9,7 @@
 #include <vector>
 #include "Button.h"
 #include "SFML/Graphics.hpp"
+#include "Timer.h"
 
 class Screen {
     std::string text;
@@ -19,14 +20,20 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Screen& screen);
 
-    int displayScreen(sf::RenderWindow &window);
+    virtual int display(sf::RenderWindow &window);
+
+    [[nodiscard]] std::basic_string<char> getText() const;
+    [[nodiscard]] std::vector<Button> getOptions() const;
+
+
 };
+
+
 
 class Question: public Screen {
 
     using Screen::Screen;
     int correctAnswerIndex, category;
-
 public:
     explicit Question(std::string question = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0);
 
@@ -38,23 +45,41 @@ public:
 
     [[nodiscard]] int getCategory() const;
 
-//    void printQuestion() const;
-
     [[nodiscard]] bool checkAnswer(int userAnswer) const;
 
-    [[nodiscard]] bool askQuestion() const;
+    int display(sf::RenderWindow &window) override;
+
 };
-/*
-class Menu: public Screen{
+
+
+class MenuScreen : public Screen {
     using Screen::Screen;
-    Button single, competitive;
+public:
+    explicit MenuScreen(std::string text = "", const std::vector<std::string> &button_options = {"Play again", "Menu", "Quit"});
 
-private:
-    explicit Menu(std::string text = "", const std::vector<std::string> &button_options = {},
-                  std::string button_texture = "", std::string button_texture_clicked = "");
-    Menu(const Menu &other);
-    Menu &operator=(const Menu &other);
+    MenuScreen(const MenuScreen &other);
+
+    MenuScreen &operator=(const MenuScreen &other);
+
+    //friend std::ostream &operator<<(std::ostream &os, const MenuScreen &screen);
+
+
+
+    int display(sf::RenderWindow &window) override;
 };
-*/
 
+class CategoryScreen : public Screen {
+    using Screen::Screen;
+
+public:
+    explicit CategoryScreen(std::string text, const std::vector<std::string> &button_options = {std::string ("Music"), std::string ("Geography"), std::string ("History"), std::string ("Art"), std::string ("Literature"), std::string ("Sports")});
+
+    CategoryScreen(const CategoryScreen &other);
+
+    CategoryScreen &operator=(const CategoryScreen &other);
+
+    //friend std::ostream &operator<<(std::ostream &os, const CategoryScreen &screen);
+
+    int display(sf::RenderWindow &window) override;
+};
 #endif //OOP_QUESTION_H

@@ -1,9 +1,4 @@
-//
-// Created by maria on 4/3/2023.
-//
-
 #include "../headers/Game.h"
-#include <algorithm>
 #include <random>
 
 
@@ -12,11 +7,11 @@ void Game::loadQuestions(const std::string& filePath){
     try {
             std::ifstream file(filePath);
             if (!file.is_open()) {
-                throw std::runtime_error("Failed to open file");
+                throw eroare_fisier("Failed to open file");
             }
             file.close();
     } catch (const std::exception& e) {
-        std::cerr << "Error opening file: " << e.what() << std::endl;
+        std::cerr << filePath << e.what() << std::endl;
     }
     std::string question;
     std::vector<std::string> answerOptions;
@@ -32,7 +27,7 @@ void Game::loadQuestions(const std::string& filePath){
         fin >> category;
         fin.get();
 
-        Question temp_(question, answerOptions, correctAnswer, category);
+        Screen * temp_  = new Question(question, answerOptions, correctAnswer, category);
         questions.emplace_back(temp_);
         answerOptions.clear();
     }
@@ -43,17 +38,13 @@ Game::Game(const std::string& questionsFilePath, const std::vector<Player>& play
     loadQuestions(questionsFilePath);
 }
 
-Game::Game([[maybe_unused]] const Game& other) :
-        questions(other.questions),
-        players(other.players){
-}
 
 /*Game([[maybe_unused]] const Game&& other)  noexcept {
     questions = other.questions;
     players = other.players;
 }*/
 
-Game& Game::operator=(const Game& other) = default;
+
 
 std::ostream& operator<<(std::ostream& os, const Game& game) {
     os << "Questions: " << std::endl;
@@ -74,33 +65,27 @@ void Game::addPlayer(const Player& player) {
 
 void Game::play(){
     bool quit = false;
-    while(!quit) {
+    sf::RenderWindow window;
+    window.create(sf::VideoMode({1000, 800}), "QuizApp", sf::Style::Default);
+
+    while(!quit and window.isOpen()) {
         for (auto &player: players) {
-            std::cout << "Player " << player.getName() << ", it's your turn!" << std::endl;
 
-            std::vector<std::string> categorii = {"Music", "Geography", "History", "Art", "Literature", "Sports"};
+            Screen * screen = new CategoryScreen(std::string("Categorii"));
 
-            Screen screen("Categorii", categorii);
-
-
-            sf::RenderWindow window;
-            window.create(sf::VideoMode({1000, 800}), "QuizApp", sf::Style::Default);
-            window.setVerticalSyncEnabled(true);
-
-            int categorie_aleasa = screen.displayScreen(window);
+            int categorie_aleasa = screen->display(window);
 
             if (categorie_aleasa != -1) {
                 bool quit2 = false;
-                while(!quit2) {
-                    Timer time(3);
-                    time.reset();
-
+                while(!quit2 and window.isOpen()) {
+                    Timer clock(12);
+                    clock.reset();
                     int number = 0;
 
-                    std::vector<Question> category_questions;
-                    for (Question &question: questions) {
-                        if (categorie_aleasa == question.getCategory()) {
-                            category_questions.push_back(question);
+                    std::vector<Question *> category_questions;
+                    for (auto question: questions) {
+                        if (categorie_aleasa == dynamic_cast<Question *>(question)->getCategory()) {
+                            category_questions.push_back(dynamic_cast<Question *>(question));
                         }
                     }
 
@@ -108,37 +93,94 @@ void Game::play(){
                     std::mt19937 g(rd());
                     std::shuffle(category_questions.begin(), category_questions.end(), g);
 
-                    for (Question &question: category_questions) {
-                        if (time.isExpired() == 1 || number == 10) {
-                            std::string message = "Player " + player.getName() + ", your final score is " +
-                                                  std::to_string(std::max(player.getScore(), 0));
-                            std::vector<std::string> optiuniFinal;
-                            optiuniFinal.push_back("Play Again");
-                            optiuniFinal.push_back("Menu");
-                            optiuniFinal.push_back("Quit");
-                            Screen final(message, optiuniFinal);
-                            int alegereFinala = final.displayScreen(window);
-                            if(alegereFinala == 1) {
-                                quit2 = true;
-                                break;
-                            }
-                            if(alegereFinala == 0)
-                                break;
-                            if(alegereFinala == 2){
-                                quit = true;
-                                quit2 = true;
-                                break;
-                            }
+                    for (auto question: category_questions) {
+                        if (number == 10 || clock.isExpired() == 1) {
+                            if(clock.isExpired() == 1) {
+                                std::string message = "                Time is up \n Player " + player.getName() +
+                                                      ", your final score is " +
+                                                      std::to_string(std::max(player.getScore(), 0));
 
+                                MenuScreen final(message);
+                                int alegereFinala = final.display(window);
+                                if(alegereFinala == 1) {
+                                    quit2 = true;
+                                    break;
+                                }
+                                if(alegereFinala == 0)
+                                    break;
+                                if(alegereFinala == 2){
+                                    quit = true;
+                                    quit2 = true;
+                                    break;
+                                }
+
+                            }
+                            else {
+                                std::string message =
+                                        "          You have answered all the questions \n Player " + player.getName() +
+                                        ", your final score is " +
+                                        std::to_string(std::max(player.getScore(), 0));
+                                std::vector<std::string> optiuniFinal;
+                                optiuniFinal.push_back("Play Again");
+                                optiuniFinal.push_back("Menu");
+                                optiuniFinal.push_back("Quit");
+                                MenuScreen final(message, optiuniFinal);
+                                int alegereFinala = final.display(window);
+                                if(alegereFinala == 1) {
+                                    quit2 = true;
+                                    break;
+                                }
+                                if(alegereFinala == 0)
+                                    break;
+                                if(alegereFinala == 2){
+                                    quit = true;
+                                    quit2 = true;
+                                    break;
+                                }
+                            }
                         }
                         else {
                             number += 1;
-                            int raspuns = question.displayScreen(window);
+                            int time = clock.getRemainingSeconds();
+
+
+                            int raspuns = question -> display(window);
                             if (raspuns != -1) {
-                                if (question.checkAnswer(raspuns))
+                                if (question -> checkAnswer(raspuns)) {
                                     player.increaseScore(1);
-                                else
+                                    std::string message = "Player " + player.getName() + ", your score is " +
+                                                          std::to_string(std::max(player.getScore(), 0)) + " and you have " +
+                                                          std::to_string(time) + " seconds left";
+                                    std::vector<std::string> optiuni;
+                                    optiuni.push_back("Next Question");
+                                    optiuni.push_back("Quit");
+                                    MenuScreen screen1(message, optiuni);
+                                    int alegere = screen1.display(window);
+                                    if (alegere == 1) {
+                                        break;
+                                    }
+                                    if (alegere == 0) {
+                                        continue;
+                                    }
+
+                                }
+                                else {
                                     player.decreaseScore(0);
+                                    std::string message = "Player " + player.getName() + ", your score is " +
+                                                          std::to_string(std::max(player.getScore(), 0)) + " and you have " +
+                                                          std::to_string(time) + " seconds left";
+                                    std::vector<std::string> optiuni;
+                                    optiuni.push_back("Next Question");
+                                    optiuni.push_back("Quit");
+                                    MenuScreen screen1(message, optiuni);
+                                    int alegere = screen1.display(window);
+                                    if (alegere == 1) {
+                                        break;
+                                    }
+                                    if (alegere == 0) {
+                                        continue;
+                                    }
+                                }
                             }
                         }
                     }

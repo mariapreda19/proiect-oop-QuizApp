@@ -8,12 +8,11 @@
 
 
 class Button{
-    sf::Vector2f position;
     std::string text;
     std::string texture; // path to texture
 
 public:
-    Button (sf::Vector2f position_, std::string text, std::string texture_);
+    Button (std::string text, std::string texture_);
 
     Button(const Button& other);
 
@@ -21,7 +20,7 @@ public:
 
     ~Button();
 
-    bool displayButton(sf::RenderWindow &window);
+    bool displayButton(sf::RenderWindow &window, sf::Vector2f position);
 
     friend std::ostream& operator<<(std::ostream& os, const Button& button);
 

@@ -11,11 +11,11 @@ Screen::Screen(std::string text, const std::vector<std::string> &button_options)
 
     unsigned long long int size_ = button_options.size();
 
-    float space_left = float(1000 - (196 * int(size_ / 2) + 20 * (int(size_ / 2) - 1))) / 2;
-    //TODO edit this after final textures are added;
+    //float space_left = float(1000 - (196 * int(size_ / 2) + 20 * (int(size_ / 2) - 1))) / 2;
+
 
     for(unsigned long long int i=0; i < size_ ; i++){
-        Button temp({space_left + float(i % (size_ / 2)) * 216, 400 + float(int(i / (size_ / 2))) * 138}, button_options[i] ,"button.png");
+        Button temp(button_options[i] ,"button.png");
         options.emplace_back(temp);
     }
 
@@ -32,11 +32,16 @@ std::ostream& operator<<(std::ostream& os, const Screen& screen) {
 }
 
 
-int Screen::displayScreen (sf::RenderWindow &window){
+int Screen::display (sf::RenderWindow &window){
+
+    sf::Texture background;
+    background.loadFromFile("background.jpg");
+    sf::Sprite background_sprite;
+    background_sprite.setTexture(background);
 
     sf::Sprite box;
     sf::Texture texture;
-    texture.loadFromFile("rectangle.png");
+    texture.loadFromFile("button2.png");
     box.setTexture(texture);
     box.setPosition(100, 100);
 
@@ -64,20 +69,30 @@ int Screen::displayScreen (sf::RenderWindow &window){
         }
 
         window.clear();
+        window.draw(background_sprite);
         window.draw(box);
         window.draw(text_);
+
+
         for (int i=0 ; i < int(options.size()); i++){
-            if(options[i].displayButton(window) == 1)
+            if(options[i].displayButton(window,{0,0}) == 1)
                 return i;
         }
+
         window.display();
     }
     return -1;
 }
 
+std::basic_string<char> Screen::getText() const {
+    return text;
+}
+std::vector<Button> Screen::getOptions() const {
+    return options;
+}
 
 Question::Question(std::string question, const std::vector<std::string>& options, const int correct, const int category_):
-        Screen(std::move(question), options), correctAnswerIndex(correct), category(category_) {
+        Screen(std::move(question), options), correctAnswerIndex(correct), category(category_){
 }
 
 Question::Question(const Question& other) = default;
@@ -88,51 +103,183 @@ std::ostream& operator<<(std::ostream& os, const Question& question) {
     os << "Correct answer: " << question.correctAnswerIndex << std::endl;
     return os;
 }
-
 //[[nodiscard]] int getCorrectAnswerIndex() const {return correctAnswerIndex;}
 //[[nodiscard]] std::vector<std::string> getAnswerText() const {return options;}
 //[[nodiscard]] std::string gettext() const {return text;}
 
 [[nodiscard]] int Question::getCategory() const {return category;}
 
-/*
-void Question::printQuestion() const {
-    std::cout << text << std::endl;
-
-    for (long long unsigned int i = 0; i < options.size(); i++) {
-        std::cout << i+1 << ". " << options[i] << std::endl;
-    }
-}
- */
-
 [[nodiscard]] bool Question::checkAnswer(int userAnswer) const {
     return (userAnswer == correctAnswerIndex);
 }
 
-[[nodiscard]] bool Question::askQuestion() const {
 
-    int userAnswer;
-    std::cout << "Enter your answer: ";
-    std::cin >> userAnswer;
+int Question::display(sf::RenderWindow &window) {
+    // Load background image and button texture
+    sf::Texture background;
+    background.loadFromFile("background.jpg");
+    sf::Sprite background_sprite;
+    background_sprite.setTexture(background);
 
-    if (checkAnswer(userAnswer - 1)) {
-        std::cout << "Correct!" << std::endl;
-        return true;
+    sf::Texture texture;
+    texture.loadFromFile("button2.png");
+
+    // Create button sprite and set its position
+    sf::Sprite box;
+    box.setTexture(texture);
+    box.setPosition(100, 100);
+
+    // Load font and create text object
+    sf::Font font;
+    font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
+
+    sf::Text text_;
+    text_.setString(this -> getText());
+    text_.setCharacterSize(20);
+    text_.setFont(font);
+    text_.setFillColor(sf::Color::White);
+
+
+    sf::Vector2f textPosition = {100 + (float(texture.getSize().x) - text_.getGlobalBounds().getSize().x) / 2,
+                                 100 + (float(texture.getSize().y) - text_.getGlobalBounds().getSize().y) / 2};
+    text_.setPosition(textPosition);
+
+    while(window.isOpen())
+    {
+
+        sf::Event e{};
+        while(window.pollEvent(e))
+        {
+            if(e.type == sf::Event::Closed)
+                window.close();
+        }
+
+
+        window.clear();
+        window.draw(background_sprite);
+        window.draw(box);
+        window.draw(text_);
+
+
+
+        for (int i=0 ; i < 4; i++){
+            if(getOptions()[i].displayButton(window, {294+float(i%2)*216, 400 + float(int(i/2))*138}) == 1)
+                return i;
+        }
+        window.display();
     }
-    else {
-        std::cout << "Incorrect." << std::endl;
-        return false;
+    return -1;
+}
+
+MenuScreen::MenuScreen(std::string text, const std::vector<std::string> &button_options) : Screen(std::move(text), button_options) {}
+
+MenuScreen::MenuScreen(const MenuScreen &other) = default;
+
+MenuScreen &MenuScreen::operator=(const MenuScreen &other) = default;
+
+int MenuScreen::display(sf::RenderWindow &window) {
+    sf::Texture background;
+    background.loadFromFile("background.jpg");
+    sf::Sprite background_sprite;
+    background_sprite.setTexture(background);
+
+    sf::Sprite box;
+    sf::Texture texture;
+    texture.loadFromFile("button2.png");
+    box.setTexture(texture);
+    box.setPosition(100, 100);
+
+    sf::Text text_;
+    sf::Font font;
+    font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
+
+    text_.setString(getText());
+    text_.setCharacterSize(20);
+    text_.setFont(font);
+    text_.setFillColor(sf::Color::White);
+
+    sf::Vector2f textPosition = {100 + (float(texture.getSize().x) - text_.getGlobalBounds().getSize().x) / 2,
+                                 100 + (float(texture.getSize().y) - text_.getGlobalBounds().getSize().y) / 2};
+
+    text_.setPosition(textPosition);
+
+    while(window.isOpen())
+    {
+        sf::Event e{};
+        while(window.pollEvent(e))
+        {
+            if(e.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        window.draw(background_sprite);
+        window.draw(box);
+        window.draw(text_);
+        for (int i=0 ; i < int(getOptions().size()); i++){
+            if(getOptions()[i].displayButton(window, { 402 + float(i % (getOptions().size() / 2)) * 216, 400 + float(int(i / (getOptions().size() / 2))) * 138}) == 1)
+                return i;
+        }
+
+
+        window.display();
     }
-}
-/*
-Menu::Menu(std::string text, const std::vector<std::string> &button_options, std::string button_texture,
-           std::string button_texture_clicked): Screen(std::move(text), button_options),
-           single({200,700},"",std::move(button_texture)),
-           competitive({500,700}, "", std::move(button_texture_clicked)) {
-
+    return -1;
 }
 
-Menu::Menu(const Menu& other) = default;
 
-Menu& Menu::operator=(const Menu& other) = default;
-*/
+
+CategoryScreen::CategoryScreen(std::string text, const std::vector<std::string> &button_options) : Screen(std::move(text), button_options){}
+CategoryScreen::CategoryScreen(const CategoryScreen &other) = default;
+CategoryScreen &CategoryScreen::operator=(const CategoryScreen &other) = default;
+int CategoryScreen::display(sf::RenderWindow &window) {
+    sf::Texture background;
+    background.loadFromFile("background.jpg");
+    sf::Sprite background_sprite;
+    background_sprite.setTexture(background);
+
+    sf::Sprite box;
+    sf::Texture texture;
+    texture.loadFromFile("button2.png");
+    box.setTexture(texture);
+    box.setPosition(100, 100);
+
+    sf::Text text_;
+    sf::Font font;
+    font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
+
+    text_.setString(getText());
+    text_.setCharacterSize(20);
+    text_.setFont(font);
+    text_.setFillColor(sf::Color::White);
+
+    sf::Vector2f textPosition = {100 + (float(texture.getSize().x) - text_.getGlobalBounds().getSize().x) / 2,
+                                 100 + (float(texture.getSize().y) - text_.getGlobalBounds().getSize().y) / 2};
+
+    text_.setPosition(textPosition);
+
+    while(window.isOpen())
+    {
+        sf::Event e{};
+        while(window.pollEvent(e))
+        {
+            if(e.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        window.draw(background_sprite);
+        window.draw(box);
+        window.draw(text_);
+
+
+        for (int i=0 ; i < 6; i++){
+            if(getOptions()[i].displayButton(window, {200 + float(i%3)*216, 400+float(int(i/3))*138}) == 1)
+                return i;
+        }
+
+        window.display();
+    }
+    return -1;
+
+}
