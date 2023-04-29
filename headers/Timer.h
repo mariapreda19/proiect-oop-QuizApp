@@ -19,7 +19,7 @@ public:
     explicit Timer(int durationSeconds);
     [[nodiscard]] bool isExpired() const;
     void reset();
-    [[nodiscard]] int getRemainingSeconds() const;
+    [[nodiscard]] long long getRemainingSeconds() const;
 };
 
 

@@ -39,7 +39,7 @@ class Question: public Screen {
 public:
     explicit Question(std::string question = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0);
 
-    Question(const Question &other);
+    //Question(const Question &other);
 
     Question &operator=(const Question &other);
 
@@ -57,9 +57,9 @@ public:
 class MenuScreen : public Screen {
     using Screen::Screen;
 public:
-    explicit MenuScreen(std::string text = "", const std::vector<std::string> &button_options = {"Play again", "Menu", "Quit"});
+    //explicit MenuScreen(std::string text = "", const std::vector<std::string> &button_options = {"Play again", "Menu", "Quit"});
 
-    MenuScreen(const MenuScreen &other);
+    //MenuScreen(const MenuScreen &other);
 
     MenuScreen &operator=(const MenuScreen &other);
 
@@ -76,7 +76,7 @@ class CategoryScreen : public Screen {
 public:
     explicit CategoryScreen(std::string text, const std::vector<std::string> &button_options = {std::string ("Music"), std::string ("Geography"), std::string ("History"), std::string ("Art"), std::string ("Literature"), std::string ("Sports")});
 
-    CategoryScreen(const CategoryScreen &other);
+    //CategoryScreen(const CategoryScreen &other);
 
     CategoryScreen &operator=(const CategoryScreen &other);
 

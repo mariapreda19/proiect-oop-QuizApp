@@ -97,7 +97,7 @@ Question::Question(std::string question, const std::vector<std::string>& options
         Screen(std::move(question), options), correctAnswerIndex(correct), category(category_){
 }
 
-Question::Question(const Question& other) = default;
+//Question::Question(const Question& other) = default;
 
 Question& Question::operator=(const Question& other) = default;
 
@@ -187,16 +187,16 @@ int Question::display(sf::RenderWindow &window) {
     return -1;
 }
 
-MenuScreen::MenuScreen(std::string text, const std::vector<std::string> &button_options) : Screen(std::move(text), button_options) {}
+//MenuScreen::MenuScreen(std::string text, const std::vector<std::string> &button_options) : Screen(std::move(text), button_options) {}
 
-MenuScreen::MenuScreen(const MenuScreen &other) = default;
+//MenuScreen::MenuScreen(const MenuScreen &other) = default;
 
 MenuScreen &MenuScreen::operator=(const MenuScreen &other) = default;
 
 int MenuScreen::display(sf::RenderWindow &window) {
     sf::Texture background;
     try {
-        background.loadFromFile("background.jpg");
+        background.loadFromFile("backgroun.jpg");
     }
     catch(eroare_imagine &er){
         std::cout << er.what() << std::endl;
@@ -259,7 +259,7 @@ int MenuScreen::display(sf::RenderWindow &window) {
 
 
 CategoryScreen::CategoryScreen(std::string text, const std::vector<std::string> &button_options) : Screen(std::move(text), button_options){}
-CategoryScreen::CategoryScreen(const CategoryScreen &other) = default;
+//CategoryScreen::CategoryScreen(const CategoryScreen &other) = default;
 CategoryScreen &CategoryScreen::operator=(const CategoryScreen &other) = default;
 int CategoryScreen::display(sf::RenderWindow &window) {
     sf::Texture background;

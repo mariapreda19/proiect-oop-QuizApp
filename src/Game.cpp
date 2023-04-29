@@ -140,7 +140,7 @@ void Game::play(){
                         }
                         else {
                             number += 1;
-                            int time = clock.getRemainingSeconds();
+                            long long time = clock.getRemainingSeconds();
 
 
                             int raspuns = question -> display(window);
@@ -182,7 +182,6 @@ void Game::play(){
                                 }
                             }
                         }
-                        delete screen;
                     }
                 }
             }
