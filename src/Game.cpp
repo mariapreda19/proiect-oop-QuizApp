@@ -78,10 +78,9 @@ void Game::play(){
             if (categorie_aleasa != -1) {
                 bool quit2 = false;
                 while(!quit2 and window.isOpen()) {
-                    Timer clock(12);
+                    Timer clock(300);
                     clock.reset();
                     int number = 0;
-
                     std::vector<Question *> category_questions;
                     for (auto question: questions) {
                         if (categorie_aleasa == dynamic_cast<Question *>(question)->getCategory()) {
@@ -183,9 +182,18 @@ void Game::play(){
                                 }
                             }
                         }
+                        delete screen;
                     }
                 }
             }
         }
     }
 }
+Game::~Game() {
+    delete startScreen;
+    for (auto q : questions) {
+        delete q;
+    }
+}
+
+

@@ -91,6 +91,8 @@ std::vector<Button> Screen::getOptions() const {
     return options;
 }
 
+Screen::~Screen() = default;
+
 Question::Question(std::string question, const std::vector<std::string>& options, const int correct, const int category_):
         Screen(std::move(question), options), correctAnswerIndex(correct), category(category_){
 }
@@ -115,23 +117,37 @@ std::ostream& operator<<(std::ostream& os, const Question& question) {
 
 
 int Question::display(sf::RenderWindow &window) {
-    // Load background image and button texture
     sf::Texture background;
-    background.loadFromFile("background.jpg");
+    try {
+        background.loadFromFile("background.jpg");
+    }
+    catch(eroare_imagine &er){
+        std::cout << er.what() << std::endl;
+    }
     sf::Sprite background_sprite;
     background_sprite.setTexture(background);
 
     sf::Texture texture;
-    texture.loadFromFile("button2.png");
 
-    // Create button sprite and set its position
+    try {
+        texture.loadFromFile("button2.png");
+    }
+    catch(eroare_imagine &er){
+        std::cout << er.what() << std::endl;
+    }
+
     sf::Sprite box;
     box.setTexture(texture);
     box.setPosition(100, 100);
 
-    // Load font and create text object
+
     sf::Font font;
-    font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
+    try {
+        font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
+    }
+    catch(eroare_font &er){
+        std::cout << er.what() << std::endl;
+    }
 
     sf::Text text_;
     text_.setString(this -> getText());
@@ -179,20 +195,34 @@ MenuScreen &MenuScreen::operator=(const MenuScreen &other) = default;
 
 int MenuScreen::display(sf::RenderWindow &window) {
     sf::Texture background;
-    background.loadFromFile("background.jpg");
+    try {
+        background.loadFromFile("background.jpg");
+    }
+    catch(eroare_imagine &er){
+        std::cout << er.what() << std::endl;
+    }
     sf::Sprite background_sprite;
     background_sprite.setTexture(background);
 
     sf::Sprite box;
     sf::Texture texture;
-    texture.loadFromFile("button2.png");
+    try {
+        texture.loadFromFile("button2.png");
+    }
+    catch(eroare_imagine &er){
+        std::cout << er.what() << std::endl;
+    }
     box.setTexture(texture);
     box.setPosition(100, 100);
 
     sf::Text text_;
     sf::Font font;
-    font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
-
+    try {
+        font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
+    }
+    catch(eroare_font &er){
+        std::cout << er.what() << std::endl;
+    }
     text_.setString(getText());
     text_.setCharacterSize(20);
     text_.setFont(font);
@@ -206,8 +236,7 @@ int MenuScreen::display(sf::RenderWindow &window) {
     while(window.isOpen())
     {
         sf::Event e{};
-        while(window.pollEvent(e))
-        {
+        while(window.pollEvent(e)){
             if(e.type == sf::Event::Closed)
                 window.close();
         }
@@ -234,19 +263,34 @@ CategoryScreen::CategoryScreen(const CategoryScreen &other) = default;
 CategoryScreen &CategoryScreen::operator=(const CategoryScreen &other) = default;
 int CategoryScreen::display(sf::RenderWindow &window) {
     sf::Texture background;
-    background.loadFromFile("background.jpg");
+    try {
+        background.loadFromFile("background.jpg");
+    }
+    catch(eroare_imagine &er){
+        std::cout << er.what() << std::endl;
+    }
     sf::Sprite background_sprite;
     background_sprite.setTexture(background);
 
     sf::Sprite box;
     sf::Texture texture;
-    texture.loadFromFile("button2.png");
+    try {
+        texture.loadFromFile("button2.png");
+    }
+    catch(eroare_imagine &er){
+        std::cout << er.what() << std::endl;
+    }
     box.setTexture(texture);
     box.setPosition(100, 100);
 
     sf::Text text_;
     sf::Font font;
-    font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
+    try {
+        font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
+    }
+    catch(eroare_font &er){
+        std::cout << er.what() << std::endl;
+    }
 
     text_.setString(getText());
     text_.setCharacterSize(20);
@@ -261,8 +305,7 @@ int CategoryScreen::display(sf::RenderWindow &window) {
     while(window.isOpen())
     {
         sf::Event e{};
-        while(window.pollEvent(e))
-        {
+        while(window.pollEvent(e)){
             if(e.type == sf::Event::Closed)
                 window.close();
         }

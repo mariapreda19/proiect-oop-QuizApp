@@ -16,4 +16,14 @@ public:
     explicit eroare_fereastra(const std::string& mesaj);
 };
 
+class eroare_imagine : public eroare_fereastra {
+public:
+    [[maybe_unused]] explicit eroare_imagine(const std::string& mesaj);
+};
+
+class eroare_font : public eroare_fereastra {
+public:
+    explicit eroare_font(const std::string& mesaj);
+};
+
 #endif //OOP_ERORI_H

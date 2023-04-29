@@ -10,6 +10,7 @@
 #include "Button.h"
 #include "SFML/Graphics.hpp"
 #include "Timer.h"
+#include "Erori.h"
 
 class Screen {
     std::string text;
@@ -20,11 +21,12 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Screen& screen);
 
-    virtual int display(sf::RenderWindow &window);
+    virtual int display(sf::RenderWindow &window) = 0;
 
     [[nodiscard]] std::basic_string<char> getText() const;
     [[nodiscard]] std::vector<Button> getOptions() const;
 
+    virtual ~Screen();
 
 };
 

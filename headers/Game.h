@@ -16,7 +16,7 @@
 
 class Game {
 private:
-    Screen *startScreen;
+    Screen *startScreen{};
     std::vector<Screen *> questions;
     std::vector<Player> players;
 
@@ -38,7 +38,8 @@ public:
     void addPlayer(const Player& player);
 
     void play();
-};
 
+    virtual ~Game();
+};
 
 #endif //OOP_GAME_H
