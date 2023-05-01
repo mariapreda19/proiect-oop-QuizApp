@@ -17,7 +17,6 @@ public:
 
     explicit Player(std::string name_, int lastId = 0, int score_ = 0);
 
-    //Player (const Player& other);
 
     Player& operator=(const Player& other);
 

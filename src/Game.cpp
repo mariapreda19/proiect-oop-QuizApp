@@ -30,6 +30,7 @@ void Game::loadQuestions(const std::string& filePath){
         Screen * temp_  = new Question(question, answerOptions, correctAnswer, category);
         questions.emplace_back(temp_);
         answerOptions.clear();
+        ///delete temp_;
     }
     fin.close();
 }

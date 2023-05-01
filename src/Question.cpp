@@ -97,7 +97,7 @@ Question::Question(std::string question, const std::vector<std::string>& options
         Screen(std::move(question), options), correctAnswerIndex(correct), category(category_){
 }
 
-//Question::Question(const Question& other) = default;
+
 
 Question& Question::operator=(const Question& other) = default;
 
@@ -196,7 +196,7 @@ MenuScreen &MenuScreen::operator=(const MenuScreen &other) = default;
 int MenuScreen::display(sf::RenderWindow &window) {
     sf::Texture background;
     try {
-        background.loadFromFile("backgroun.jpg");
+        background.loadFromFile("background.jpg");
     }
     catch(eroare_imagine &er){
         std::cout << er.what() << std::endl;

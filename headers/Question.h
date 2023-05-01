@@ -39,8 +39,6 @@ class Question: public Screen {
 public:
     explicit Question(std::string question = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0);
 
-    //Question(const Question &other);
-
     Question &operator=(const Question &other);
 
     friend std::ostream &operator<<(std::ostream &os, const Question &question);
@@ -50,6 +48,7 @@ public:
     [[nodiscard]] bool checkAnswer(int userAnswer) const;
 
     int display(sf::RenderWindow &window) override;
+
 
 };
 

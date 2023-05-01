@@ -9,7 +9,6 @@ Player::Player(std::string name_, int lastId , int score_) : name(std::move(name
     //std::cout<<"const player";
 }
 
-//Player::Player (const Player& other) = default;
 
 Player& Player:: operator=(const Player& other) {
     name = other.name;
