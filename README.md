@@ -54,4 +54,4 @@
 
 ## Resurse
 
-- adăugați trimiteri către resursele externe care v-au ajutat sau pe care le-ați folosit
+- Background, butoane: https://www.freepik.com
