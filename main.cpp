@@ -22,8 +22,6 @@ int main(){
 
 
     /*TODO
-      -> fisier separat pentru fonturi, pentru ca nu se incarca
-      -> try catch diferit, sa nu mai arunce exceptia in acelasi loc
       -> nu mai am niciun atribut de tip static sau functie
       -> ? mai e nevoie de suprascrierea cc/op=
       */

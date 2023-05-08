@@ -62,11 +62,11 @@ void Game::addPlayer(const Player& player) {
 }
 
 void Game::play(){
-    bool quit = false;
     sf::RenderWindow window;
     window.create(sf::VideoMode({1000, 800}), "QuizApp", sf::Style::Default);
     Player player = players[0];
     try {
+        bool quit = false;
         while (!quit and window.isOpen()) {
             Screen *screen = new CategoryScreen(std::string("Categorii"));
 
