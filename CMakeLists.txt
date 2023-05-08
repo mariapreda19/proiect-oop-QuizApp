@@ -134,6 +134,6 @@ endif()
 # copy binaries to "bin" folder; these are uploaded as artifacts on each release
 # update name in .github/workflows/cmake.yml:29 when changing "bin" name here
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-install(FILES questions.txt, arial.ttf, background.jpg, button.png, button1.png, button2.png, primaPoza.png, rectangle.png DESTINATION bin)
+install(FILES questions.txt arial.ttf background.jpg button.png button1.png button2.png primaPoza.png rectangle.png DESTINATION bin)
 #install(DIRECTORY some_dir1 some_dir2 DESTINATION bin)
 # install(FILES some_file1.txt some_file2.md DESTINATION bin)
