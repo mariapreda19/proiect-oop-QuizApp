@@ -19,6 +19,9 @@ class Screen {
 public:
     explicit Screen(std::string text = "", const std::vector<std::string> &button_options = {});
 
+    Screen& operator=(const Screen& other) = delete;
+    Screen (const Screen& other) = delete;
+
     friend std::ostream& operator<<(std::ostream& os, const Screen& screen);
 
     virtual int display(sf::RenderWindow &window) = 0;
@@ -26,8 +29,7 @@ public:
     [[nodiscard]] std::basic_string<char> getText() const;
     [[nodiscard]] std::vector<Button> getOptions() const;
 
-    virtual ~Screen();
-
+    virtual ~Screen() = default;
 };
 
 
@@ -39,7 +41,8 @@ class Question: public Screen {
 public:
     explicit Question(std::string question = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0);
 
-    Question &operator=(const Question &other);
+    Question &operator=(const Question &other) = delete;
+    Question (const Question &other) = delete;
 
     friend std::ostream &operator<<(std::ostream &os, const Question &question);
 
@@ -49,38 +52,40 @@ public:
 
     int display(sf::RenderWindow &window) override;
 
-
+    ~Question() override = default;
 };
 
 
 class MenuScreen : public Screen {
     using Screen::Screen;
 public:
-    //explicit MenuScreen(std::string text = "", const std::vector<std::string> &button_options = {"Play again", "Menu", "Quit"});
+    explicit MenuScreen(std::string text = "", const std::vector<std::string> &button_options = {"Play again", "Menu", "Quit"});
 
-    //MenuScreen(const MenuScreen &other);
+    MenuScreen(const MenuScreen &other) = delete;
 
-    MenuScreen &operator=(const MenuScreen &other);
+    MenuScreen &operator=(const MenuScreen &other) = delete;
 
     //friend std::ostream &operator<<(std::ostream &os, const MenuScreen &screen);
 
-
-
     int display(sf::RenderWindow &window) override;
+    ~MenuScreen() override = default;
 };
 
 class CategoryScreen : public Screen {
     using Screen::Screen;
 
 public:
-    explicit CategoryScreen(std::string text, const std::vector<std::string> &button_options = {std::string ("Music"), std::string ("Geography"), std::string ("History"), std::string ("Art"), std::string ("Literature"), std::string ("Sports")});
+    explicit CategoryScreen(std::string text, const std::vector<std::string> &button_options = {std::string ("Music"),
+                            std::string ("Geography"), std::string ("History"), std::string ("Art"),
+                            std::string ("Literature"), std::string ("Sports")});
 
-    //CategoryScreen(const CategoryScreen &other);
+    CategoryScreen(const CategoryScreen &other) = delete;
 
-    CategoryScreen &operator=(const CategoryScreen &other);
+    CategoryScreen &operator=(const CategoryScreen &other) = delete;
 
     //friend std::ostream &operator<<(std::ostream &os, const CategoryScreen &screen);
 
     int display(sf::RenderWindow &window) override;
+    ~CategoryScreen() override = default;
 };
 #endif //OOP_QUESTION_H

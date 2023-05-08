@@ -68,10 +68,8 @@ void Game::play(){
     bool quit = false;
     sf::RenderWindow window;
     window.create(sf::VideoMode({1000, 800}), "QuizApp", sf::Style::Default);
-
+    Player player = players[0];
     while(!quit and window.isOpen()) {
-        for (auto &player: players) {
-
             Screen * screen = new CategoryScreen(std::string("Categorii"));
 
             int categorie_aleasa = screen->display(window);
@@ -82,113 +80,100 @@ void Game::play(){
                     Timer clock(300);
                     clock.reset();
                     int number = 0;
-                    std::vector<Question *> category_questions;
-                    for (auto question: questions) {
-                        if (categorie_aleasa == dynamic_cast<Question *>(question)->getCategory()) {
-                            category_questions.push_back(dynamic_cast<Question *>(question));
-                        }
-                    }
 
-                    std::random_device rd;
-                    std::mt19937 g(rd());
-                    std::shuffle(category_questions.begin(), category_questions.end(), g);
+                    std::vector<Question *> category_questions = shuffleQuestions(categorie_aleasa);
 
                     for (auto question: category_questions) {
                         if (number == 10 || clock.isExpired() == 1) {
+                            std::string message;
                             if(clock.isExpired() == 1) {
-                                std::string message = "                Time is up \n Player " + player.getName() +
+                                message = "                Time is up \n Player " + player.getName() +
                                                       ", your final score is " +
                                                       std::to_string(std::max(player.getScore(), 0));
-
-                                MenuScreen final(message);
-                                int alegereFinala = final.display(window);
-                                if(alegereFinala == 1) {
-                                    quit2 = true;
-                                    break;
-                                }
-                                if(alegereFinala == 0)
-                                    break;
-                                if(alegereFinala == 2){
-                                    quit = true;
-                                    quit2 = true;
-                                    break;
-                                }
-
                             }
                             else {
-                                std::string message =
+                                message =
                                         "          You have answered all the questions \n Player " + player.getName() +
                                         ", your final score is " +
                                         std::to_string(std::max(player.getScore(), 0));
-                                std::vector<std::string> optiuniFinal;
-                                optiuniFinal.push_back("Play Again");
-                                optiuniFinal.push_back("Menu");
-                                optiuniFinal.push_back("Quit");
-                                MenuScreen final(message, optiuniFinal);
-                                int alegereFinala = final.display(window);
-                                if(alegereFinala == 1) {
-                                    quit2 = true;
-                                    break;
-                                }
-                                if(alegereFinala == 0)
-                                    break;
-                                if(alegereFinala == 2){
-                                    quit = true;
-                                    quit2 = true;
-                                    break;
-                                }
+                            }
+
+                            MenuScreen final(message);
+                            int alegereFinala = final.display(window);
+                            if(alegereFinala == 1) {
+                                quit2 = true;
+                                break;
+                            }
+                            if(alegereFinala == 0)
+                                break;
+                            if(alegereFinala == 2){
+                                quit = true;
+                                quit2 = true;
+                                break;
                             }
                         }
                         else {
                             number += 1;
                             long long time = clock.getRemainingSeconds();
 
-
                             int raspuns = question -> display(window);
+
                             if (raspuns != -1) {
+                                std::string message;
                                 if (question -> checkAnswer(raspuns)) {
                                     player.increaseScore(1);
-                                    std::string message = "Player " + player.getName() + ", your score is " +
+                                    message = "Player " + player.getName() + ", your score is " +
                                                           std::to_string(std::max(player.getScore(), 0)) + " and you have " +
                                                           std::to_string(time) + " seconds left";
-                                    std::vector<std::string> optiuni;
-                                    optiuni.push_back("Next Question");
-                                    optiuni.push_back("Quit");
-                                    MenuScreen screen1(message, optiuni);
-                                    int alegere = screen1.display(window);
-                                    if (alegere == 1) {
-                                        break;
-                                    }
-                                    if (alegere == 0) {
-                                        continue;
-                                    }
-
                                 }
                                 else {
                                     player.decreaseScore(0);
-                                    std::string message = "Player " + player.getName() + ", your score is " +
+                                    message = "Player " + player.getName() + ", your score is " +
                                                           std::to_string(std::max(player.getScore(), 0)) + " and you have " +
                                                           std::to_string(time) + " seconds left";
-                                    std::vector<std::string> optiuni;
-                                    optiuni.push_back("Next Question");
-                                    optiuni.push_back("Quit");
-                                    MenuScreen screen1(message, optiuni);
-                                    int alegere = screen1.display(window);
-                                    if (alegere == 1) {
-                                        break;
-                                    }
-                                    if (alegere == 0) {
-                                        continue;
-                                    }
+                                }
+
+                                std::vector<std::string> optiuni;
+                                optiuni.emplace_back("Next Question");
+                                optiuni.emplace_back("Quit");
+                                MenuScreen screen1(message, optiuni);
+                                auto alegere = screen1.display(window);
+                                if (alegere == 1) {
+                                    break;
+                                }
+                                if (alegere == 0) {
+                                    continue;
                                 }
                             }
                         }
                     }
                 }
-            }
+
         }
     }
 }
+
+
+
+
+std::vector<Question *>  Game::shuffleQuestions(int category) {
+    std::vector<Question *> category_questions;
+    for (auto question: questions) {
+        if (category== dynamic_cast<Question *>(question)->getCategory()) {
+            category_questions.push_back(dynamic_cast<Question *>(question));
+        }
+    }
+
+
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(category_questions.begin(), category_questions.end(), g);
+
+    return category_questions;
+}
+
+
+
 Game::~Game() {
     delete startScreen;
     for (auto q : questions) {

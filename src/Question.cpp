@@ -32,6 +32,7 @@ std::ostream& operator<<(std::ostream& os, const Screen& screen) {
 }
 
 
+
 int Screen::display (sf::RenderWindow &window){
 
     sf::Texture background;
@@ -91,7 +92,7 @@ std::vector<Button> Screen::getOptions() const {
     return options;
 }
 
-Screen::~Screen() = default;
+
 
 Question::Question(std::string question, const std::vector<std::string>& options, const int correct, const int category_):
         Screen(std::move(question), options), correctAnswerIndex(correct), category(category_){
@@ -99,7 +100,7 @@ Question::Question(std::string question, const std::vector<std::string>& options
 
 
 
-Question& Question::operator=(const Question& other) = default;
+//Question& Question::operator=(const Question& other) = default;
 
 std::ostream& operator<<(std::ostream& os, const Question& question) {
     os << "Correct answer: " << question.correctAnswerIndex << std::endl;
@@ -187,11 +188,11 @@ int Question::display(sf::RenderWindow &window) {
     return -1;
 }
 
-//MenuScreen::MenuScreen(std::string text, const std::vector<std::string> &button_options) : Screen(std::move(text), button_options) {}
+MenuScreen::MenuScreen(std::string text, const std::vector<std::string> &button_options) : Screen(std::move(text), button_options) {}
 
 //MenuScreen::MenuScreen(const MenuScreen &other) = default;
 
-MenuScreen &MenuScreen::operator=(const MenuScreen &other) = default;
+//MenuScreen &MenuScreen::operator=(const MenuScreen &other) = default;
 
 int MenuScreen::display(sf::RenderWindow &window) {
     sf::Texture background;
@@ -260,7 +261,7 @@ int MenuScreen::display(sf::RenderWindow &window) {
 
 CategoryScreen::CategoryScreen(std::string text, const std::vector<std::string> &button_options) : Screen(std::move(text), button_options){}
 //CategoryScreen::CategoryScreen(const CategoryScreen &other) = default;
-CategoryScreen &CategoryScreen::operator=(const CategoryScreen &other) = default;
+//CategoryScreen &CategoryScreen::operator=(const CategoryScreen &other) = default;
 int CategoryScreen::display(sf::RenderWindow &window) {
     sf::Texture background;
     try {

@@ -10,6 +10,7 @@
 #include "Timer.h"
 #include <vector>
 #include <fstream>
+#include <string>
 #include "SFML/Graphics.hpp"
 #include "Erori.h"
 
@@ -26,11 +27,9 @@ public:
 
     explicit Game(const std::string& questionsFilePath, const std::vector<Player>& players_ = {});
 
+    Game& operator=(const Game& other) = delete;
 
-    /*Game([[maybe_unused]] const Game&& other)  noexcept {
-        questions = other.questions;
-        players = other.players;
-    }*/
+    Game(const Game& other) = delete;
 
     friend std::ostream& operator<<(std::ostream& os, const Game& game);
 
@@ -39,7 +38,10 @@ public:
 
     void play();
 
-    virtual ~Game();
+    std::vector<Question *> shuffleQuestions(int category);
+
+
+    ~Game();
 };
 
 #endif //OOP_GAME_H
