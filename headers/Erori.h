@@ -5,6 +5,7 @@
 #ifndef OOP_ERORI_H
 #define OOP_ERORI_H
 #include <stdexcept>
+#include <string>
 
 class eroare_fisier : public std::runtime_error {
 public:
