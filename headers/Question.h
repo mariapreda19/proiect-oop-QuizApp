@@ -59,7 +59,7 @@ public:
 class MenuScreen : public Screen {
     using Screen::Screen;
 public:
-    explicit MenuScreen(std::string text = "", const std::vector<std::string> &button_options = {"Play again", "Menu", "Quit"});
+    explicit MenuScreen(std::string text = "", const std::vector<std::string> &button_options = {"Next Question", "Restart"});
 
     MenuScreen(const MenuScreen &other) = delete;
 
@@ -88,4 +88,26 @@ public:
     int display(sf::RenderWindow &window) override;
     ~CategoryScreen() override = default;
 };
+
+
+
+class ScoreScreen: public Screen{
+    using Screen::Screen;
+    int score;
+public:
+    explicit ScoreScreen(const std::string& text = "", const std::vector<std::string> &button_options = {"Play again", "Menu", "Quit"},
+                         int score_ = 0);
+
+    ScoreScreen(const ScoreScreen &other) = delete;
+
+    ScoreScreen &operator=(const ScoreScreen &other) = delete;
+
+    //friend std::ostream &operator<<(std::ostream &os, const ScoreScreen &screen);
+
+    int display(sf::RenderWindow &window) override;
+    ~ScoreScreen() override = default;
+};
+
+
+
 #endif //OOP_QUESTION_H

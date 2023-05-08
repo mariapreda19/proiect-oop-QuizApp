@@ -240,8 +240,8 @@ int MenuScreen::display(sf::RenderWindow &window) {
         window.draw(background_sprite);
         window.draw(box);
         window.draw(text_);
-        for (int i=0 ; i < int(getOptions().size()); i++){
-            if(getOptions()[i].displayButton(window, { 402 + float(i % (getOptions().size() / 2)) * 216, 400 + float(int(i / (getOptions().size() / 2))) * 138}) == 1)
+        for (int i=0 ; i < 2; i++){
+            if(getOptions()[i].displayButton(window, { 402 + float(i % int(3 / 2)) * 216, 400 + float(int(i / (3 / 2))) * 138}) == 1)
                 return i;
         }
 
@@ -313,3 +313,68 @@ int CategoryScreen::display(sf::RenderWindow &window) {
     return -1;
 
 }
+
+
+ScoreScreen::ScoreScreen(const std::string& text, const std::vector<std::string> &button_options, int score_) :
+        Screen(text + "\nYour score: " + std::to_string(score_), button_options), score(score_) {}
+
+
+int ScoreScreen::display(sf::RenderWindow &window) {
+    sf::Texture background;
+
+    background.loadFromFile("background.jpg");
+
+
+    sf::Sprite background_sprite;
+    background_sprite.setTexture(background);
+
+    sf::Sprite box;
+    sf::Texture texture;
+
+    texture.loadFromFile("button2.png");
+
+    box.setTexture(texture);
+    box.setPosition(100, 100);
+
+    sf::Text text_;
+    sf::Font font;
+
+    font.loadFromFile("arial.ttf");
+
+
+    text_.setString(getText());
+    text_.setCharacterSize(20);
+    text_.setFont(font);
+    text_.setFillColor(sf::Color::White);
+
+    sf::Vector2f textPosition = {100 + (float(texture.getSize().x) - text_.getGlobalBounds().getSize().x) / 2,
+                                 100 + (float(texture.getSize().y) - text_.getGlobalBounds().getSize().y) / 2};
+
+    text_.setPosition(textPosition);
+
+    while(window.isOpen())
+    {
+        sf::Event e{};
+        while(window.pollEvent(e)){
+            if(e.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        window.draw(background_sprite);
+        window.draw(box);
+        window.draw(text_);
+
+
+        for (int i=0 ; i <= 2; i++){
+            if(getOptions()[i].displayButton(window, {200 + float(i%3)*216, 400+float(int(i/3))*138}) == 1)
+                return i;
+        }
+
+        window.display();
+    }
+    return -1;
+}
+
+
+

@@ -75,7 +75,7 @@ void Game::play(){
             if (categorie_aleasa != -1) {
                 bool quit2 = false;
                 while (!quit2 and window.isOpen()) {
-                    Timer clock(300);
+                    Timer clock(30);
                     clock.reset();
                     int number = 0;
 
@@ -85,17 +85,14 @@ void Game::play(){
                         if (number == 10 || clock.isExpired() == 1) {
                             std::string message;
                             if (clock.isExpired() == 1) {
-                                message = "                Time is up \n Player " + player.getName() +
-                                          ", your final score is " +
-                                          std::to_string(std::max(player.getScore(), 0));
+                                message = "  Time is up Player " + player.getName();
                             } else {
                                 message =
-                                        "          You have answered all the questions \n Player " + player.getName() +
-                                        ", your final score is " +
-                                        std::to_string(std::max(player.getScore(), 0));
+                                        "You have answered all the questions Player" + player.getName();
                             }
 
-                            MenuScreen final(message);
+                            ScoreScreen final(message, {"Play Again", "Back to Menu", "Quit Game"}, player.getScore());
+
                             int alegereFinala = final.display(window);
                             if (alegereFinala == 1) {
                                 quit2 = true;
@@ -128,10 +125,7 @@ void Game::play(){
                                               std::to_string(time) + " seconds left";
                                 }
 
-                                std::vector<std::string> optiuni;
-                                optiuni.emplace_back("Next Question");
-                                optiuni.emplace_back("Quit");
-                                MenuScreen screen1(message, optiuni);
+                                MenuScreen screen1(message);
                                 auto alegere = screen1.display(window);
                                 if (alegere == 1) {
                                     break;
