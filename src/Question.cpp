@@ -144,7 +144,7 @@ int Question::display(sf::RenderWindow &window) {
 
     sf::Font font;
     try {
-        font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
+        font.loadFromFile("arial.ttf");
     }
     catch(eroare_font &er){
         std::cout << er.what() << std::endl;
@@ -196,34 +196,28 @@ MenuScreen::MenuScreen(std::string text, const std::vector<std::string> &button_
 
 int MenuScreen::display(sf::RenderWindow &window) {
     sf::Texture background;
-    try {
-        background.loadFromFile("background.jpg");
-    }
-    catch(eroare_imagine &er){
-        std::cout << er.what() << std::endl;
-    }
+
+    background.loadFromFile("background.jpg");
+
+
     sf::Sprite background_sprite;
     background_sprite.setTexture(background);
 
     sf::Sprite box;
     sf::Texture texture;
-    try {
-        texture.loadFromFile("button2.png");
-    }
-    catch(eroare_imagine &er){
-        std::cout << er.what() << std::endl;
-    }
+
+    texture.loadFromFile("button2.png");
+
+
     box.setTexture(texture);
     box.setPosition(100, 100);
 
     sf::Text text_;
     sf::Font font;
-    try {
-        font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
-    }
-    catch(eroare_font &er){
-        std::cout << er.what() << std::endl;
-    }
+
+    font.loadFromFile("arial.ttf");
+
+
     text_.setString(getText());
     text_.setCharacterSize(20);
     text_.setFont(font);
@@ -264,34 +258,26 @@ CategoryScreen::CategoryScreen(std::string text, const std::vector<std::string> 
 //CategoryScreen &CategoryScreen::operator=(const CategoryScreen &other) = default;
 int CategoryScreen::display(sf::RenderWindow &window) {
     sf::Texture background;
-    try {
-        background.loadFromFile("background.jpg");
-    }
-    catch(eroare_imagine &er){
-        std::cout << er.what() << std::endl;
-    }
+
+    background.loadFromFile("background.jpg");
+
+
     sf::Sprite background_sprite;
     background_sprite.setTexture(background);
 
     sf::Sprite box;
     sf::Texture texture;
-    try {
-        texture.loadFromFile("button2.png");
-    }
-    catch(eroare_imagine &er){
-        std::cout << er.what() << std::endl;
-    }
+
+    texture.loadFromFile("button2.png");
+
     box.setTexture(texture);
     box.setPosition(100, 100);
 
     sf::Text text_;
     sf::Font font;
-    try {
-        font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
-    }
-    catch(eroare_font &er){
-        std::cout << er.what() << std::endl;
-    }
+
+    font.loadFromFile("arial.ttf");
+
 
     text_.setString(getText());
     text_.setCharacterSize(20);

@@ -4,15 +4,12 @@
 
 void Game::loadQuestions(const std::string& filePath){
     std::ifstream fin(filePath);
-    try {
             std::ifstream file(filePath);
             if (!file.is_open()) {
                 throw eroare_fisier("Failed to open file");
             }
             file.close();
-    } catch (const std::exception& e) {
-        std::cerr << filePath << e.what() << std::endl;
-    }
+
     std::string question;
     std::vector<std::string> answerOptions;
     int correctAnswer;
@@ -69,14 +66,15 @@ void Game::play(){
     sf::RenderWindow window;
     window.create(sf::VideoMode({1000, 800}), "QuizApp", sf::Style::Default);
     Player player = players[0];
-    while(!quit and window.isOpen()) {
-            Screen * screen = new CategoryScreen(std::string("Categorii"));
+    try {
+        while (!quit and window.isOpen()) {
+            Screen *screen = new CategoryScreen(std::string("Categorii"));
 
             int categorie_aleasa = screen->display(window);
 
             if (categorie_aleasa != -1) {
                 bool quit2 = false;
-                while(!quit2 and window.isOpen()) {
+                while (!quit2 and window.isOpen()) {
                     Timer clock(300);
                     clock.reset();
                     int number = 0;
@@ -86,12 +84,11 @@ void Game::play(){
                     for (auto question: category_questions) {
                         if (number == 10 || clock.isExpired() == 1) {
                             std::string message;
-                            if(clock.isExpired() == 1) {
+                            if (clock.isExpired() == 1) {
                                 message = "                Time is up \n Player " + player.getName() +
-                                                      ", your final score is " +
-                                                      std::to_string(std::max(player.getScore(), 0));
-                            }
-                            else {
+                                          ", your final score is " +
+                                          std::to_string(std::max(player.getScore(), 0));
+                            } else {
                                 message =
                                         "          You have answered all the questions \n Player " + player.getName() +
                                         ", your final score is " +
@@ -100,37 +97,35 @@ void Game::play(){
 
                             MenuScreen final(message);
                             int alegereFinala = final.display(window);
-                            if(alegereFinala == 1) {
+                            if (alegereFinala == 1) {
                                 quit2 = true;
                                 break;
                             }
-                            if(alegereFinala == 0)
+                            if (alegereFinala == 0)
                                 break;
-                            if(alegereFinala == 2){
+                            if (alegereFinala == 2) {
                                 quit = true;
                                 quit2 = true;
                                 break;
                             }
-                        }
-                        else {
+                        } else {
                             number += 1;
                             long long time = clock.getRemainingSeconds();
 
-                            int raspuns = question -> display(window);
+                            int raspuns = question->display(window);
 
                             if (raspuns != -1) {
                                 std::string message;
-                                if (question -> checkAnswer(raspuns)) {
+                                if (question->checkAnswer(raspuns)) {
                                     player.increaseScore(1);
                                     message = "Player " + player.getName() + ", your score is " +
-                                                          std::to_string(std::max(player.getScore(), 0)) + " and you have " +
-                                                          std::to_string(time) + " seconds left";
-                                }
-                                else {
+                                              std::to_string(std::max(player.getScore(), 0)) + " and you have " +
+                                              std::to_string(time) + " seconds left";
+                                } else {
                                     player.decreaseScore(0);
                                     message = "Player " + player.getName() + ", your score is " +
-                                                          std::to_string(std::max(player.getScore(), 0)) + " and you have " +
-                                                          std::to_string(time) + " seconds left";
+                                              std::to_string(std::max(player.getScore(), 0)) + " and you have " +
+                                              std::to_string(time) + " seconds left";
                                 }
 
                                 std::vector<std::string> optiuni;
@@ -149,7 +144,11 @@ void Game::play(){
                     }
                 }
 
+            }
         }
+    }
+    catch(eroare_fereastra &er){
+        std::cout << er.what() << std::endl;
     }
 }
 
