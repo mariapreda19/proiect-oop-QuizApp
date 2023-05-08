@@ -92,6 +92,9 @@ std::vector<Button> Screen::getOptions() const {
     return options;
 }
 
+void Screen::setText(const std::string &text_) {
+    Screen::text = text_;
+}
 
 
 Question::Question(std::string question, const std::vector<std::string>& options, const int correct, const int category_):
@@ -241,7 +244,7 @@ int MenuScreen::display(sf::RenderWindow &window) {
         window.draw(box);
         window.draw(text_);
         for (int i=0 ; i < 2; i++){
-            if(getOptions()[i].displayButton(window, { 402 + float(i % int(3 / 2)) * 216, 400 + float(int(i / (3 / 2))) * 138}) == 1)
+            if(getOptions()[i].displayButton(window, { 402 + float(int(i/2)) * 216, 400 + float(int(i / (3 / 2))) * 138}) == 1)
                 return i;
         }
 
@@ -316,7 +319,7 @@ int CategoryScreen::display(sf::RenderWindow &window) {
 
 
 ScoreScreen::ScoreScreen(const std::string& text, const std::vector<std::string> &button_options, int score_) :
-        Screen(text + "\nYour score: " + std::to_string(score_), button_options), score(score_) {}
+        Screen(text, button_options), score(score_) {}
 
 
 int ScoreScreen::display(sf::RenderWindow &window) {
@@ -341,6 +344,7 @@ int ScoreScreen::display(sf::RenderWindow &window) {
 
     font.loadFromFile("arial.ttf");
 
+    setText(getText() + std::string("\nYour score is: ") + std::to_string(score));
 
     text_.setString(getText());
     text_.setCharacterSize(20);
@@ -375,6 +379,8 @@ int ScoreScreen::display(sf::RenderWindow &window) {
     }
     return -1;
 }
+
+
 
 
 

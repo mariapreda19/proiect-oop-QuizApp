@@ -29,6 +29,8 @@ public:
     [[nodiscard]] std::basic_string<char> getText() const;
     [[nodiscard]] std::vector<Button> getOptions() const;
 
+    void setText(const std::string &text);
+
     virtual ~Screen() = default;
 };
 
@@ -106,6 +108,8 @@ public:
 
     int display(sf::RenderWindow &window) override;
     ~ScoreScreen() override = default;
+
+
 };
 
 

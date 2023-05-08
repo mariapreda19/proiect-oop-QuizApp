@@ -88,7 +88,7 @@ void Game::play(){
                                 message = "  Time is up Player " + player.getName();
                             } else {
                                 message =
-                                        "You have answered all the questions Player" + player.getName();
+                                        "You have answered all the questions Player " + player.getName();
                             }
 
                             ScoreScreen final(message, {"Play Again", "Back to Menu", "Quit Game"}, player.getScore());
