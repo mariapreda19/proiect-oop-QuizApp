@@ -9,7 +9,7 @@ Player::Player(const Player& other): name(other.name), id(other.id), score(other
 }
 
 int Player::lastId = 0;
-Player::Player(std::string name_, int id_ , int score_) : name(std::move(name_)), id(id_), score(score_) {
+Player::Player(std::string name_, int id_ , float score_) : name(std::move(name_)), id(id_), score(score_) {
     lastId ++;
 }
 
@@ -29,13 +29,13 @@ std::ostream& operator<<(std::ostream& os, const Player& player){
 
 std::string Player::getName() const {return name;}
 
-int Player::getScore() const {return score;}
+float Player::getScore() const {return score;}
 
-void Player::increaseScore(int points) {
+void Player::increaseScore(float points) {
     score += points;
 }
 
-void Player::decreaseScore(int points) {
+void Player::decreaseScore(float points) {
     score -= points;
 }
 

@@ -42,9 +42,11 @@ public:
 class Question: public Screen {
 
     using Screen::Screen;
+protected:
     int correctAnswerIndex, category;
+    float score;
 public:
-    explicit Question(std::string question = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0);
+    explicit Question(std::string question = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0, float score_ = 1.0f);
 
     Question &operator=(const Question &other) = delete;
 
@@ -58,6 +60,8 @@ public:
 
     int display(sf::RenderWindow &window) override;
 
+    virtual float getScoreForQuestion(long long time) = 0;
+
     ~Question() override = default;
 };
 
@@ -65,7 +69,8 @@ class QuestionText: public Question{
     using Question::Question;
 
 public:
-    explicit QuestionText (std::string question_text = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0) : Question(std::move(question_text), options, correct, category_){};
+    explicit QuestionText (std::string question_text = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0, float score_ = 10.0f) : Question(std::move(question_text), options, correct, category_, score_){};
+    float getScoreForQuestion(long long time) override;
     ~QuestionText() override = default;
 };
 class QuestionImage: public Question{
@@ -73,8 +78,9 @@ class QuestionImage: public Question{
     using Question::Question;
 
 public:
-    explicit QuestionImage(std::string image = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0): Question("", options, correct, category_), image_path(std::move(image)){};
+    explicit QuestionImage(std::string image = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0, float score_ = 20.0f): Question("", options, correct, category_, score_), image_path(std::move(image)){};
     int display(sf::RenderWindow &window) override;
+    float getScoreForQuestion(long long time) override;
     ~QuestionImage() override = default;
 };
 
@@ -115,10 +121,10 @@ public:
 
 class ScoreScreen: public Screen{
     using Screen::Screen;
-    int score;
+    float score;
 public:
     explicit ScoreScreen(const std::string& text = "", const std::vector<std::string> &button_options = {"Play again", "Menu", "Quit"},
-                         int score_ = 0);
+                         float score_ = 0.0f);
 
     ScoreScreen(const ScoreScreen &other) = delete;
 

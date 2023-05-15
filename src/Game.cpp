@@ -1,7 +1,6 @@
 #include "../headers/Game.h"
 #include <random>
 
-
 void Game::loadQuestions(const std::string& filePath, const std::string& filePathImg){
     std::ifstream fin(filePath);
     std::ifstream file(filePath);
@@ -95,6 +94,7 @@ void Game::play(){
             bool quit2 = false;
             while (!quit2 and window.isOpen()) {
                 Timer clock(30);
+                Timer questionClock(5);
                 clock.reset();
                 int number = 0;
 
@@ -124,23 +124,27 @@ void Game::play(){
                             quit2 = true;
                             break;
                         }
-                    } else {
+                    }
+                    else {
                         number += 1;
                         long long time = clock.getRemainingSeconds();
+                        long long timeQuestion = questionClock.getRemainingSeconds();
+
 
                         int raspuns = question->display(window);
 
                         if (raspuns != -1) {
                             std::string message;
                             if (question->checkAnswer(raspuns)) {
-                                player.increaseScore(1);
+                                player.increaseScore(question->getScoreForQuestion(timeQuestion));
                                 message = "Player " + player.getName() + ", your score is " +
-                                          std::to_string(std::max(player.getScore(), 0)) + " and you have " +
+                                          std::to_string(std::max(player.getScore(), 0.0f))+ " and you have " +
                                           std::to_string(time) + " seconds left";
-                            } else {
-                                player.decreaseScore(0);
+                            }
+                            else {
+                                player.decreaseScore(question->getScoreForQuestion(timeQuestion));
                                 message = "Player " + player.getName() + ", your score is " +
-                                          std::to_string(std::max(player.getScore(), 0)) + " and you have " +
+                                          std::to_string(std::max(player.getScore(), 0.0f)) + " and you have " +
                                           std::to_string(time) + " seconds left";
                             }
 
@@ -150,6 +154,7 @@ void Game::play(){
                                 break;
                             }
                             if (alegere == 0) {
+                                questionClock.reset();
                                 continue;
                             }
                         }

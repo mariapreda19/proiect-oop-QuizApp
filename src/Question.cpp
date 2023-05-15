@@ -97,8 +97,8 @@ void Screen::setText(const std::string &text_) {
 }
 
 
-Question::Question(std::string question, const std::vector<std::string>& options, const int correct, const int category_):
-        Screen(std::move(question), options), correctAnswerIndex(correct), category(category_){
+Question::Question(std::string question, const std::vector<std::string>& options, const int correct, const int category_, const float score_):
+        Screen(std::move(question), options), correctAnswerIndex(correct), category(category_), score(score_){
 }
 
 
@@ -310,7 +310,7 @@ int CategoryScreen::display(sf::RenderWindow &window) {
 }
 
 
-ScoreScreen::ScoreScreen(const std::string& text, const std::vector<std::string> &button_options, int score_) :
+ScoreScreen::ScoreScreen(const std::string& text, const std::vector<std::string> &button_options, float score_) :
         Screen(text, button_options), score(score_) {}
 
 
@@ -434,4 +434,12 @@ int QuestionImage::display(sf::RenderWindow &window) {
         window.display();
     }
     return -1;
+}
+
+float QuestionImage::getScoreForQuestion(long long time) {
+    return score * 1.0f * float(5-time);
+}
+
+float QuestionText::getScoreForQuestion(long long time) {
+    return score * 1.0f - (float(time)) / 5;
 }

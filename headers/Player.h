@@ -11,10 +11,10 @@ class Player{
     std::string name;
     static int lastId;
     int id;
-    int score;
+    float score;
 
 public:
-    explicit Player(std::string name_, int id = lastId + 1, int score_ = 0);
+    explicit Player(std::string name_, int id = lastId + 1, float score_ = 0);
 
     Player(const Player& other);
 
@@ -27,11 +27,11 @@ public:
 
     //[[maybe_unused]] [[nodiscard]] int getId() const {return id;}
     //[[nodiscard]] static int getLastId() {return lastId;}
-    [[nodiscard]] int getScore() const;
+    [[nodiscard]] float getScore() const;
 
-    void increaseScore(int points);
+    void increaseScore(float points);
 
-    void decreaseScore(int points);
+    void decreaseScore(float points);
 
     ~Player();
 };
