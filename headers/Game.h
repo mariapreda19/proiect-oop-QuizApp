@@ -18,14 +18,14 @@
 class Game {
 private:
     Screen *startScreen{};
-    std::vector<Screen *> questions;
+    std::vector<Question *> questions;
     std::vector<Player> players;
 
-    void loadQuestions(const std::string& filePath);
+    void loadQuestions(const std::string& filePath, const std::string& filePathImg);
 
 public:
 
-    explicit Game(const std::string& questionsFilePath, const std::vector<Player>& players_ = {});
+    explicit Game(const std::string& questionsFilePath, const std::string& imageQuestionsFilePath, const std::vector<Player>& players_ = {});
 
     Game& operator=(const Game& other) = delete;
 

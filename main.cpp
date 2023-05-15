@@ -11,7 +11,7 @@ int main(){
     std::vector<Player> players;
 
     try{
-        Game firstGame("questions.txt", players);
+        Game firstGame("questions.txt", "imgQuestions.txt", players);
         firstGame.addPlayer(p1);
 
         firstGame.play();

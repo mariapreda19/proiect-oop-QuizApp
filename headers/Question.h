@@ -6,6 +6,7 @@
 #define OOP_QUESTION_H
 
 #include <iostream>
+#include <utility>
 #include <vector>
 #include "Button.h"
 #include "SFML/Graphics.hpp"
@@ -29,6 +30,8 @@ public:
     [[nodiscard]] std::basic_string<char> getText() const;
     [[nodiscard]] std::vector<Button> getOptions() const;
 
+
+
     void setText(const std::string &text);
 
     virtual ~Screen() = default;
@@ -44,6 +47,7 @@ public:
     explicit Question(std::string question = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0);
 
     Question &operator=(const Question &other) = delete;
+
     Question (const Question &other) = delete;
 
     friend std::ostream &operator<<(std::ostream &os, const Question &question);
@@ -57,6 +61,22 @@ public:
     ~Question() override = default;
 };
 
+class QuestionText: public Question{
+    using Question::Question;
+
+public:
+    explicit QuestionText (std::string question_text = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0) : Question(std::move(question_text), options, correct, category_){};
+    ~QuestionText() override = default;
+};
+class QuestionImage: public Question{
+    std::string image_path;
+    using Question::Question;
+
+public:
+    explicit QuestionImage(std::string image = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0): Question("", options, correct, category_), image_path(std::move(image)){};
+    int display(sf::RenderWindow &window) override;
+    ~QuestionImage() override = default;
+};
 
 class MenuScreen : public Screen {
     using Screen::Screen;

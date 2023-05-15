@@ -381,6 +381,73 @@ int ScoreScreen::display(sf::RenderWindow &window) {
 }
 
 
+int QuestionImage::display(sf::RenderWindow &window) {
+    sf::Texture background;
+    try {
+        background.loadFromFile("background.jpg");
+    }
+    catch(eroare_imagine &er){
+        std::cout << er.what() << std::endl;
+    }
+    sf::Sprite background_sprite;
+    background_sprite.setTexture(background);
+
+    sf::Texture texture;
+
+    try {
+        texture.loadFromFile(this -> image_path);
+    }
+    catch(eroare_imagine &er){
+        std::cout << er.what() << std::endl;
+    }
+
+    sf::Sprite box;
+    box.setTexture(texture);
+    box.setPosition((float(1000) - float(texture.getSize().x))/2, 50);
+
+
+    sf::Font font;
+    try {
+        font.loadFromFile("arial.ttf");
+    }
+    catch(eroare_font &er){
+        std::cout << er.what() << std::endl;
+    }
+
+    sf::Text text_;
+    text_.setString(this -> getText());
+    text_.setCharacterSize(20);
+    text_.setFont(font);
+    text_.setFillColor(sf::Color::White);
+
+
+    sf::Vector2f textPosition = {100 + (float(texture.getSize().x) - text_.getGlobalBounds().getSize().x) / 2,
+                                 100 + (float(texture.getSize().y) - text_.getGlobalBounds().getSize().y) / 2};
+    text_.setPosition(textPosition);
+
+    while(window.isOpen())
+    {
+
+        sf::Event e{};
+        while(window.pollEvent(e))
+        {
+            if(e.type == sf::Event::Closed)
+                window.close();
+        }
+
+
+        window.clear();
+        window.draw(background_sprite);
+        window.draw(box);
+        window.draw(text_);
 
 
 
+        for (int i=0 ; i < 4; i++){
+            if(getOptions()[i].displayButton(window, {294+float(i%2)*216, float(100 + texture.getSize().y) + float(int(i/2))*138}) == 1)
+                return i;
+        }
+        window.display();
+    }
+    return -1;
+}

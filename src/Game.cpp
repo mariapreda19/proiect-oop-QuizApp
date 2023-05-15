@@ -2,7 +2,7 @@
 #include <random>
 
 
-void Game::loadQuestions(const std::string& filePath){
+void Game::loadQuestions(const std::string& filePath, const std::string& filePathImg){
     std::ifstream fin(filePath);
             std::ifstream file(filePath);
             if (!file.is_open()) {
@@ -24,16 +24,35 @@ void Game::loadQuestions(const std::string& filePath){
         fin >> category;
         fin.get();
 
-        Screen * temp_  = new Question(question, answerOptions, correctAnswer, category);
+        Question * temp_  = new QuestionText(question, answerOptions, correctAnswer, category);
         questions.emplace_back(temp_);
         answerOptions.clear();
         ///delete temp_;
     }
     fin.close();
+
+    std::ifstream fin2(filePathImg);
+
+    while(std::getline(fin2, question)){
+        for(int i=0; i<4; i++){
+            std::string line;
+            std::getline(fin2, line);
+            answerOptions.emplace_back(line);
+        }
+        fin2 >> correctAnswer;
+        fin2 >> category;
+        fin2.get();
+
+        Question * temp_  = new QuestionImage(question, answerOptions, correctAnswer, category);
+        questions.emplace_back(temp_);
+        answerOptions.clear();
+        ///delete temp_;
+    }
+    fin2.close();
 }
 
-Game::Game(const std::string& questionsFilePath, const std::vector<Player>& players_) : players(players_){
-    loadQuestions(questionsFilePath);
+Game::Game(const std::string& questionsFilePath, const std::string& imageQuestionsFilePath, const std::vector<Player>& players_) : players(players_){
+    loadQuestions(questionsFilePath, imageQuestionsFilePath);
 }
 
 
@@ -152,8 +171,8 @@ void Game::play(){
 std::vector<Question *>  Game::shuffleQuestions(int category) {
     std::vector<Question *> category_questions;
     for (auto question: questions) {
-        if (category== dynamic_cast<Question *>(question)->getCategory()) {
-            category_questions.push_back(dynamic_cast<Question *>(question));
+        if (category== question -> getCategory()) {
+            category_questions.push_back(question);
         }
     }
 
@@ -164,8 +183,6 @@ std::vector<Question *>  Game::shuffleQuestions(int category) {
 
     return category_questions;
 }
-
-
 
 Game::~Game() {
     delete startScreen;
