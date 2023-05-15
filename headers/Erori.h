@@ -7,12 +7,17 @@
 #include <stdexcept>
 #include <string>
 
-class eroare_fisier : public std::runtime_error {
+class eroare_joc : public std::runtime_error {
+public:
+    explicit eroare_joc(const std::string& mesaj);
+};
+
+class eroare_fisier : public eroare_joc {
 public:
     explicit eroare_fisier(const std::string& mesaj);
 };
 
-class eroare_fereastra : public std::runtime_error {
+class eroare_fereastra : public eroare_joc {
 public:
     explicit eroare_fereastra(const std::string& mesaj);
 };

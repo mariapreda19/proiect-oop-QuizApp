@@ -16,9 +16,16 @@ int main(){
 
         firstGame.play();
     }
-    catch (const eroare_fisier& e) {
-        std::cerr << e.what() << std::endl;
+    catch (const eroare_fisier& er) {
+        std::cerr << er.what() << std::endl;
     }
+    catch(const eroare_fereastra& er){
+        std::cerr << er.what() << std::endl;
+    }
+    catch(const eroare_joc& er){
+        std::cerr << er.what() << std::endl;
+    }
+
 
 
     /*TODO
