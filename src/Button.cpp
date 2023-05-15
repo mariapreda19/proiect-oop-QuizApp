@@ -19,7 +19,7 @@ bool Button::displayButton(sf::RenderWindow &window, sf::Vector2f position){
     sf::Texture texture_;
     sf::Text text_;
     sf::Font font;
-    font.loadFromFile(R"(C:\Windows\Fonts\arial.ttf)");
+    font.loadFromFile("arial.ttf");
 
     text_.setString(this -> text);
     text_.setCharacterSize(20);

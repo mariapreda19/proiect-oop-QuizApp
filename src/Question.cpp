@@ -122,23 +122,17 @@ std::ostream& operator<<(std::ostream& os, const Question& question) {
 
 int Question::display(sf::RenderWindow &window) {
     sf::Texture background;
-    try {
-        background.loadFromFile("background.jpg");
-    }
-    catch(eroare_imagine &er){
-        std::cout << er.what() << std::endl;
-    }
+    if(!background.loadFromFile("background.jpg"))
+        throw eroare_imagine("Imaginea nu a putut fi incarcata");
+
+
     sf::Sprite background_sprite;
     background_sprite.setTexture(background);
 
     sf::Texture texture;
 
-    try {
-        texture.loadFromFile("button2.png");
-    }
-    catch(eroare_imagine &er){
-        std::cout << er.what() << std::endl;
-    }
+    if(!texture.loadFromFile("button2.png"))
+        throw eroare_imagine("Imaginea nu a putut fi incarcata");
 
     sf::Sprite box;
     box.setTexture(texture);
@@ -146,12 +140,10 @@ int Question::display(sf::RenderWindow &window) {
 
 
     sf::Font font;
-    try {
-        font.loadFromFile("arial.ttf");
-    }
-    catch(eroare_font &er){
-        std::cout << er.what() << std::endl;
-    }
+
+    if(!font.loadFromFile("arial.ttf"))
+        throw eroare_font("Fontul nu a putut fi incarcat");
+
 
     sf::Text text_;
     text_.setString(this -> getText());
@@ -383,23 +375,18 @@ int ScoreScreen::display(sf::RenderWindow &window) {
 
 int QuestionImage::display(sf::RenderWindow &window) {
     sf::Texture background;
-    try {
-        background.loadFromFile("background.jpg");
-    }
-    catch(eroare_imagine &er){
-        std::cout << er.what() << std::endl;
-    }
+    if(!background.loadFromFile("background.jpg"))
+        throw eroare_imagine("Imaginea nu a putut fi incarcata");
+
     sf::Sprite background_sprite;
     background_sprite.setTexture(background);
 
     sf::Texture texture;
 
-    try {
-        texture.loadFromFile(this -> image_path);
-    }
-    catch(eroare_imagine &er){
-        std::cout << er.what() << std::endl;
-    }
+
+    if(texture.loadFromFile(this -> image_path))
+        throw eroare_imagine("Imaginea nu a putut fi incarcata");
+
 
     sf::Sprite box;
     box.setTexture(texture);
@@ -407,12 +394,9 @@ int QuestionImage::display(sf::RenderWindow &window) {
 
 
     sf::Font font;
-    try {
-        font.loadFromFile("arial.ttf");
-    }
-    catch(eroare_font &er){
-        std::cout << er.what() << std::endl;
-    }
+    if(!font.loadFromFile("arial.ttf"))
+        throw eroare_font("Fontul nu a putut fi incarcat");
+
 
     sf::Text text_;
     text_.setString(this -> getText());
