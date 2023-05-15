@@ -158,6 +158,7 @@ void Game::play(){
                 }
 
             }
+            delete screen;
         }
     }
     catch(eroare_fereastra &er){
