@@ -34,10 +34,8 @@ public:
 
     void setText(const std::string &text);
 
-    virtual ~Screen() = default;
+    virtual ~Screen() = 0;
 };
-
-
 
 class Question: public Screen {
 
@@ -87,7 +85,7 @@ public:
 class MenuScreen : public Screen {
     using Screen::Screen;
 public:
-    explicit MenuScreen(std::string text = "", const std::vector<std::string> &button_options = {"Next Question", "Restart"});
+    [[maybe_unused]] explicit MenuScreen(std::string text = "", const std::vector<std::string> &button_options = {"Next Question", "Restart"});
 
     MenuScreen(const MenuScreen &other) = delete;
 
@@ -138,6 +136,14 @@ public:
 
 };
 
+class MultipleAnswers: public Question{
+    int correctAnswer2;
+public:
+    explicit MultipleAnswers(std::string question_text = "", const std::vector<std::string> &options = {},
+                             int correct = -1, int correct2 = -1, int category_ = 0, float score_ = 10.0f);
 
+    float getScoreForQuestion(long long time) override;
+    int display(sf::RenderWindow &window) override;
+};
 
 #endif //OOP_QUESTION_H

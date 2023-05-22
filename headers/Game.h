@@ -21,11 +21,11 @@ private:
     std::vector<Question *> questions;
     std::vector<Player> players;
 
-    void loadQuestions(const std::string& filePath, const std::string& filePathImg);
+    void loadQuestions(const std::string& filePath, const std::string& filePathImg, const std::string& filePathMltAnswers);
 
 public:
 
-    explicit Game(const std::string& questionsFilePath, const std::string& imageQuestionsFilePath, const std::vector<Player>& players_ = {});
+    explicit Game(const std::string& questionsFilePath, const std::string& imageQuestionsFilePath, const std::string& filePathMltAnswers, const std::vector<Player>& players_ = {});
 
     Game& operator=(const Game& other) = delete;
 

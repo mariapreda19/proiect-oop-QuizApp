@@ -96,12 +96,11 @@ void Screen::setText(const std::string &text_) {
     Screen::text = text_;
 }
 
+Screen::~Screen() = default;
 
 Question::Question(std::string question, const std::vector<std::string>& options, const int correct, const int category_, const float score_):
         Screen(std::move(question), options), correctAnswerIndex(correct), category(category_), score(score_){
 }
-
-
 
 //Question& Question::operator=(const Question& other) = default;
 
@@ -166,7 +165,6 @@ int Question::display(sf::RenderWindow &window) {
                 window.close();
         }
 
-
         window.clear();
         window.draw(background_sprite);
         window.draw(box);
@@ -183,7 +181,7 @@ int Question::display(sf::RenderWindow &window) {
     return -1;
 }
 
-MenuScreen::MenuScreen(std::string text, const std::vector<std::string> &button_options) : Screen(std::move(text), button_options) {}
+[[maybe_unused]] MenuScreen::MenuScreen(std::string text, const std::vector<std::string> &button_options) : Screen(std::move(text), button_options) {}
 
 //MenuScreen::MenuScreen(const MenuScreen &other) = default;
 
@@ -384,7 +382,7 @@ int QuestionImage::display(sf::RenderWindow &window) {
     sf::Texture texture;
 
 
-    if(texture.loadFromFile(this -> image_path))
+    if(!texture.loadFromFile(this -> image_path))
         throw eroare_imagine("Imaginea nu a putut fi incarcata");
 
 
@@ -419,13 +417,10 @@ int QuestionImage::display(sf::RenderWindow &window) {
                 window.close();
         }
 
-
         window.clear();
         window.draw(background_sprite);
         window.draw(box);
         window.draw(text_);
-
-
 
         for (int i=0 ; i < 4; i++){
             if(getOptions()[i].displayButton(window, {294+float(i%2)*216, float(100 + texture.getSize().y) + float(int(i/2))*138}) == 1)
@@ -442,4 +437,85 @@ float QuestionImage::getScoreForQuestion(long long time) {
 
 float QuestionText::getScoreForQuestion(long long time) {
     return score * 1.0f - (float(time)) / 5;
+}
+
+MultipleAnswers::MultipleAnswers(std::string question_text, const std::vector<std::string> &options, int correct,
+                                 int correct2, int category_, float score_):
+        Question(std::move(question_text), options, correct, category_, score_),
+        correctAnswer2(correct2){}
+
+float MultipleAnswers::getScoreForQuestion(long long time) {
+    return score * 1.0f + (float(time)) / 5;
+}
+
+int MultipleAnswers::display(sf::RenderWindow &window) {
+    sf::Texture background;
+    if(!background.loadFromFile("background.jpg"))
+        throw eroare_imagine("Imaginea nu a putut fi incarcata");
+
+    sf::Sprite background_sprite;
+    background_sprite.setTexture(background);
+
+    sf::Texture texture;
+
+    if(!texture.loadFromFile("button2.png"))
+        throw eroare_imagine("Imaginea nu a putut fi incarcata");
+
+    sf::Sprite box;
+    box.setTexture(texture);
+    box.setPosition(100, 100);
+
+
+    sf::Font font;
+
+    if(!font.loadFromFile("arial.ttf"))
+        throw eroare_font("Fontul nu a putut fi incarcat");
+
+
+    sf::Text text_;
+    text_.setString(this -> getText());
+    text_.setCharacterSize(20);
+    text_.setFont(font);
+    text_.setFillColor(sf::Color::White);
+
+
+    sf::Vector2f textPosition = {100 + (float(texture.getSize().x) - text_.getGlobalBounds().getSize().x) / 2,
+                                 100 + (float(texture.getSize().y) - text_.getGlobalBounds().getSize().y) / 2};
+    text_.setPosition(textPosition);
+
+    std::vector<int> answers;
+    int count = 0;
+    while(window.isOpen() and count < 2)
+    {
+
+        sf::Event e{};
+        while(window.pollEvent(e))
+        {
+            if(e.type == sf::Event::Closed)
+                window.close();
+        }
+
+        window.clear();
+        window.draw(background_sprite);
+        window.draw(box);
+        window.draw(text_);
+
+
+        for (int i=0 ; i < 4; i++){
+            if(getOptions()[i].displayButton(window, {294+float(i%2)*216, 400 + float(int(i/2))*138}) == 1)
+            {
+                answers.push_back(i);
+                count++;
+            }
+        }
+        window.display();
+    }
+    if(count == 2)
+    {
+        if(answers[0] == correctAnswer2)
+            return answers[1];
+        if(answers[1] == correctAnswer2)
+            return answers[0];
+    }
+    return -1;
 }
