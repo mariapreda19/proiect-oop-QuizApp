@@ -69,6 +69,7 @@ class QuestionText: public Question{
 public:
     explicit QuestionText (std::string question_text = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0, float score_ = 10.0f) : Question(std::move(question_text), options, correct, category_, score_){};
     float getScoreForQuestion(long long time) override;
+    static void loadQuestions(std::vector<Question *> &questions,  std::map<std::string, std::string>  &filePathNames);
     ~QuestionText() override = default;
 };
 class QuestionImage: public Question{
@@ -79,6 +80,7 @@ public:
     explicit QuestionImage(std::string image = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0, float score_ = 20.0f): Question("", options, correct, category_, score_), image_path(std::move(image)){};
     int display(sf::RenderWindow &window) override;
     float getScoreForQuestion(long long time) override;
+    static void loadQuestions(std::vector<Question *> &questions,  std::map<std::string, std::string>  &filePathNames);
     ~QuestionImage() override = default;
 };
 
@@ -143,6 +145,7 @@ public:
                              int correct = -1, int correct2 = -1, int category_ = 0, float score_ = 10.0f);
 
     float getScoreForQuestion(long long time) override;
+    static void loadQuestions(std::vector<Question *> &questions,  std::map<std::string, std::string> &filePathNames);
     int display(sf::RenderWindow &window) override;
 };
 

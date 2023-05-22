@@ -3,6 +3,7 @@
 //
 
 #include <utility>
+#include <fstream>
 
 #include "../headers/Question.h"
 
@@ -431,12 +432,77 @@ int QuestionImage::display(sf::RenderWindow &window) {
     return -1;
 }
 
+void QuestionImage::loadQuestions(std::vector<Question *> &questions,  std::map<std::string, std::string>  &filePathNames){
+    std::string filePath = filePathNames["image"];
+    std::ifstream fin(filePath);
+    std::ifstream file(filePath);
+    if (!file.is_open()) {
+        throw eroare_fisier("Failed to open file");
+    }
+    file.close();
+
+    std::string question;
+    std::vector<std::string> answerOptions;
+    int correctAnswer;
+    int category;
+    while(std::getline(fin, question)){
+        for(int i=0; i<4; i++){
+            std::string line;
+            std::getline(fin, line);
+            answerOptions.emplace_back(line);
+        }
+        fin >> correctAnswer;
+        fin >> category;
+        fin.get();
+
+        Question * temp_  = new QuestionImage(question, answerOptions, correctAnswer, category);
+        questions.push_back(temp_);
+
+    }
+    fin.close();
+
+
+}
+
 float QuestionImage::getScoreForQuestion(long long time) {
     return score * 1.0f * float(5-time);
 }
 
 float QuestionText::getScoreForQuestion(long long time) {
     return score * 1.0f - (float(time)) / 5;
+}
+
+void QuestionText::loadQuestions(std::vector<Question *> &questions,  std::map<std::string, std::string>  &filePathNames) {
+
+    std::string filePath = filePathNames["text"];
+    std::ifstream fin(filePath);
+    std::ifstream file(filePath);
+    if (!file.is_open()) {
+        throw eroare_fisier("Failed to open file");
+    }
+    file.close();
+
+    std::string question;
+    std::vector<std::string> answerOptions;
+    int correctAnswer;
+    int category;
+    while(std::getline(fin, question)){
+        for(int i=0; i<4; i++){
+            std::string line;
+            std::getline(fin, line);
+            answerOptions.emplace_back(line);
+        }
+        fin >> correctAnswer;
+        fin >> category;
+        fin.get();
+
+        Question * temp_  = new QuestionText(question, answerOptions, correctAnswer, category);
+        questions.push_back(temp_);
+
+
+    }
+    fin.close();
+
 }
 
 MultipleAnswers::MultipleAnswers(std::string question_text, const std::vector<std::string> &options, int correct,
@@ -518,4 +584,35 @@ int MultipleAnswers::display(sf::RenderWindow &window) {
             return answers[0];
     }
     return -1;
+}
+
+void MultipleAnswers::loadQuestions(std::vector<Question *> &questions,  std::map<std::string, std::string>  &filePathNames) {
+    std::string filePath = filePathNames["multiple"];
+    std::ifstream fin(filePath);
+    std::ifstream file(filePath);
+    if (!file.is_open()) {
+        throw eroare_fisier("Failed to open file");
+    }
+    file.close();
+
+    std::string question;
+    std::vector<std::string> answerOptions;
+    int correctAnswer;
+    int correctAnswer2;
+    int category;
+    while(std::getline(fin, question)){
+        for(int i=0; i<4; i++){
+            std::string line;
+            std::getline(fin, line);
+            answerOptions.emplace_back(line);
+        }
+        fin >> category;
+        fin >> correctAnswer;
+        fin >> correctAnswer2;
+
+        Question * temp_  = new MultipleAnswers(question, answerOptions, correctAnswer, category);
+        questions.push_back(temp_);
+
+    }
+    fin.close();
 }

@@ -19,13 +19,14 @@ class Game {
 private:
     Screen *startScreen{};
     std::vector<Question *> questions;
+    std::map<std::string, std::string> filePathNames;
     std::vector<Player> players;
 
-    void loadQuestions(const std::string& filePath, const std::string& filePathImg, const std::string& filePathMltAnswers);
+    void loadQuestions();
 
 public:
 
-    explicit Game(const std::string& questionsFilePath, const std::string& imageQuestionsFilePath, const std::string& filePathMltAnswers, const std::vector<Player>& players_ = {});
+    explicit Game(const std::map<std::string, std::string> &filePathNames_ , const std::vector<Player>& players_ = {});
 
     Game& operator=(const Game& other) = delete;
 

@@ -1,77 +1,15 @@
 #include "../headers/Game.h"
 #include <random>
 
-void Game::loadQuestions(const std::string& filePath, const std::string& filePathImg , const std::string& filePathMltAnswers){
-    std::ifstream fin(filePath);
-    std::ifstream file(filePath);
-    if (!file.is_open()) {
-        throw eroare_fisier("Failed to open file");
-    }
-    file.close();
+void Game::loadQuestions(){
+    QuestionImage::loadQuestions(questions, filePathNames);
+    QuestionText::loadQuestions(questions, filePathNames);
+    MultipleAnswers::loadQuestions(questions, filePathNames);
 
-    std::string question;
-    std::vector<std::string> answerOptions;
-    int correctAnswer;
-    int category;
-    while(std::getline(fin, question)){
-        for(int i=0; i<4; i++){
-            std::string line;
-            std::getline(fin, line);
-            answerOptions.emplace_back(line);
-        }
-        fin >> correctAnswer;
-        fin >> category;
-        fin.get();
-
-        Question * temp_  = new QuestionText(question, answerOptions, correctAnswer, category);
-        questions.emplace_back(temp_);
-        answerOptions.clear();
-        ///delete temp_;
-    }
-    fin.close();
-
-    std::ifstream fin2(filePathImg);
-
-    int correctAnswer2;
-
-    while(std::getline(fin2, question)){
-        for(int i=0; i<4; i++){
-            std::string line;
-            std::getline(fin2, line);
-            answerOptions.emplace_back(line);
-        }
-        fin2 >> category;
-        fin2 >> correctAnswer;
-        fin2.get();
-
-        Question * temp_  = new QuestionImage(question, answerOptions, correctAnswer, category);
-        questions.emplace_back(temp_);
-        answerOptions.clear();
-    }
-    fin2.close();
-
-    std::ifstream fin3(filePathMltAnswers);
-
-    while(std::getline(fin3, question)){
-        for(int i=0; i<4; i++){
-            std::string line;
-            std::getline(fin3, line);
-            answerOptions.emplace_back(line);
-        }
-        fin3 >> category;
-        fin3 >> correctAnswer;
-        fin3 >> correctAnswer2;
-        fin3.get();
-
-        Question * temp_  = new MultipleAnswers(question, answerOptions,  correctAnswer, correctAnswer2, category);
-        questions.emplace_back(temp_);
-        answerOptions.clear();
-    }
-    fin3.close();
 }
 
-Game::Game(const std::string& questionsFilePath, const std::string& imageQuestionsFilePath, const std::string& filePathMltAnswers,const std::vector<Player>& players_) : players(players_){
-    loadQuestions(questionsFilePath, imageQuestionsFilePath, filePathMltAnswers);
+Game::Game(const std::map<std::string, std::string> &filePathNames_, const std::vector<Player>& players_) :  filePathNames(filePathNames_), players(players_){
+    loadQuestions();
 }
 
 

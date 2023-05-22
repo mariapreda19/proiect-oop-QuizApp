@@ -10,8 +10,13 @@ int main(){
     Player p1("A");
     std::vector<Player> players;
 
+    std::map<std::string, std::string> filePathNames;
+    filePathNames["text"] = "questions.txt";
+    filePathNames["image"] = "imgQuestions.txt";
+    filePathNames["multiple"] = "multipleAnswers.txt";
+
     try{
-        Game firstGame("questions.txt", "imgQuestions.txt", "multipleAnswers.txt",players);
+        Game firstGame(filePathNames,players);
         firstGame.addPlayer(p1);
 
         firstGame.play();
