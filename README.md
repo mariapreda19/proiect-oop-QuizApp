@@ -1,4 +1,4 @@
-# OOP Template
+# Quiz Game
 
 ### Tema 0
 
