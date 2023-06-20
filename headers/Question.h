@@ -104,13 +104,12 @@ public:
 
 class AbstractQuestionFactory {
 public:
-    virtual ~AbstractQuestionFactory() {}
-    virtual std::vector<Question*> createQuestion(std::map<std::string, std::string> filePathNames) = 0;
+    virtual std::vector<Question*> createQuestion(std::map<std::string, std::string>& filePathNames) = 0;
 };
 
 class QuestionTextFactory : public AbstractQuestionFactory {
 public:
-    std::vector<Question *> createQuestion(std::map<std::string, std::string> filePathNames) override {
+    std::vector<Question *> createQuestion(std::map<std::string, std::string>& filePathNames) override {
         std::vector<Question *> questions;
         QuestionText::loadQuestions(questions, filePathNames);
         return questions;
@@ -120,17 +119,16 @@ public:
 
 class QuestionImageFactory : public AbstractQuestionFactory {
 public:
-    std::vector<Question *> createQuestion(std::map<std::string, std::string> filePathNames) override {
+    std::vector<Question *> createQuestion(std::map<std::string, std::string>& filePathNames) override {
         std::vector<Question *> questions;
         QuestionImage::loadQuestions(questions, filePathNames);
         return questions;
     }
-
 };
 
 class MultipleAnswersFactory : public AbstractQuestionFactory {
 public:
-    std::vector<Question *> createQuestion(std::map<std::string, std::string> filePathNames) override {
+    std::vector<Question *> createQuestion(std::map<std::string, std::string>& filePathNames) override {
         std::vector<Question *> questions;
         MultipleAnswers::loadQuestions(questions, filePathNames);
         return questions;
