@@ -1,11 +1,36 @@
 #include "../headers/Game.h"
 #include <random>
+#include <memory>
 
 void Game::loadQuestions(){
-    QuestionImage::loadQuestions(questions, filePathNames);
+    /*QuestionImage::loadQuestions(questions, filePathNames);
     QuestionText::loadQuestions(questions, filePathNames);
-    MultipleAnswers::loadQuestions(questions, filePathNames);
+    MultipleAnswers::loadQuestions(questions, filePathNames);*/
 
+    std::shared_ptr<AbstractQuestionFactory> questionFactory = std::make_shared<QuestionTextFactory>();
+
+    //questions.insert(questions.end(), questionFactory->createQuestion(filePathNames).begin(), questionFactory->createQuestion(filePathNames).end());
+    for (auto& question : questionFactory->createQuestion(filePathNames)) {
+        questions.push_back(question);
+    }
+
+
+    questionFactory = std::make_shared<QuestionImageFactory>();
+
+    //questions.insert(questions.end(), questionFactory->createQuestion(filePathNames).begin(), questionFactory->createQuestion(filePathNames).end());
+
+    for (auto& question : questionFactory->createQuestion(filePathNames)) {
+        questions.push_back(question);
+    }
+
+
+    questionFactory = std::make_shared<MultipleAnswersFactory>();
+
+    //questions.insert(questions.end(), questionFactory->createQuestion(filePathNames).begin(), questionFactory->createQuestion(filePathNames).end());
+
+    for (auto& question : questionFactory->createQuestion(filePathNames)) {
+        questions.push_back(question);
+    }
 }
 
 Game::Game(const std::map<std::string, std::string> &filePathNames_, const std::vector<Player>& players_) :  filePathNames(filePathNames_), players(players_){

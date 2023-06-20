@@ -16,7 +16,7 @@ int main(){
     filePathNames["multiple"] = "multipleAnswers.txt";
 
     try{
-        Game firstGame(filePathNames,players);
+        auto& firstGame = Game::get_app(filePathNames, players);
         firstGame.addPlayer(p1);
 
         firstGame.play();

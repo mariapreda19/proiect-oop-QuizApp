@@ -38,8 +38,6 @@ public:
 };
 
 class Question: public Screen {
-
-    using Screen::Screen;
 protected:
     int correctAnswerIndex, category;
     float score;
@@ -63,26 +61,84 @@ public:
     ~Question() override = default;
 };
 
+
+
+
 class QuestionText: public Question{
-    using Question::Question;
 
 public:
     explicit QuestionText (std::string question_text = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0, float score_ = 10.0f) : Question(std::move(question_text), options, correct, category_, score_){};
     float getScoreForQuestion(long long time) override;
     static void loadQuestions(std::vector<Question *> &questions,  std::map<std::string, std::string>  &filePathNames);
     ~QuestionText() override = default;
+
 };
+
+
 class QuestionImage: public Question{
     std::string image_path;
-    using Question::Question;
 
 public:
-    explicit QuestionImage(std::string image = "", const std::vector<std::string> &options = {}, int correct = -1, int category_ = 0, float score_ = 20.0f): Question("", options, correct, category_, score_), image_path(std::move(image)){};
+    explicit QuestionImage(std::string image = "", const std::vector<std::string> &options = {}, int correct = -1,
+                           int category_ = 0, float score_ = 20.0f): Question("", options, correct, category_, score_),
+                           image_path(std::move(image)){};
     int display(sf::RenderWindow &window) override;
     float getScoreForQuestion(long long time) override;
     static void loadQuestions(std::vector<Question *> &questions,  std::map<std::string, std::string>  &filePathNames);
     ~QuestionImage() override = default;
+
 };
+
+class MultipleAnswers: public Question{
+    int correctAnswer2;
+public:
+    explicit MultipleAnswers(std::string question_text = "", const std::vector<std::string> &options = {},
+                             int correct = -1, int correct2 = -1, int category_ = 0, float score_ = 10.0f);
+
+    float getScoreForQuestion(long long time) override;
+    static void loadQuestions(std::vector<Question *> &questions,  std::map<std::string, std::string> &filePathNames);
+    int display(sf::RenderWindow &window) override;
+};
+
+
+
+class AbstractQuestionFactory {
+public:
+    virtual ~AbstractQuestionFactory() {}
+    virtual std::vector<Question*> createQuestion(std::map<std::string, std::string> filePathNames) = 0;
+};
+
+class QuestionTextFactory : public AbstractQuestionFactory {
+public:
+    std::vector<Question *> createQuestion(std::map<std::string, std::string> filePathNames) override {
+        std::vector<Question *> questions;
+        QuestionText::loadQuestions(questions, filePathNames);
+        return questions;
+    }
+
+};
+
+class QuestionImageFactory : public AbstractQuestionFactory {
+public:
+    std::vector<Question *> createQuestion(std::map<std::string, std::string> filePathNames) override {
+        std::vector<Question *> questions;
+        QuestionImage::loadQuestions(questions, filePathNames);
+        return questions;
+    }
+
+};
+
+class MultipleAnswersFactory : public AbstractQuestionFactory {
+public:
+    std::vector<Question *> createQuestion(std::map<std::string, std::string> filePathNames) override {
+        std::vector<Question *> questions;
+        MultipleAnswers::loadQuestions(questions, filePathNames);
+        return questions;
+    }
+
+};
+
+
 
 class MenuScreen : public Screen {
     using Screen::Screen;
@@ -138,15 +194,5 @@ public:
 
 };
 
-class MultipleAnswers: public Question{
-    int correctAnswer2;
-public:
-    explicit MultipleAnswers(std::string question_text = "", const std::vector<std::string> &options = {},
-                             int correct = -1, int correct2 = -1, int category_ = 0, float score_ = 10.0f);
-
-    float getScoreForQuestion(long long time) override;
-    static void loadQuestions(std::vector<Question *> &questions,  std::map<std::string, std::string> &filePathNames);
-    int display(sf::RenderWindow &window) override;
-};
 
 #endif //OOP_QUESTION_H

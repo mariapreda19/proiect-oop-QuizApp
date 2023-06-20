@@ -15,6 +15,7 @@
 #include "Erori.h"
 
 
+
 class Game {
 private:
     Screen *startScreen{};
@@ -22,11 +23,16 @@ private:
     std::map<std::string, std::string> filePathNames;
     std::vector<Player> players;
 
+    explicit Game(const std::map<std::string, std::string> &filePathNames_ , const std::vector<Player>& players_ = {});
+
     void loadQuestions();
 
 public:
 
-    explicit Game(const std::map<std::string, std::string> &filePathNames_ , const std::vector<Player>& players_ = {});
+    static Game& get_app(const std::map<std::string, std::string> filePathNames, std::vector<Player> players) {
+        static Game app(filePathNames, players);
+        return app;
+    }
 
     Game& operator=(const Game& other) = delete;
 
