@@ -7,7 +7,7 @@ void Game::loadQuestions(){
     QuestionText::loadQuestions(questions, filePathNames);
     MultipleAnswers::loadQuestions(questions, filePathNames);*/
 
-    std::shared_ptr<AbstractQuestionFactory> questionFactory = std::make_shared<QuestionTextFactory>();
+    AbstractQuestionFactory * questionFactory = new QuestionTextFactory();
 
     //questions.insert(questions.end(), questionFactory->createQuestion(filePathNames).begin(), questionFactory->createQuestion(filePathNames).end());
     for (auto& question : questionFactory->createQuestion(filePathNames)) {
@@ -15,7 +15,7 @@ void Game::loadQuestions(){
     }
 
 
-    questionFactory = std::make_shared<QuestionImageFactory>();
+    questionFactory = new QuestionImageFactory();
 
     //questions.insert(questions.end(), questionFactory->createQuestion(filePathNames).begin(), questionFactory->createQuestion(filePathNames).end());
 
@@ -24,13 +24,15 @@ void Game::loadQuestions(){
     }
 
 
-    questionFactory = std::make_shared<MultipleAnswersFactory>();
+    questionFactory = new MultipleAnswersFactory();
 
     //questions.insert(questions.end(), questionFactory->createQuestion(filePathNames).begin(), questionFactory->createQuestion(filePathNames).end());
 
     for (auto& question : questionFactory->createQuestion(filePathNames)) {
         questions.push_back(question);
     }
+
+    delete questionFactory;
 }
 
 Game::Game(const std::map<std::string, std::string> &filePathNames_, const std::vector<Player>& players_) :  filePathNames(filePathNames_), players(players_){

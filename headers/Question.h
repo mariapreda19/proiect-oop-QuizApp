@@ -105,6 +105,7 @@ public:
 class AbstractQuestionFactory {
 public:
     virtual std::vector<Question*> createQuestion(std::map<std::string, std::string>& filePathNames) = 0;
+    virtual ~AbstractQuestionFactory() = default;
 };
 
 class QuestionTextFactory : public AbstractQuestionFactory {
@@ -114,7 +115,7 @@ public:
         QuestionText::loadQuestions(questions, filePathNames);
         return questions;
     }
-
+    ~QuestionTextFactory() override = default;
 };
 
 class QuestionImageFactory : public AbstractQuestionFactory {
@@ -124,6 +125,7 @@ public:
         QuestionImage::loadQuestions(questions, filePathNames);
         return questions;
     }
+    ~QuestionImageFactory() override = default;
 };
 
 class MultipleAnswersFactory : public AbstractQuestionFactory {
@@ -133,6 +135,7 @@ public:
         MultipleAnswers::loadQuestions(questions, filePathNames);
         return questions;
     }
+    ~MultipleAnswersFactory() override = default;
 
 };
 

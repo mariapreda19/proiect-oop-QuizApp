@@ -29,7 +29,7 @@ private:
 
 public:
 
-    static Game& get_app(const std::map<std::string, std::string> filePathNames, std::vector<Player> players) {
+    static Game& get_app(const std::map<std::string, std::string>& filePathNames, const std::vector<Player>& players) {
         static Game app(filePathNames, players);
         return app;
     }
