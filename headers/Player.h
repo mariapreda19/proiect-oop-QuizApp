@@ -13,8 +13,12 @@ class Player{
     int id;
     float score;
 
-public:
     explicit Player(std::string name_, int id = lastId + 1, float score_ = 0);
+
+public:
+
+
+    //explicit Player(std::string name_, int id = lastId + 1, float score_ = 0);
 
     Player(const Player& other);
 
@@ -32,6 +36,8 @@ public:
     void increaseScore(float points);
 
     void decreaseScore(float points);
+
+    static Player& get_player(std::string name) ;
 
     ~Player();
 };

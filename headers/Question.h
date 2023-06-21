@@ -110,31 +110,19 @@ public:
 
 class QuestionTextFactory : public AbstractQuestionFactory {
 public:
-    std::vector<Question *> createQuestion(std::map<std::string, std::string>& filePathNames) override {
-        std::vector<Question *> questions;
-        QuestionText::loadQuestions(questions, filePathNames);
-        return questions;
-    }
+    std::vector<Question *> createQuestion(std::map<std::string, std::string>& filePathNames) override;
     ~QuestionTextFactory() override = default;
 };
 
 class QuestionImageFactory : public AbstractQuestionFactory {
 public:
-    std::vector<Question *> createQuestion(std::map<std::string, std::string>& filePathNames) override {
-        std::vector<Question *> questions;
-        QuestionImage::loadQuestions(questions, filePathNames);
-        return questions;
-    }
+    std::vector<Question *> createQuestion(std::map<std::string, std::string>& filePathNames) override;
     ~QuestionImageFactory() override = default;
 };
 
 class MultipleAnswersFactory : public AbstractQuestionFactory {
 public:
-    std::vector<Question *> createQuestion(std::map<std::string, std::string>& filePathNames) override {
-        std::vector<Question *> questions;
-        MultipleAnswers::loadQuestions(questions, filePathNames);
-        return questions;
-    }
+    std::vector<Question *> createQuestion(std::map<std::string, std::string>& filePathNames) override;
     ~MultipleAnswersFactory() override = default;
 
 };

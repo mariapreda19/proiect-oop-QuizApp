@@ -2,6 +2,8 @@
 // Created by maria on 4/3/2023.
 //
 
+#include <utility>
+
 #include "../headers/Player.h"
 
 Player::Player(const Player& other): name(other.name), id(other.id), score(other.score) {
@@ -38,5 +40,11 @@ void Player::increaseScore(float points) {
 void Player::decreaseScore(float points) {
     score -= points;
 }
+
+Player& Player::get_player(std::string name) {
+    static Player app(name);
+    return app;
+}
+
 
 Player::~Player() = default;

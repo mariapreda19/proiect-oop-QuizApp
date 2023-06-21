@@ -21,27 +21,21 @@ private:
     Screen *startScreen{};
     std::vector<Question *> questions;
     std::map<std::string, std::string> filePathNames;
-    std::vector<Player> players;
+    Player currentPlayer;
 
-    explicit Game(const std::map<std::string, std::string> &filePathNames_ , const std::vector<Player>& players_ = {});
+    explicit Game(const std::map<std::string, std::string> &filePathNames_ , const Player& currentPlayer_);
 
     void loadQuestions();
 
 public:
 
-    static Game& get_app(const std::map<std::string, std::string>& filePathNames, const std::vector<Player>& players) {
-        static Game app(filePathNames, players);
-        return app;
-    }
+    static Game& get_app(const std::map<std::string, std::string>& filePathNames, const Player& currentPlayer);
 
     Game& operator=(const Game& other) = delete;
 
     Game(const Game& other) = delete;
 
     friend std::ostream& operator<<(std::ostream& os, const Game& game);
-
-
-    void addPlayer(const Player& player);
 
     void play();
 

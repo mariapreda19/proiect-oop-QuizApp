@@ -35,7 +35,7 @@ void Game::loadQuestions(){
     delete questionFactory;
 }
 
-Game::Game(const std::map<std::string, std::string> &filePathNames_, const std::vector<Player>& players_) :  filePathNames(filePathNames_), players(players_){
+Game::Game(const std::map<std::string, std::string> &filePathNames_, const Player& currentPlayer_) :  filePathNames(filePathNames_), currentPlayer(currentPlayer_){
     loadQuestions();
 }
 
@@ -52,22 +52,16 @@ std::ostream& operator<<(std::ostream& os, const Game& game) {
     for (const auto& question : game.questions) {
         os << question << std::endl;
     }
-    os << "Players: " << std::endl;
-    for (const auto& player : game.players) {
-        os << player << std::endl;
-    }
+    os << "Player: " << std::endl;
+    os << game.currentPlayer << std::endl;
     return os;
 }
 
 
-void Game::addPlayer(const Player& player) {
-    players.push_back(player);
-}
 
 void Game::play(){
     sf::RenderWindow window;
     window.create(sf::VideoMode({1000, 800}), "QuizApp", sf::Style::Default);
-    Player player = players[0];
 
     bool quit = false;
     while (!quit and window.isOpen()) {
@@ -78,6 +72,7 @@ void Game::play(){
         if (categorie_aleasa != -1) {
             bool quit2 = false;
             while (!quit2 and window.isOpen()) {
+
                 Timer clock(30);
                 Timer questionClock(5);
                 clock.reset();
@@ -89,13 +84,13 @@ void Game::play(){
                     if (number == 10 || clock.isExpired() == 1) {
                         std::string message;
                         if (clock.isExpired() == 1) {
-                            message = "  Time is up Player " + player.getName();
+                            message = "  Time is up Player " + currentPlayer.getName();
                         } else {
                             message =
-                                    "You have answered all the questions Player " + player.getName();
+                                    "You have answered all the questions Player " + currentPlayer.getName();
                         }
 
-                        ScoreScreen final(message, {"Play Again", "Back to Menu", "Quit Game"}, player.getScore());
+                        ScoreScreen final(message, {"Play Again", "Back to Menu", "Quit Game"}, currentPlayer.getScore());
 
                         int alegereFinala = final.display(window);
                         if (alegereFinala == 1) {
@@ -121,15 +116,15 @@ void Game::play(){
                         if (raspuns != -1) {
                             std::string message;
                             if (question->checkAnswer(raspuns)) {
-                                player.increaseScore(question->getScoreForQuestion(timeQuestion));
-                                message = "Player " + player.getName() + ", your score is " +
-                                          std::to_string(std::max(player.getScore(), 0.0f))+ " and you have " +
+                                currentPlayer.increaseScore(question->getScoreForQuestion(timeQuestion));
+                                message = "Player " +  currentPlayer.getName() + ", your score is " +
+                                          std::to_string(std::max(currentPlayer.getScore(), 0.0f))+ " and you have " +
                                           std::to_string(time) + " seconds left";
                             }
                             else {
-                                player.decreaseScore(question->getScoreForQuestion(timeQuestion));
-                                message = "Player " + player.getName() + ", your score is " +
-                                          std::to_string(std::max(player.getScore(), 0.0f)) + " and you have " +
+                                currentPlayer.decreaseScore(question->getScoreForQuestion(timeQuestion));
+                                message = "Player " + currentPlayer.getName() + ", your score is " +
+                                          std::to_string(std::max(currentPlayer.getScore(), 0.0f)) + " and you have " +
                                           std::to_string(time) + " seconds left";
                             }
 
@@ -181,4 +176,7 @@ Game::~Game() {
     }
 }
 
-
+Game& Game::get_app(const std::map<std::string, std::string>& filePathNames, const Player& players) {
+    static Game app(filePathNames, players);
+    return app;
+}

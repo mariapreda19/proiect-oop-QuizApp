@@ -18,3 +18,5 @@ long long Timer::getRemainingSeconds() const {
     auto remainingTime = duration_ - (std::chrono::high_resolution_clock::now() - start_);
     return std::chrono::duration_cast<std::chrono::seconds>(remainingTime).count();
 }
+
+

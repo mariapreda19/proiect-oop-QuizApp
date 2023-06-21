@@ -1,5 +1,3 @@
-#include <vector>
-
 #include "headers/Player.h"
 #include "headers/Timer.h"
 #include "headers/Game.h"
@@ -7,8 +5,7 @@
 
 int main(){
 
-    Player p1("A");
-    std::vector<Player> players;
+    auto& p1 = Player::get_player("A");
 
     std::map<std::string, std::string> filePathNames;
     filePathNames["text"] = "questions.txt";
@@ -16,8 +13,7 @@ int main(){
     filePathNames["multiple"] = "multipleAnswers.txt";
 
     try{
-        auto& firstGame = Game::get_app(filePathNames, players);
-        firstGame.addPlayer(p1);
+        auto& firstGame = Game::get_app(filePathNames, p1);
 
         firstGame.play();
     }
@@ -32,10 +28,5 @@ int main(){
     }
 
 
-
-    /*TODO
-      -> nu mai am niciun atribut de tip static sau functie
-      -> ? mai e nevoie de suprascrierea cc/op=
-      */
     return 0;
 }
