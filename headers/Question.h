@@ -183,5 +183,18 @@ public:
 
 };
 
+class StartScreen: public Screen {
+public:
+    explicit StartScreen(std::string text, const std::vector<std::string> &button_options = {std::string ("Precise"), std::string ("Rounded")});
+
+    StartScreen(const StartScreen &other) = delete;
+
+    StartScreen &operator=(const StartScreen &other) = delete;
+
+    //friend std::ostream &operator<<(std::ostream &os, const CategoryScreen &screen);
+
+    int display(sf::RenderWindow &window) override;
+    ~StartScreen() override = default;
+};
 
 #endif //OOP_QUESTION_H

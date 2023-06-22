@@ -7,40 +7,40 @@
 #define OOP_PLAYER_H
 
 
+template <typename T>
 class Player{
     std::string name;
     static int lastId;
     int id;
-    float score;
-
-    explicit Player(std::string name_, int id = lastId + 1, float score_ = 0);
+    T score;
 
 public:
 
+    explicit Player(std::string name_, int id = lastId + 1, T score_ = 0):name(std::move(name_)), id(id), score(score_){lastId++;};
 
-    //explicit Player(std::string name_, int id = lastId + 1, float score_ = 0);
 
-    Player(const Player& other);
+    friend std::ostream& operator<<(std::ostream& os, const Player<T>& player){
+        os << player.name << " " << player.id << " " << " " << player.score;
+        return os;
+    }
 
-    Player& operator=(const Player& other);
+    [[nodiscard]] std::string getName() const {return name;}
 
-    friend std::ostream& operator<<(std::ostream& os, const Player& player);
+    [[nodiscard]] float getScore() const {return score;}
 
-    ///getters
-    [[nodiscard]] std::string getName() const;
+    void increaseScore(float points) {
+        score += points;
+    }
 
-    //[[maybe_unused]] [[nodiscard]] int getId() const {return id;}
-    //[[nodiscard]] static int getLastId() {return lastId;}
-    [[nodiscard]] float getScore() const;
+    void decreaseScore(float points) {
+        score -= points;
+    }
 
-    void increaseScore(float points);
-
-    void decreaseScore(float points);
-
-    static Player& get_player(std::string name) ;
-
-    ~Player();
+    ~Player() = default;
 };
+
+template <typename T>
+int Player<T>::lastId = 0;
 
 
 

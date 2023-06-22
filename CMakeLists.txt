@@ -88,7 +88,7 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml:25 when changing name here
-add_executable(${PROJECT_NAME} main.cpp src/Player.cpp src/Game.cpp src/Question.cpp src/Button.cpp src/Timer.cpp src/Erori.cpp)
+add_executable(${PROJECT_NAME} main.cpp src/Question.cpp src/Button.cpp src/Timer.cpp src/Erori.cpp)
 
 ###############################################################################
 
