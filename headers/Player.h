@@ -33,7 +33,10 @@ public:
     }
 
     void decreaseScore(float points) {
-        score -= points;
+        if(score - points >= 0)
+            score -= points;
+        else
+            score = 0;
     }
 
     ~Player() = default;

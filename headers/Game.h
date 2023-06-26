@@ -71,6 +71,9 @@ public:
     void play(sf::RenderWindow &window){
 
         bool quit = false;
+        window.setFramerateLimit(10);
+
+        window.setVerticalSyncEnabled(true);
         while (!quit and window.isOpen()) {
             Screen *screen = new CategoryScreen(std::string("Categorii"));
 
