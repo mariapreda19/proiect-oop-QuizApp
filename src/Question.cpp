@@ -76,6 +76,7 @@ int Screen::display (sf::RenderWindow &window){
         window.draw(text_);
 
 
+
         for (int i=0 ; i < int(options.size()); i++){
             if(options[i].displayButton(window,{0,0}) == 1)
                 return i;
@@ -480,10 +481,24 @@ void QuestionText::loadQuestions(std::vector<Question*>& questions, std::map<std
     int correctAnswer;
     int category;
     while (std::getline(fin, question)) {
+
+        for (char & i : question) {
+            if (i == '|') {
+                i = '\n';
+            }
+        }
+
         answerOptions.clear();
         for (int i = 0; i < 4; i++) {
             std::string line;
             std::getline(fin, line);
+
+            for (char & ii : line) {
+                if (ii == '|') {
+                    ii = '\n';
+                }
+            }
+
             answerOptions.emplace_back(line);
         }
         fin >> correctAnswer;
@@ -493,6 +508,7 @@ void QuestionText::loadQuestions(std::vector<Question*>& questions, std::map<std
         Question* temp_ = new QuestionText(question, answerOptions, correctAnswer, category);
         questions.push_back(temp_);
     }
+
     fin.close();
 }
 
@@ -591,10 +607,24 @@ void MultipleAnswers::loadQuestions(std::vector<Question*>& questions, std::map<
     int correctAnswer2;
     int category;
     while (std::getline(fin, question)) {
+
+        for (char & i : question) {
+            if (i == '|') {
+                i = '\n';
+            }
+        }
+
         answerOptions.clear();
         for (int i = 0; i < 4; i++) {
             std::string line;
             std::getline(fin, line);
+
+            for (char & ii : question) {
+                if (ii == '|') {
+                    ii = '\n';
+                }
+            }
+
             answerOptions.emplace_back(line);
         }
         fin >> category;

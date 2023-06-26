@@ -30,21 +30,21 @@ What is the capital of Indonesia?
 Rome
 Jakarta
 Tokyo
-New Delhi
+New|Delhi
 1
 1
 What is the capital of Romania?
 Rome
 Iasi
 Bucharest
-New York
+New|York
 2
 1
 Which continent is the largest in terms of land area?
 Asia
 Europe
 Africa
-North America
+North|America
 0
 1
 What is the capital city of Brazil?
@@ -153,13 +153,13 @@ Vincent van Gogh
 2
 3
 Which artist is known for painting the Starry Night?
-Vincent van Gogh
+Vincent van|Gogh
 Pablo Picasso
 Claude Monet
 Salvador Dali
 0
 3
-Which art movement is known for its colorful, abstract shapes and forms?
+Which art movement is known for its colorful, abstract|shapes and forms?
 Cubism
 Expressionism
 Fauvism
@@ -167,7 +167,7 @@ Surrealism
 2
 3
 Who created the sculpture David?
-Leonardo da Vinci
+Leonardo da|Vinci
 Michelangelo
 Donatello
 Raphael
@@ -176,12 +176,12 @@ Raphael
 Which artist is known for painting the water lilies series?
 Claude Monet
 Paul Cézanne
-Vincent van Gogh
+Vincent van|Gogh
 Edvard Munch
 0
 3
-Which Renaissance artist created the ceiling of the Sistine Chapel?
-Leonardo da Vinci
+Which Renaissance artist created the ceiling of the|Sistine Chapel?
+Leonardo da|Vinci
 Donatello
 Michelangelo
 Raphael
@@ -194,60 +194,46 @@ The Cry
 The Yell
 0
 3
-Which artist is known for creating the sculpture The Thinker?
+Which artist is known for creating the sculpture|The Thinker?
 Michelangelo
 Auguste Rodin
-Gian Lorenzo Bernini
-Leonardo da Vinci
-1
-3
-Which art movement is known for using bright colors and bold designs to convey a sense of joy and celebration?
-Pop Art
-Fauvism
-Expressionism
-Abstract Expressionism
+Gian Lorenzo|Bernini
+Leonardo da|Vinci
 1
 3
 Who is the artist behind the famous sculpture The Kiss?
-Gian Lorenzo Bernini
+Gian Lorenzo|Bernini
 Michelangelo
-Auguste Rodin
+Auguste|Rodin
 Donatello
 2
 3
 Which artist is known for painting The Persistence of Memory?
 Salvador Dali
 Pablo Picasso
-Vincent van Gogh
+Vincent van|Gogh
 Claude Monet
 0
 3
 Who painted the famous fresco The Last Supper?
-Leonardo da Vinci
+Leonardo da|Vinci
 Michelangelo
 Raphael
-Sandro Botticelli
+Sandro|Botticelli
 0
 3
-Which art movement is known for its use of bold, contrasting colors and simple, geometric shapes?
-Futurism
-Abstract Expressionism
-Cubism
-Pop Art
-2
-3
 Which artist is known for creating the sculpture The David?
-Leonardo da Vinci
+Leonardo da|Vinci
 Michelangelo
 Donatello
-Gian Lorenzo Bernini
+Gian Lorenzo|Bernini
 1
 3
-Who painted the famous artwork known as The Starry Night Over the Rhône?
-Vincent van Gogh
+Who painted the famous artwork known as The Starry Night Over|the Rhône?
+Vincent van|Gogh
 Claude Monet
-Pierre-Auguste Renoir
-Georges Seurat
+Pierre-Auguste|Renoir
+Georges|Seurat
 0
 3
 Who was the lead singer of Queen?
@@ -266,7 +252,7 @@ Heavy Metal
 0
 Who is the guitarist for the Rolling Stones?
 Eric Clapton
-Keith Richards
+Keith|Richards
 Jimi Hendrix
 Jimmy Page
 1
@@ -281,7 +267,7 @@ Taylor Swift
 What is the name of the singer known as the "King of Pop"?
 Prince
 Elvis Presley
-Michael Jackson
+Michael|Jackson
 David Bowie
 2
 0
@@ -289,10 +275,10 @@ Who is the lead singer of the band Coldplay?
 Bono
 Chris Martin
 Thom Yorke
-Brandon Flowers
+Brandon|Flowers
 1
 0
-Which of the following is a famous DJ and producer known for hits like "Wake Me Up" and "Levels"?
+Which of the following is a famous DJ and producer known|for hits like "Wake Me Up" and "Levels"?
 Avicii
 Calvin Harris
 Tiësto
@@ -303,17 +289,17 @@ Who is the lead singer of the band U2?
 Bono
 Chris Martin
 Thom Yorke
-Brandon Flowers
+Brandon|Flowers
 0
 0
-Which of the following is a famous rapper and songwriter known for hits like "Lose Yourself" and "Rap God"?
+Which of the following is a famous rapper and songwriter|known for hits like "Lose Yourself" and "Rap God"?
 Jay-Z
 Eminem
 Kanye West
 Nas
 1
 0
-What is the name of Adele's album that won Album of the Year at the 2017 Grammy Awards?
+What is the name of Adele's album that won Album of the Year at|the 2017 Grammy Awards?
 25
 21
 19
@@ -328,7 +314,7 @@ Neil Peart
 2
 0
 Which singer is known for hits like "Sorry" and "Love Yourself"?
-Justin Timberlake
+Justin|Timberlake
 Bruno Mars
 Ed Sheeran
 Justin Bieber
@@ -340,13 +326,6 @@ Eddie Vedder
 Chris Cornell
 Layne Staley
 0
-0
-Which of the following is a famous pop group consisting of four members, known for hits like "Wannabe" and "Spice Up Your Life"?
-Destiny's Child
-TLC
-The Spice Girls
-Fifth Harmony
-2
 0
 What is the name of the singer known as the "Queen of Pop"?
 Madonna
@@ -363,17 +342,17 @@ Olmec
 1
 2
 Who was the first president of the United States?
-Thomas Jefferson
-George Washington
+Thomas|Jefferson
+George|Washington
 John Adams
-Benjamin Franklin
+Benjamin|Franklin
 1
 2
-What was the name of the period in European history that followed the Middle Ages?
+What was the name of the period in European history that|followed the Middle Ages?
 Renaissance
 Enlightenment
-Industrial Revolution
-Age of Exploration
+Industrial|Revolution
+Age of|Exploration
 0
 2
 Which country was responsible for colonizing much of South America?
@@ -383,7 +362,7 @@ France
 England
 0
 2
-In what year did the United States declare independence from Great Britain?
+In what year did the United States declare independence from|Great Britain?
 1776
 1783
 1800
@@ -392,9 +371,9 @@ In what year did the United States declare independence from Great Britain?
 2
 Who was the leader of the Soviet Union during World War II?
 Joseph Stalin
-Vladimir Lenin
+Vladimir|Lenin
 Leon Trotsky
-Nikita Khrushchev
+Nikita|Khrushchev
 0
 2
 Which European country colonized much of Africa in the 19th century?
@@ -411,19 +390,12 @@ Nero
 Trajan
 1
 2
-Which European country was the first to colonize what is now the United States?
+Which European country was the first to colonize what is now|the United States?
 Spain
 France
 England
 Portugal
 2
-2
-Who was the leader of the United States during World War II?
-Franklin D. Roosevelt
-Harry S. Truman
-Dwight D. Eisenhower
-John F. Kennedy
-0
 2
 Which city was the site of the famous witch trials in 1692?
 Salem
@@ -432,7 +404,7 @@ Philadelphia
 New York City
 0
 2
-Which Chinese philosopher emphasized the importance of moral and ethical behavior?
+Which Chinese philosopher emphasized the importance of|moral and ethical behavior?
 Confucius
 Laozi
 Sun Tzu
@@ -447,17 +419,17 @@ Ronald Reagan
 0
 2
 Who was the last monarch of France before the French Revolution?
-King Louis XVI
-King Henry IV
-King Francis I
-King Charles V
+King|Louis XVI
+King|Henry IV
+King|Francis I
+King|Charles V
 0
 2
 Who was the first president of the United States?
 John Adams
-George Washington
-Thomas Jefferson
-Benjamin Franklin
+George|Washington
+Thomas|Jefferson
+Benjamin|Franklin
 1
 2
 Which country was the first to circumnavigate the world?
@@ -467,7 +439,7 @@ England
 France
 0
 2
-What was the name of the first successful airplane built by the Wright brothers?
+What was the name of the first successful airplane built|by the Wright brothers?
 Flyer
 Hawk
 Eagle
@@ -475,10 +447,10 @@ Falcon
 0
 2
 Who was the first female prime minister of Great Britain?
-Theresa May
-Margaret Thatcher
-Angela Merkel
-Indira Gandhi
+Theresa|May
+Margaret|Thatcher
+Angela|Merkel
+Indira|Gandhi
 1
 2
 Who was the first emperor of Rome?
@@ -489,9 +461,9 @@ Caligula
 1
 2
 What was the name of the first man to walk on the moon?
-Neil Armstrong
+Neil|Armstrong
 Buzz Aldrin
-Michael Collins
+Michael|Collins
 John Glenn
 0
 2
@@ -502,18 +474,18 @@ Italy
 France
 1
 2
-What was the name of the ship that Charles Darwin sailed on during his voyage to the Galapagos Islands?
+What was the name of the ship that Charles Darwin sailed on during|is voyage to the Galapagos Islands?
 Endeavour
 Beagle
 Discovery
 Bounty
 1
 2
-Who was the first person to complete a solo nonstop flight across the Atlantic Ocean?
-Charles Lindbergh
-Amelia Earhart
-Howard Hughes
-Bessie Coleman
+Who was the first person to complete a solo nonstop flight|across the Atlantic Ocean?
+Charles|Lindbergh
+Amelia|Earhart
+Howard|Hughes
+Bessie|Coleman
 0
 2
 What was the name of the first successful steam-powered ship?
@@ -537,7 +509,7 @@ Jimmy Carter
 Ronald Reagan
 0
 2
-What was the name of the famous 1969 music festival that drew hundreds of thousands of attendees?
+What was the name of the famous 1969 music festival that|drew hundreds of thousands of attendees?
 Woodstock
 Monterey Pop
 Isle of Wight
@@ -545,10 +517,10 @@ Live Aid
 0
 2
 Who wrote "To Kill a Mockingbird"?
-F. Scott Fitzgerald
-William Faulkner
+F. Scott|Fitzgerald
+William|Faulkner
 Harper Lee
-Ernest Hemingway
+Ernest|Hemingway
 2
 4
 In which country was Shakespeare born?
@@ -560,155 +532,148 @@ England
 4
 Who wrote the novel "1984"?
 Ray Bradbury
-Margaret Atwood
+Margaret|Atwood
 George Orwell
 Aldous Huxley
 2
 4
 Who wrote the novel "Pride and Prejudice"?
-Charlotte Bronte
+Charlotte|Bronte
 Jane Austen
 Emily Bronte
 Virginia Woolf
 1
 4
-Which of the following is a tragedy written by William Shakespeare?
-A Midsummer Night's Dream
+Which of the following is a tragedy written by William|Shakespeare?
+A Midsummer|Night's Dream
 Macbeth
 Twelfth Night
 The Tempest
 1
 4
 Who wrote "The Great Gatsby"?
-William Faulkner
-F. Scott Fitzgerald
+William|Faulkner
+F. Scott|Fitzgerald
 J.D. Salinger
-Ernest Hemingway
+Ernest|Hemingway
 1
 4
 Which of the following is a novel by Jane Austen?
-Wuthering Heights
-The Picture of Dorian Gray
-Great Expectations
-Sense and Sensibility
+Wuthering|Heights
+The Picture|of Dorian Gray
+Great|Expectations
+Sense and|Sensibility
 3
 4
 Who wrote "The Catcher in the Rye"?
-John Steinbeck
-Ernest Hemingway
+John|Steinbeck
+Ernest|Hemingway
 J.D. Salinger
-F. Scott Fitzgerald
+F. Scott|Fitzgerald
 2
 4
-Which of the following is a play by Tennessee Williams?
-Who's Afraid of Virginia Woolf?
-Long Day's Journey into Night
-A Streetcar Named Desire
-Death of a Salesman
+Which of the following is a play by|Tennessee Williams?
+Who's Afraidof|Virginia Woolf?
+Long Day's Journey|into Night
+A Streetcar|Named Desire
+Death of a|Salesman
 2
 4
 Who wrote "The Lord of the Rings"?
 J.K. Rowling
-George R.R. Martin
+George R.R.|Martin
 J.R.R. Tolkien
-Stephenie Meyer
+Stephenie|Meyer
 2
 4
 Who wrote the novel "Frankenstein"?
-Nathaniel Hawthorne
-Edgar Allan Poe
+Nathaniel|Hawthorne
+Edgar Allan|Poe
 Mary Shelley
-Herman Melville
+Herman|Melville
 2
 4
 Who wrote "The Adventures of Huckleberry Finn"?
-Edgar Allan Poe
+Edgar Allan|Poe
 Mark Twain
-Nathaniel Hawthorne
-Herman Melville
+Nathaniel|Hawthorne
+Herman|Melville
 1
 4
 Who wrote the play "Hamlet"?
-Arthur Miller
-Henrik Ibsen
-William Shakespeare
-Tennessee Williams
+Arthur|Miller
+Henrik|Ibsen
+William|Shakespeare
+Tennessee|Williams
 2
 4
-Which of the following is a novel by Toni Morrison?
-Their Eyes Were Watching God
-The Color Purple
+Which of the following is a novel by Toni|Morrison?
+Their Eyes|Were Watching|God
+The Color|Purple
 Beloved
-Invisible Man
+Invisible|Man
 2
 4
 Who wrote "The Picture of Dorian Gray"?
-William Faulkner
+William|Faulkner
 Oscar Wilde
-Virginia Woolf
+Virginia|Woolf
 James Joyce
 1
 4
 Who wrote the novel "The Grapes of Wrath"?
-William Faulkner
-Ernest Hemingway
-John Steinbeck
-F. Scott Fitzgerald
+William|Faulkner
+Ernest|Hemingway
+John|Steinbeck
+F. Scott|Fitzgerald
 2
 4
 Who wrote the play "Othello"?
-William Shakespeare
-Henrik Ibsen
-Arthur Miller
-Tennessee Williams
+William|Shakespeare
+Henrik|Ibsen
+Arthur|Miller
+Tennessee|Williams
 0
 4
-Which of the following is a novel by Fyodor Dostoevsky?
-Crime and Punishment
+Which of the following is a novel by Fyodor|Dostoevsky?
+Crime and|Punishment
 War and Peace
-The Brothers Karamazov
+The Brothers|Karamazov
 Anna Karenina
 0
 4
 Who wrote "The Canterbury Tales"?
-William Shakespeare
-Geoffrey Chaucer
-Dante Alighieri
-Miguel de Cervantes
+William|Shakespeare
+Geoffrey|Chaucer
+Dante|Alighieri
+Miguel de|Cervantes
 1
 4
-Which of the following is a novel by Gabriel Garcia Marquez?
-One Hundred Years of Solitude
-Love in the Time of Cholera
-The House of the Spirits
+Which of the following is a novel by Gabriel|Garcia Marquez?
+One Hundred|Years of Solitude
+Love in the|Time of Cholera
+The House of|the Spirits
 The Alchemist
 0
 4
 Who wrote "The Scarlet Letter"?
-Herman Melville
-Nathaniel Hawthorne
-Edgar Allan Poe
-Ralph Waldo Emerson
-1
-4
-Which of the following is a play by William Shakespeare?
-Waiting for Godot
-King Lear
-Death of a Salesman
-The Importance of Being Earnest
+Herman|Melville
+Nathaniel|Hawthorne
+Edgar Allan|Poe
+Ralph Waldo|Emerson
 1
 4
 Who wrote "The Sun Also Rises"?
-William Faulkner
-Ernest Hemingway
-F. Scott Fitzgerald
-J.D. Salinger
+William|Faulkner
+Ernest|Hemingway
+F. Scott|Fitzgerald
+J.D.|Salinger
 1
 4
-Which of the following is a novel by Charles Dickens?
+Which of the following is a novel by Charles|Dickens?
 Oliver Twist
 Dracula
-Heart of Darkness
+Heart of|Darkness
 Dubliners
 0
 4
@@ -719,9 +684,9 @@ Sophocles
 Aristophanes
 0
 4
-Which of the following is a novel by Harper Lee?
-Their Eyes Were Watching God
-To Kill a Mockingbird
+Which of the following is a novel by Harper|Lee?
+Their Eyes|Were Watching God
+To Kill a|Mockingbird
 Beloved
 Invisible Man
 1
@@ -729,22 +694,22 @@ Invisible Man
 Who wrote "The Stranger"?
 Albert Camus
 Samuel Beckett
-Jean-Paul Sartre
+Jean-Paul|Sartre
 Franz Kafka
 0
 4
 Who wrote "The Importance of Being Earnest"?
 Oscar Wilde
-George Bernard Shaw
-Samuel Beckett
-James Joyce
+George Bernard|Shaw
+Samuel|Beckett
+James|Joyce
 0
 4
 Who wrote the play "The Crucible"?
 Arthur Miller
-Tennessee Williams
-Henrik Ibsen
-Edward Albee
+Tennessee|Williams
+Henrik|Ibsen
+Edward|Albee
 0
 4
 Which country won the 2018 FIFA World Cup?
@@ -757,11 +722,11 @@ Brazil
 Who is the all-time leading scorer in NBA history?
 Kobe Bryant
 LeBron James
-Michael Jordan
-Kareem Abdul-Jabbar
+Michael|Jordan
+Kareem|Abdul-Jabbar
 3
 5
-Which country has won the most Olympic gold medals in history?
+Which country has won the most Olympic|gold medals in|history?
 United States
 China
 Russia
@@ -782,15 +747,15 @@ In what year did the first modern Olympic Games take place?
 1920
 0
 5
-Which country has won the most World Cup titles in men's soccer?
+Which country has won the most World Cup|titles in men's soccer?
 Germany
 Brazil
 Argentina
 Italy
 1
 5
-Who was the first African American to play Major League Baseball?
-Jackie Robinson
+Who was the first African American to play|Major League|Baseball?
+Jackie|Robinson
 Hank Aaron
 Willie Mays
 Babe Ruth
@@ -803,35 +768,35 @@ Football
 Hockey
 2
 5
-Who holds the record for the most Grand Slam singles titles in women's tennis?
-Serena Williams
-Margaret Court
+Who holds the record for the most Grand Slam|singles|titles in women's tennis?
+Serena|Williams
+Margaret|Court
 Steffi Graf
-Martina Navratilova
+Martina|Navratilova
 1
 5
-Who won the most recent men's singles title at Wimbledon (as of 2023)?
+Who won the most recent men's singles title at|Wimbledon (as of 2023)?
 Novak Djokovic
 Rafael Nadal
 Roger Federer
 Andy Murray
 0
 5
-Which of the following is not a position in American football?
+Which of the following is not a position in|American football?
 Quarterback
 Running back
 Point guard
 Wide receiver
 2
 5
-Which country won the most gold medals at the 2020 Summer Olympics?
+Which country won the most gold medals at the|2020 Summer Olympics?
 Japan
-United States
+United|States
 China
-Great Britain
+Great|Britain
 2
 5
-Who won the most recent men's World Cup in cricket (as of 2023)?
+Who won the most recent men's World Cup in|cricket (as of 2023)?
 India
 Australia
 England
@@ -841,105 +806,98 @@ South Africa
 Who is considered the greatest boxer of all time?
 Muhammad Ali
 Mike Tyson
-Sugar Ray Robinson
-Floyd Mayweather Jr.
+Sugar Ray|Robinson
+Floyd|Mayweather|Jr.
 0
 5
-Who is the all-time leading goal scorer in the English Premier League?
+Who is the all-time leading goal scorer in the|English Premier League?
 Alan Shearer
-Cristiano Ronaldo
+Cristiano|Ronaldo
 Wayne Rooney
 Thierry Henry
 0
 5
-Who won the most recent men's singles title at the French Open (as of 2023)?
+Who won the most recent men's singles title at|the French Open (as of 2023)?
 Rafael Nadal
 Novak Djokovic
 Roger Federer
 Dominic Thiem
 3
 5
-Which team won the most recent Super Bowl (as of 2023)?
-Kansas City Chiefs
-New England Patriots
-Tampa Bay Buccaneers
-Los Angeles Rams
-2
-5
-Who is the only athlete to win Olympic gold medals in both the decathlon and the long jump?
+Who is the only athlete to win Olympic gold medals|in both the decathlon and the long jump?
 Bob Beamon
 Jesse Owens
 Jim Thorpe
 Carl Lewis
 3
 5
-Which country won the most recent men's hockey gold medal at the Winter Olympics (as of 2023)?
+Which country won the most recent men's hockey gold|medal at the Winter Olympics (as of 2023)?
 Canada
 Sweden
 United States
 Russia
 0
 5
-Which boxer has won world titles in eight different weight classes?
-Floyd Mayweather Jr.
-Manny Pacquiao
+Which boxer has won world titles in eight different|weight classes?
+Floyd|Mayweather Jr.
+Manny|Pacquiao
 Mike Tyson
-Oscar De La Hoya
+Oscar De|La Hoya
 1
 5
-Which golfer has won the most major championships in history?
+Which golfer has won the most major championships|in history?
 Jack Nicklaus
 Tiger Woods
-Arnold Palmer
+Arnold|Palmer
 Gary Player
 0
 5
-Who won the most recent men's singles title at the US Open (as of 2023)?
-Rafael Nadal
-Novak Djokovic
-Daniil Medvedev
-Alexander Zverev
+Who won the most recent men's singles title at|the US Open (as of 2023)?
+Rafael|Nadal
+Novak|Djokovic
+Daniil|Medvedev
+Alexander|Zverev
 2
 5
 Which team has won the most NBA championships in history?
-Los Angeles Lakers
-Chicago Bulls
-Boston Celtics
-Golden State Warriors
+Los Angeles|Lakers
+Chicago|Bulls
+Boston|Celtics
+Golden|State|Warriors
 2
 5
-Who won the most recent women's singles title at Wimbledon (as of 2023)?
+Who won the most recent women's singles title at|Wimbledon (as of 2023)?
 Serena Williams
-Angelique Kerber
+Angelique|Kerber
 Simona Halep
-Ashleigh Barty
+Ashleigh|Barty
 3
 5
-Who won the most recent men's singles title at the Australian Open (as of 2023)?
-Rafael Nadal
-Novak Djokovic
-Roger Federer
-Dominic Thiem
+Who won the most recent men's singles title at the|Australian Open (as of 2023)?
+Rafael|Nadal
+Novak|Djokovic
+Roger|Federer
+Dominic|Thiem
 1
 5
-Who holds the record for the most consecutive Olympic gold medals in an individual event?
+Who holds the record for the most consecutive|Olympic gold medals in an individual event?
 Usain Bolt
-Michael Phelps
+Michael|Phelps
 Carl Lewis
-Nadia Comaneci
+Nadia|Comaneci
 1
 5
-Who was the first African American to win the heavyweight boxing championship?
-Jack Johnson
+Who was the first African American to win the|heavyweight boxing championship?
+Jack|Johnson
 Joe Louis
-Muhammad Ali
+Muhammad|Ali
 Mike Tyson
 0
 5
 Which country has won the most Rugby World Cups?
-South Africa
+South|Africa
 Australia
 England
-New Zealand
+New|Zealand
 3
 5
